@@ -4,7 +4,7 @@ import { useAuthContext } from "../auth/AuthProvider";
 function Dashboard() {
   const {isAuthenticated, setIsAuthenticated} = useAuthContext();
   const goTo = useNavigate();
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -17,10 +17,12 @@ function Dashboard() {
   };
 
   return (
+    <>
     <form className="form" onSubmit={handleSubmit}>
       <h1>Dashboard</h1>
       <button type="submit">Log out</button>
     </form>
+    </>
   );
 }
 export default Dashboard;
