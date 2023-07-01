@@ -9,7 +9,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [errorResponse, setErrorResponse] = useState("");
 
-  const auth = useAuthContext();
+  const {isAuthenticated, setIsAuthenticated} = useAuthContext();
 
   const goTo = useNavigate();
 
@@ -29,7 +29,7 @@ function Login() {
       if (response.ok) {
         console.log(" User logged in successfully");
         setErrorResponse("");
-        
+        setIsAuthenticated(!isAuthenticated)
         goTo("/dashboard");
       } else {
         console.log(" User login failed");
@@ -42,7 +42,7 @@ function Login() {
     }
   };
 
-  if (auth.isAuthenticated) {
+  if (isAuthenticated) {
     return <Navigate to="/dashboard" />;
   }
 
