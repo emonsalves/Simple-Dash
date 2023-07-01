@@ -1,13 +1,46 @@
 import { useState } from "react";
-import {useAuthContext} from "../auth/AuthProvider";
+import { useAuthContext } from "../auth/AuthProvider";
 import DefaultLayout from "../layout/DefaultLayout";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+
 
 function Login() {
-  const [username, setUsername] = useState("");
+  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [errorResponse, setErrorResponse] = useState("");
 
   const auth = useAuthContext();
+
+  const goTo = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userName, password }),
+        }
+      );
+      if (response.ok) {
+        console.log(" User logged in successfully");
+        setErrorResponse("");
+        
+        goTo("/dashboard");
+      } else {
+        console.log(" User login failed");
+        const json = await response.json();
+        setErrorResponse(json);
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   if (auth.isAuthenticated) {
     return <Navigate to="/dashboard" />;
@@ -16,16 +49,17 @@ function Login() {
   return (
     <>
       <DefaultLayout>
-        <form className="form">
+        <form className="form" onSubmit={handleSubmit}>
           <h1>Log in</h1>
+          { !! errorResponse && <div className="errorMessage">{errorResponse.body.message}</div>}
           <div>
             <label htmlFor="username">Username</label>
             <input
               type="text"
               id="username"
               name="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
             />
           </div>
           <div className="form-control">
