@@ -7,7 +7,7 @@ router
   .post('/', (req, res) => {
     const { userName, password, passwordConfirmation } = req.body
 
-    if (!!userName && !!password && !!passwordConfirmation) {
+    if (!userName || !password || !passwordConfirmation) {
       return res.status(400)
         .json(jsonResponse(400, { message: 'Missing required fields' }))
     }

@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { useAuthContext } from "../auth/AuthProvider";
 import DefaultLayout from "../layout/DefaultLayout";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Signup() {
-  const [username, setUsername] = useState("");
+  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [errorResponse, setErrorResponse] = useState("");
 
   const auth = useAuthContext();
+
+  const goTo = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,12 +21,17 @@ function Signup() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password, passwordConfirmation }),
+        body: JSON.stringify({ userName, password, passwordConfirmation }),
       });
       if (response.ok) {
         console.log("User created successfully");
+        setErrorResponse("");
+        goTo("/");
       } else {
         console.log("User creation failed");
+        const json = await response.json() 
+        setErrorResponse(json);
+        return
       }
     } catch (error) {
       console.log(error);
@@ -40,14 +48,15 @@ function Signup() {
       <DefaultLayout>
         <form className="form" onSubmit={handleSubmit}>
           <h1>Signup</h1>
+          { !! errorResponse && <div className="errorMessage">{errorResponse.body.message}</div>}
           <div className="form-control">
             <label htmlFor="username">Username</label>
             <input
               type="text"
               id="username"
               name="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
             />
           </div>
           <div className="form-control">
