@@ -10,6 +10,27 @@ function Signup() {
 
   const auth = useAuthContext();
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password, passwordConfirmation }),
+      });
+      if (response.ok) {
+        console.log("User created successfully");
+      } else {
+        console.log("User creation failed");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
   if (auth.isAuthenticated) {
     return <Navigate to="/dashboard" />;
   }
@@ -17,7 +38,7 @@ function Signup() {
   return (
     <>
       <DefaultLayout>
-        <form className="form">
+        <form className="form" onSubmit={handleSubmit}>
           <h1>Signup</h1>
           <div className="form-control">
             <label htmlFor="username">Username</label>
