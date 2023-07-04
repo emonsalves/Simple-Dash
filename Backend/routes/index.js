@@ -3,6 +3,7 @@ const router = express.Router()
 const fs = require('fs')
 
 const PATH_ROUTER = __dirname
+console.log("Bienvenido estamos cargando las rutas de la API")
 
 // retiramos el .js
 const cleanFileName = (fileName) => {
@@ -17,5 +18,6 @@ fs.readdirSync(PATH_ROUTER).filter(fileName => {
     router.use(`/${prefixRoute}`, require(`./${prefixRoute}.js`))
   }
 })
+console.log("Rutas cargadas correctamente")
 
 module.exports = router
