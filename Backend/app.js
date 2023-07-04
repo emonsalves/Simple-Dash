@@ -18,6 +18,4 @@ morganBody(app);
 app.use(express.static(('public')))
 app.use('/api', require('./routes'))
 
-app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
-});
+export default app;
