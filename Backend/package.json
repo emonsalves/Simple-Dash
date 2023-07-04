@@ -13,7 +13,8 @@
     "mysql2": "^3.4.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "sequelize": "^6.32.1"
   },
   "name": "Backend",
   "version": "1.0.0",
