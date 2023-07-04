@@ -1,6 +1,13 @@
-const app = require('./app');
+ import app from "./app.js";
+
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
-});
+// import { sequelize } from "./database/database.js";
+
+async function main() {
+  app.listen(port, () => {
+    console.log(`Server on port ${port}`);
+  });
+}
+
+main();

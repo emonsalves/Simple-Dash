@@ -1,20 +1,21 @@
-require('dotenv').config();
+import 'dotenv/config';
 
-const morganBody = require('morgan-body')
-const express = require('express');
-const cors = require('cors');
-const morgan = require('morgan');
+import morganBody from 'morgan-body';
+import express from 'express';
+import cors from 'cors';
+import morgan from 'morgan';
+import router from './routes/index.js';
 
 const app = express();
 
 // Middlewares
-app.use(cors())
-app.use(express.json())
-app.use(morgan('dev'))
+app.use(cors());
+app.use(express.json());
+app.use(morgan('dev'));
 morganBody(app);
 
 // Routes
-app.use(express.static(('public')))
-app.use('/api', require('./routes'))
+app.use(express.static('public'));
+app.use('/api', router);
 
-module.exports = app;
+export default app;

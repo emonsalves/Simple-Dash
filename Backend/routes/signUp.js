@@ -1,5 +1,5 @@
-const { Router } = require('express')
-const { jsonResponse } = require('../lib/jsonResponse')
+import { Router } from 'express'
+import { jsonResponse } from '../lib/jsonResponse.js'
 
 const router = Router()
 
@@ -17,5 +17,5 @@ router
       .status(200)
       .json(jsonResponse(200, { message: 'User created' }))
   })
-
-module.exports = router
+  
+export default router
