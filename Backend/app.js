@@ -1,6 +1,5 @@
 require('dotenv').config();
 
-const port = process.env.PORT || 5000;
 const morganBody = require('morgan-body')
 const express = require('express');
 const cors = require('cors');
@@ -18,4 +17,4 @@ morganBody(app);
 app.use(express.static(('public')))
 app.use('/api', require('./routes'))
 
-export default app;
+module.exports = app;
