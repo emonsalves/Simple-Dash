@@ -1,4 +1,8 @@
 {
+  "name": "Backend",
+  "version": "1.0.0",
+  "main": "app.js",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "nodemon server.js"
@@ -16,9 +20,5 @@
   "devDependencies": {
     "nodemon": "^2.0.22",
     "sequelize": "^6.32.1"
-  },
-  "name": "Backend",
-  "version": "1.0.0",
-  "main": "app.js",
-  "license": "MIT"
+  }
 }
