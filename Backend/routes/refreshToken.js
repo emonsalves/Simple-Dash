@@ -1,10 +1,9 @@
-import { Router } from 'express'
+import { Router } from "express";
 
-const router = Router()
+const router = Router();
 
-router
-  .get('/', (req, res) => {
-    res.send('Refresh Token!')
-    })
+router.get("/", (req, res) => {
+  res.send("Refresh Token!");
+});
 
-export default router
+export default router;
