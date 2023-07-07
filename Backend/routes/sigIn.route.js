@@ -28,7 +28,6 @@ router.post("/", (req, res) => {
       email:"Test@gmail.com",
       phone:"Test",
       address:"Test",
-
     });
   };
 
