@@ -3,7 +3,7 @@ import { useAuthContext } from "../auth/AuthProvider";
 import DefaultLayout from "../layout/DefaultLayout";
 import { Navigate, useNavigate } from "react-router-dom";
 
-function Signup() {
+function SignIn() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -16,7 +16,7 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/signup`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/signin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,7 +47,7 @@ function Signup() {
     <>
       <DefaultLayout>
         <form className="form" onSubmit={handleSubmit}>
-          <h1>Signup</h1>
+          <h1>SignIn</h1>
           { !! errorResponse && <div className="errorMessage">{errorResponse.body.message}</div>}
           <div className="form-control">
             <label htmlFor="username">Username</label>
@@ -79,10 +79,10 @@ function Signup() {
               onChange={(e) => setPasswordConfirmation(e.target.value)}
             />
           </div>
-          <button type="submit">Signup</button>
+          <button type="submit">SignIn</button>
         </form>
       </DefaultLayout>
     </>
   );
 }
-export default Signup;
+export default SignIn;

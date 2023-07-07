@@ -10,7 +10,7 @@ function DefaultLayout({ children }) {
               <Link to="/">Login</Link>
             </li>
             <li>
-              <Link to="/signup">Signup</Link>
+              <Link to="/signin">SignIn</Link>
             </li>
           </ul>
         </nav>
