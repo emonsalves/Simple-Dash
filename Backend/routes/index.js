@@ -28,6 +28,6 @@ readdirSync(join(__dirname)).filter((fileName) => {
   }
 });
 
-console.log("Routes loaded");
+console.log("Routes loaded successfully");
 
 export default router;
