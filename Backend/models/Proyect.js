@@ -18,7 +18,7 @@ User.init(
       type: DataTypes.STRING(150),
       allowNull: false,
     },
-    username: {
+    user_name: {
       type: DataTypes.STRING(150),
       allowNull: false,
       unique: true,
@@ -54,31 +54,32 @@ User.init(
   }
 );
 
-class Role extends Model {}
+// class Role extends Model {}
 
-Role.init(
-  {
-    id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
-    },
-    name: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
-      unique: true,
-    },
-  },
-  {
-    sequelize,
-    modelName: "Role",
-    tableName: "roles",
-    timestamps: true,
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  }
-);
+// Role.init(
+//   {
+//     id: {
+//       type: DataTypes.UUID,
+//       defaultValue: DataTypes.UUIDV4,
+//       primaryKey: true,
+//     },
+//     name: {
+//       type: DataTypes.STRING(50),
+//       allowNull: false,
+//       unique: true,
+//     },
+//   },
+//   {
+//     sequelize,
+//     modelName: "Role",
+//     tableName: "roles",
+//     timestamps: true,
+//     createdAt: "created_at",
+//     updatedAt: "updated_at",
+//   }
+// );
 
-User.belongsTo(Role); // Agrega una clave foránea "RoleId" en la tabla de usuarios
+// User.belongsTo(Role); // Agrega una clave foránea "RoleId" en la tabla de usuarios
 
-export { User, Role };
+// export { User, Role };
+export { User };

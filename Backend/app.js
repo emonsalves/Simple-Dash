@@ -16,6 +16,6 @@ morganBody(app);
 
 // Routes
 app.use(express.static("public"));
-app.use("/api", router);
+app.use("/api/v1", router);
 
 export default app;
