@@ -81,11 +81,4 @@ Role.init(
 
 User.belongsTo(Role); // Agrega una clave foránea "RoleId" en la tabla de usuarios
 
-// Sincroniza los modelos con la base de datos
-// debo separar esto.
-sequelize
-  .sync({ force: true })
-  .then(() => console.log("Tables created successfully"))
-  .catch((error) => console.error("Unable to create tables", error));
-
 export { User, Role };

@@ -1,15 +1,20 @@
 import app from "./app.js";
-import './models/Proyect.js'
+import "./models/Proyect.js";
 
 const port = process.env.PORT || 5000;
 
-import { sequelize } from "./database/users.js";
 import { jsonResponse } from "./lib/jsonResponse.js";
+import { sequelize } from "./database/users.js";
 
-async function main() {
+async function force() {
   try {
-    await sequelize.authenticate();
-    console.log("Connection to the database was successful");
+    sequelize.sync({ force: true });
+    console.log("Tables created successfully");
+  } catch (error) {
+    jsonResponse(500, { error: error.message });
+  }
+  
+  try {
     app.listen(port);
     console.log(`Server on port ${port}`);
   } catch (error) {
@@ -17,4 +22,4 @@ async function main() {
   }
 }
 
-main();
+force();

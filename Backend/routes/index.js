@@ -9,7 +9,7 @@ console.log(__filename, __dirname);
 
 const router = express.Router();
 
-console.log("Bienvenido, estamos cargando las rutas de la API");
+console.log("Wellcome we are loading routes... ");
 
 // Remove the .js extension from the file name
 const cleanFileName = (fileName) => {
@@ -17,15 +17,14 @@ const cleanFileName = (fileName) => {
   return cleanRoute;
 };
 
-
 // Load the routes except index
 readdirSync(join(__dirname)).filter((fileName) => {
   const prefixRoute = cleanFileName(fileName);
   if (prefixRoute !== "index") {
     console.log(`Loading Route...  ${prefixRoute}`);
-    import(`./${prefixRoute}.route.js`).then((module) => {
-      router.use(`/${prefixRoute}`, module.default);
-    });
+    import(`./${prefixRoute}.route.js`).then((module) =>
+      router.use(`/${prefixRoute}`, module.default)
+    );
   }
 });
 
