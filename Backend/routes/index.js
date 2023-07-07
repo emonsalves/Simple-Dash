@@ -13,16 +13,17 @@ console.log("Bienvenido, estamos cargando las rutas de la API");
 
 // Remove the .js extension from the file name
 const cleanFileName = (fileName) => {
-  const clean = fileName.split(".").shift();
-  return clean;
+  const cleanRoute = fileName.split(".")[0];
+  return cleanRoute;
 };
+
 
 // Load the routes except index
 readdirSync(join(__dirname)).filter((fileName) => {
   const prefixRoute = cleanFileName(fileName);
   if (prefixRoute !== "index") {
     console.log(`Loading Route...  ${prefixRoute}`);
-    import(`./${prefixRoute}.js`).then((module) => {
+    import(`./${prefixRoute}.router.js`).then((module) => {
       router.use(`/${prefixRoute}`, module.default);
     });
   }
