@@ -23,7 +23,7 @@ readdirSync(join(__dirname)).filter((fileName) => {
   const prefixRoute = cleanFileName(fileName);
   if (prefixRoute !== "index") {
     console.log(`Loading Route...  ${prefixRoute}`);
-    import(`./${prefixRoute}.router.js`).then((module) => {
+    import(`./${prefixRoute}.route.js`).then((module) => {
       router.use(`/${prefixRoute}`, module.default);
     });
   }
