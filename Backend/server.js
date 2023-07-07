@@ -3,7 +3,7 @@ import './models/Proyect.js'
 
 const port = process.env.PORT || 5000;
 
-import { sequelize } from "./database/database.js";
+import { sequelize } from "./database/users.js";
 import { jsonResponse } from "./lib/jsonResponse.js";
 
 async function main() {
