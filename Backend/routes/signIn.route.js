@@ -10,13 +10,17 @@ router.post("/", async (req, res) => {
   if (password !== passwordConfirmation) {
     return res
       .status(400)
-      .json(jsonResponse(400, { message: "Passwords do not match" }));
+      .json(
+        jsonResponse(400, { message: "Passwords do not match", ok: false })
+      );
   }
 
   if (!userName || !password || !passwordConfirmation) {
     return res
       .status(400)
-      .json(jsonResponse(400, { message: "Missing required fields" }));
+      .json(
+        jsonResponse(400, { message: "Missing required fields", ok: false })
+      );
   }
 
   try {
@@ -25,11 +29,12 @@ router.post("/", async (req, res) => {
       where: { user_name: userName },
     });
 
-    console.log("existing", existingUserName);
     if (existingUserName) {
       return res
         .status(400)
-        .json(jsonResponse(400, { message: "Username already exists" }));
+        .json(
+          jsonResponse(400, { message: "Username already exists", ok: false })
+        );
     }
 
     // Crear un nuevo usuario
@@ -45,12 +50,11 @@ router.post("/", async (req, res) => {
 
     res
       .status(201)
-      .json(jsonResponse(201, { ok: true, message: "User created" }));
+      .json(jsonResponse(201, { message: "User created", ok: true }));
   } catch (error) {
-    console.error(error);
     res
       .status(500)
-      .json(jsonResponse(500, { message: "Internal server error" }));
+      .json(jsonResponse(500, { message: error.message, ok: false }));
   }
 });
 
