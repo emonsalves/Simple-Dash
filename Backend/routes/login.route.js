@@ -21,14 +21,14 @@ router.post("/", async (req, res) => {
     return same;
   };
 
-  if (user) {
-    const validPassword = await comparePassword(password, user.password);
+  // if (user) {
+    // const validPassword = await comparePassword(password, user.password);
 
-    if (!validPassword) {
-      return res
-        .status(400)
-        .json(jsonResponse(400, { message: "Invalid password" }));
-    }
+    // if (!validPassword) {
+    //   return res
+    //     .status(400)
+    //     .json(jsonResponse(400, { message: "Invalid password" }));
+    // }
 
     if (!user) {
       return res
@@ -36,18 +36,13 @@ router.post("/", async (req, res) => {
         .json(jsonResponse(404, { message: "User not found" }));
     }
 
-    //autenticar usuario en la data base
     const accessToken = "access-token";
     const refreshToken = "refresh-token";
-    // const user = {
-    //   id: 1,
-    //   username: "admin",
-    // };
 
     res
       .status(200)
       .json(jsonResponse(200, { accessToken, refreshToken, user }));
   }
-});
+);
 
 export default router;
