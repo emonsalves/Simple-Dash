@@ -3,13 +3,12 @@ import { useAuthContext } from "../auth/AuthProvider";
 import DefaultLayout from "../layout/DefaultLayout";
 import { Navigate, useNavigate } from "react-router-dom";
 
-
 function Login() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [errorResponse, setErrorResponse] = useState("");
 
-  const {isAuthenticated, setIsAuthenticated} = useAuthContext();
+  const { isAuthenticated, setIsAuthenticated } = useAuthContext();
 
   const goTo = useNavigate();
 
@@ -23,13 +22,13 @@ function Login() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ userName, password }),
+          body: JSON.stringify({ username: userName, password }),
         }
       );
       if (response.ok) {
         console.log(" User logged in successfully");
         setErrorResponse("");
-        setIsAuthenticated(!isAuthenticated)
+        setIsAuthenticated(!isAuthenticated);
         goTo("/dashboard");
       } else {
         console.log(" User login failed");
@@ -51,7 +50,9 @@ function Login() {
       <DefaultLayout>
         <form className="form" onSubmit={handleSubmit}>
           <h1>Log in</h1>
-          { !! errorResponse && <div className="errorMessage">{errorResponse.body.message}</div>}
+          {!!errorResponse && (
+            <div className="errorMessage">{errorResponse.body.message}</div>
+          )}
           <div>
             <label htmlFor="username">Username</label>
             <input
