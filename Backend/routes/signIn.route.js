@@ -5,7 +5,7 @@ import { User } from "../models/Proyect.js";
 const router = Router();
 
 router.post("/", async (req, res) => {
-  const { userName, password, passwordConfirmation, } = req.body;
+  const { userName, password, passwordConfirmation } = req.body;
 
   if (password !== passwordConfirmation) {
     return res
@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
       .json(jsonResponse(400, { message: "Passwords do not match" }));
   }
 
-  if (!userName || !password || !passwordConfirmation ) {
+  if (!userName || !password || !passwordConfirmation) {
     return res
       .status(400)
       .json(jsonResponse(400, { message: "Missing required fields" }));
@@ -21,20 +21,16 @@ router.post("/", async (req, res) => {
 
   try {
     // Verificar si el nombre de usuario ya está registrado
-    const existingUserName = await User.findOne({ user_name: userName });
+    const existingUserName = await User.findOne({
+      where: { user_name: userName },
+    });
+
+    console.log("existing", existingUserName);
     if (existingUserName) {
       return res
         .status(400)
         .json(jsonResponse(400, { message: "Username already exists" }));
     }
-
-    // Verificar si el correo ya está registrado
-    // const existingEmail = await User.findOne({ email: email });
-    // if (existingEmail) {
-    //   return res
-    //     .status(400)
-    //     .json(jsonResponse(400, { message: "Email already registered" }));
-    // }
 
     // Crear un nuevo usuario
     await User.create({
@@ -54,7 +50,7 @@ router.post("/", async (req, res) => {
     console.error(error);
     res
       .status(500)
-      .json(jsonResponse(500, { message: "Internal Server Error" }));
+      .json(jsonResponse(500, { message: "Internal server error" }));
   }
 });
 
