@@ -11,10 +11,34 @@ router.get("/", async (req, res) => {
 
 router.get("/:username", async (req, res) => {
   const { username } = req.params;
-  console.log("test", username);
   const user = await User.findOne({ where: { user_name: username } });
   user
     ? res.json(jsonResponse(200, { user, ok: true }))
+    : res.json(jsonResponse(404, { message: "User not found", ok: false }));
+});
+
+router.put("/:username", async (req, res) => {
+  const { username } = req.params;
+  const { name, last_name, phone, address } = req.body;
+  const updatedUser = await User.update(
+    {
+      name,
+      last_name,
+      phone,
+      address,
+    },
+    { where: { user_name: username } }
+  );
+  updatedUser
+    ? res.json(jsonResponse(200, { username, ok: true }))
+    : res.json(jsonResponse(404, { message: "User not found", ok: false }));
+});
+
+router.delete("/:username", async (req, res) => {
+  const { username } = req.params;
+  const deletedUser = await User.destroy({ where: { user_name: username } });
+  deletedUser
+    ? res.json(jsonResponse(200, { username, ok: true }))
     : res.json(jsonResponse(404, { message: "User not found", ok: false }));
 });
 
