@@ -9,4 +9,13 @@ router.get("/", async (req, res) => {
   res.json(jsonResponse(200, { users, ok: true }));
 });
 
+router.get("/:username", async (req, res) => {
+  const { username } = req.params;
+  console.log("test", username);
+  const user = await User.findOne({ where: { user_name: username } });
+  user
+    ? res.json(jsonResponse(200, { user, ok: true }))
+    : res.json(jsonResponse(404, { message: "User not found", ok: false }));
+});
+
 export default router;
