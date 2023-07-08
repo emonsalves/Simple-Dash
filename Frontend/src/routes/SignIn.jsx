@@ -16,7 +16,7 @@ function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/signin`, {
+      const response = await fetch(`http://localhost:5000/api/v1/signin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -27,12 +27,7 @@ function SignIn() {
         console.log("User created successfully");
         setErrorResponse("");
         goTo("/");
-      } else {
-        console.log("User creation failed");
-        const json = await response.json() 
-        setErrorResponse(json);
-        return
-      }
+      } 
     } catch (error) {
       console.log(error);
     }
