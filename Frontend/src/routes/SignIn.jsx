@@ -26,7 +26,7 @@ function SignIn() {
         setErrorResponse("");
         goTo("/");
       }
-      console.log("test", response.data.body.message);
+      console.log(response.data.body.message);
     } catch (error) {
       console.log(error.message);
     }

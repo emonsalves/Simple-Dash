@@ -25,7 +25,6 @@ router.post("/", async (req, res) => {
     const existingUserName = await User.findOne({
       where: { user_name: userName },
     });
-    console.log("tewst", existingUserName);
 
     if (existingUserName) {
       return res
