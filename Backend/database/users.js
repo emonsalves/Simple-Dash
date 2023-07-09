@@ -10,4 +10,5 @@ export const sequelize = new Sequelize("projectsdb", "root", "12qwaszx", {
     idle: 10000,
   },
   logging: false,
+  timezone: "-04:00", // Ajusta el huso horario a Chile
 });
