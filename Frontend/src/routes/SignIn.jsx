@@ -24,15 +24,18 @@ function SignIn() {
         body: JSON.stringify({ userName, password, passwordConfirmation }),
       });
       if (response.ok) {
-        console.log("User created successfully");
+        console.log(response.statusText);
         setErrorResponse("");
         goTo("/");
-      } 
+      } else {
+        const error = await response.json();
+        console.log(error.body.message);
+        setErrorResponse(error);
+      }
     } catch (error) {
       console.log(error);
     }
   };
-
 
   if (auth.isAuthenticated) {
     return <Navigate to="/dashboard" />;
@@ -43,7 +46,9 @@ function SignIn() {
       <DefaultLayout>
         <form className="form" onSubmit={handleSubmit}>
           <h1>SignIn</h1>
-          { !! errorResponse && <div className="errorMessage">{errorResponse.body.message}</div>}
+          {!!errorResponse && (
+            <div className="errorMessage">{errorResponse.body.message}</div>
+          )}
           <div className="form-control">
             <label htmlFor="username">Username</label>
             <input
