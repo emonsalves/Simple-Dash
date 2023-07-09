@@ -8,7 +8,7 @@ function Dashboard() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(" User logged out successfully");
+      console.log("User logged out successfully");
       setIsAuthenticated(!isAuthenticated);
       goTo("/");
     } catch (error) {
