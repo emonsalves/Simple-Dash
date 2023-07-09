@@ -2,42 +2,42 @@ import { useState } from "react";
 import { useAuthContext } from "../auth/AuthProvider";
 import DefaultLayout from "../layout/DefaultLayout";
 import { Navigate, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Login() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [errorResponse, setErrorResponse] = useState("");
-
   const { isAuthenticated, setIsAuthenticated } = useAuthContext();
 
   const goTo = useNavigate();
 
+  const handleResponse = (response) => {
+    if (response.status === 200) {
+      console.log("User logged in successfully");
+      setErrorResponse("");
+      setIsAuthenticated(!isAuthenticated);
+      goTo("/dashboard");
+    } else {
+      console.log("User login failed");
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(
+      const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/login`,
+        { username: userName, password },
         {
-          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ username: userName, password }),
         }
       );
-      if (response.ok) {
-        console.log(" User logged in successfully");
-        setErrorResponse("");
-        setIsAuthenticated(!isAuthenticated);
-        goTo("/dashboard");
-      } else {
-        console.log(" User login failed");
-        const json = await response.json();
-        setErrorResponse(json);
-        return;
-      }
+      handleResponse(response);
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.body.message);
     }
   };
 

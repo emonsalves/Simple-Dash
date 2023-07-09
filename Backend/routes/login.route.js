@@ -27,7 +27,7 @@ router.post("/", async (req, res) => {
   if (!validPassword) {
     return res
       .status(400)
-      .json(jsonResponse(400, { message: "Invalid password" }));
+      .json(jsonResponse(400, { message: "Invalid password or user" }));
   }
 
   const accessToken = "access-token";
