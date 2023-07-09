@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../auth/AuthProvider";
 
 function Dashboard() {
-  const {isAuthenticated, setIsAuthenticated} = useAuthContext();
+  const { isAuthenticated, setIsAuthenticated } = useAuthContext();
   const goTo = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -18,10 +18,10 @@ function Dashboard() {
 
   return (
     <>
-    <form className="form" onSubmit={handleSubmit}>
-      <h1>Dashboard</h1>
-      <button type="submit">Log out</button>
-    </form>
+      <form className="form" onSubmit={handleSubmit}>
+        <h1>Dashboard</h1>
+        <button type="submit">Log out</button>
+      </form>
     </>
   );
 }

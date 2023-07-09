@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuthContext } from "../auth/AuthProvider";
 import DefaultLayout from "../layout/DefaultLayout";
 import { Navigate, useNavigate } from "react-router-dom";
+import AuthService from "../auth/AuthService";
 
 function SignIn() {
   const [userName, setUserName] = useState("");
@@ -16,24 +17,18 @@ function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/signin`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userName, password, passwordConfirmation }),
+      const response = await AuthService.signIn({
+        userName,
+        password,
+        passwordConfirmation,
       });
-      if (response.ok) {
-        console.log(response.statusText);
+      if (response.status === 201) {
         setErrorResponse("");
         goTo("/");
-      } else {
-        const error = await response.json();
-        console.log(error.body.message);
-        setErrorResponse(error);
       }
+      console.log("test", response.data.body.message);
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 

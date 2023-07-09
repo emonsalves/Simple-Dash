@@ -1,43 +1,37 @@
 import { useState } from "react";
+import { useNavigate, Navigate } from "react-router-dom";
 import { useAuthContext } from "../auth/AuthProvider";
 import DefaultLayout from "../layout/DefaultLayout";
-import { Navigate, useNavigate } from "react-router-dom";
-import axios from "axios";
+import AuthService from "../auth/AuthService";
 
 function Login() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [errorResponse, setErrorResponse] = useState("");
   const { isAuthenticated, setIsAuthenticated } = useAuthContext();
-
-  const goTo = useNavigate();
+  const navigate = useNavigate();
 
   const handleResponse = (response) => {
     if (response.status === 200) {
+      console.log(response.data.body.user);
       console.log("User logged in successfully");
       setErrorResponse("");
       setIsAuthenticated(!isAuthenticated);
-      goTo("/dashboard");
+      navigate("/dashboard");
     } else {
       console.log("User login failed");
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/login`,
-        { username: userName, password },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await AuthService.login({ userName, password });
       handleResponse(response);
     } catch (error) {
-      console.log(error.response.data.body.message);
+      console.log(error.message);
+      setErrorResponse(error.message);
     }
   };
 
@@ -46,37 +40,34 @@ function Login() {
   }
 
   return (
-    <>
-      <DefaultLayout>
-        <form className="form" onSubmit={handleSubmit}>
-          <h1>Log in</h1>
-          {!!errorResponse && (
-            <div className="errorMessage">{errorResponse.body.message}</div>
-          )}
-          <div>
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
-            />
-          </div>
-          <div className="form-control">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <button type="submit">Log in</button>
-        </form>
-      </DefaultLayout>
-    </>
+    <DefaultLayout>
+      <form className="form" onSubmit={handleSubmit}>
+        <h1>Log in</h1>
+        {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
+        <div>
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={userName}
+            onChange={(event) => setUserName(event.target.value)}
+          />
+        </div>
+        <div className="form-control">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
+        </div>
+        <button type="submit">Log in</button>
+      </form>
+    </DefaultLayout>
   );
 }
+
 export default Login;

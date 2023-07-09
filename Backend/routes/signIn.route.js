@@ -11,17 +11,13 @@ router.post("/", async (req, res) => {
   if (password !== passwordConfirmation) {
     return res
       .status(400)
-      .json(
-        jsonResponse(400, { message: "Passwords do not match"})
-      );
+      .json(jsonResponse(400, { message: "Passwords do not match" }));
   }
 
   if (!userName || !password || !passwordConfirmation) {
     return res
       .status(400)
-      .json(
-        jsonResponse(400, { message: "Missing required fields"})
-      );
+      .json(jsonResponse(400, { message: "Missing required fields" }));
   }
 
   try {
@@ -29,13 +25,12 @@ router.post("/", async (req, res) => {
     const existingUserName = await User.findOne({
       where: { user_name: userName },
     });
+    console.log("tewst", existingUserName);
 
     if (existingUserName) {
       return res
         .status(400)
-        .json(
-          jsonResponse(400, { message: "Username already exists"})
-        );
+        .json(jsonResponse(400, { message: "Username already exists" }));
     }
 
     // Encriptar la contraseña
@@ -51,14 +46,10 @@ router.post("/", async (req, res) => {
       phone: "Test",
       address: "Test",
     });
-
-    res
-      .status(201)
-      .json(jsonResponse(201, { message: "User created" }));
+    console.log("first");
+    res.status(201).json(jsonResponse(201, { message: "User created" }));
   } catch (error) {
-    res
-      .status(500)
-      .json(jsonResponse(500, { message: error.message }));
+    res.status(500).json(jsonResponse(500, { message: error.message }));
   }
 });
 
