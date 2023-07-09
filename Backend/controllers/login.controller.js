@@ -27,6 +27,8 @@ const LoginUser = async (req, res) => {
       .json(jsonResponse(400, { message: "Invalid password or user" }));
   }
 
+  delete user.dataValues.password;
+  
   const accessToken = "access-token";
   const refreshToken = "refresh-token";
 
