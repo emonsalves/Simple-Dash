@@ -21,9 +21,6 @@ router.post("/", async (req, res) => {
       .status(404)
       .json(jsonResponse(404, { message: "User not found" }));
   }
-
-  const data = { password, hash: user.password };
-  console.log("first", data);
   
   const validPassword = await compare({ text: password, hash: user.password });
 
