@@ -25,6 +25,7 @@ function Login() {
           body: JSON.stringify({ username: userName, password }),
         }
       );
+      console.log(response);
       if (response.ok) {
         console.log(" User logged in successfully");
         setErrorResponse("");

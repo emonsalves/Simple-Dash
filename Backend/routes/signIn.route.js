@@ -12,7 +12,7 @@ router.post("/", async (req, res) => {
     return res
       .status(400)
       .json(
-        jsonResponse(400, { message: "Passwords do not match", ok: false })
+        jsonResponse(400, { message: "Passwords do not match"})
       );
   }
 
@@ -20,7 +20,7 @@ router.post("/", async (req, res) => {
     return res
       .status(400)
       .json(
-        jsonResponse(400, { message: "Missing required fields", ok: false })
+        jsonResponse(400, { message: "Missing required fields"})
       );
   }
 
@@ -34,7 +34,7 @@ router.post("/", async (req, res) => {
       return res
         .status(400)
         .json(
-          jsonResponse(400, { message: "Username already exists", ok: false })
+          jsonResponse(400, { message: "Username already exists"})
         );
     }
 
@@ -54,11 +54,11 @@ router.post("/", async (req, res) => {
 
     res
       .status(201)
-      .json(jsonResponse(201, { message: "User created", ok: true }));
+      .json(jsonResponse(201, { message: "User created" }));
   } catch (error) {
     res
       .status(500)
-      .json(jsonResponse(500, { message: error.message, ok: false }));
+      .json(jsonResponse(500, { message: error.message }));
   }
 });
 
