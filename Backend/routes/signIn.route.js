@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { jsonResponse } from "../lib/jsonResponse.js";
 import { User } from "../models/Proyect.js";
+import { encrypt } from "../utils/bcypt.js";
 
 const router = Router();
 
@@ -37,10 +38,13 @@ router.post("/", async (req, res) => {
         );
     }
 
+    // Encriptar la contraseña
+    const encryptedPassword = encrypt({ text: password });
+
     // Crear un nuevo usuario
     await User.create({
       user_name: userName,
-      password: password,
+      password: encryptedPassword,
       name: "Test",
       last_name: "Test",
       // email: "test",
