@@ -19,7 +19,7 @@ const login = async ({ userName, password }) => {
 
 const signIn = async ({ userName, password, passwordConfirmation }) => {
   try {
-    console.log("signin", userName, password, passwordConfirmation);
+    // console.log("signin", userName, password, passwordConfirmation);
     const response = await axios.post(
       `${import.meta.env.VITE_BACKEND_URL}/signin`,
       { userName, password, passwordConfirmation },
