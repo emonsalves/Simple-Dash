@@ -5,7 +5,6 @@ import { readdirSync } from "fs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-console.log(__filename, __dirname);
 
 const router = express.Router();
 
