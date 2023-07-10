@@ -1,5 +1,5 @@
 import { jsonResponse } from "../lib/jsonResponse.js";
-import { User } from "../models/Proyect.js";
+import { User, Role } from "../models/User.js";
 import { compare } from "../utils/bcypt.js";
 
 const LoginUser = async (req, res) => {
@@ -11,7 +11,10 @@ const LoginUser = async (req, res) => {
       .json(jsonResponse(400, { message: "Missing required fields" }));
   }
 
-  const user = await User.findOne({ where: { user_name: userName } });
+  const user = await User.findOne({
+    where: { user_name: userName },
+    include: { model: Role, attributes: ["name"] },
+  });
 
   if (!user) {
     return res
@@ -28,7 +31,7 @@ const LoginUser = async (req, res) => {
   }
 
   delete user.dataValues.password;
-  
+
   const accessToken = "access-token";
   const refreshToken = "refresh-token";
 
