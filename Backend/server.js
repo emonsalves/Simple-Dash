@@ -1,6 +1,6 @@
 import app from "./app.js";
 import "./models/index.js";
-import { createRoles } from "./models/RoleGenerator.js";
+import { createRoles } from "./models/createRoles.js";
 
 const port = process.env.PORT || 5000;
 
@@ -9,12 +9,11 @@ import { sequelize } from "./database/ProyectZero.js";
 
 async function force() {
   try {
-    const test = false;
-    if (test) {
+    // const loadTables = true;
+    await createRoles();
+    if (loadTables) {
       sequelize.sync({ force: true });
       console.log("Tables created successfully");
-      createRoles();
-      console.log("Default roles generated successfully");
     }
   } catch (error) {
     jsonResponse(500, { error: error.message });
