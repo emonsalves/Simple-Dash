@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { jsonResponse } from "../lib/jsonResponse.js";
-import { User } from "../models/Proyect.js";
+import { User } from "../models/User.js";
 
 const router = Router();
 
