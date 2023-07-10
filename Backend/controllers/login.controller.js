@@ -1,5 +1,5 @@
 import { jsonResponse } from "../lib/jsonResponse.js";
-import { User, Role } from "../models/User.js";
+import { User, Role } from "../models/index.js";
 import { compare } from "../utils/bcypt.js";
 
 const LoginUser = async (req, res) => {
