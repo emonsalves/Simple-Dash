@@ -2,22 +2,16 @@ import { Role } from "./role.js";
 
 async function createRoles() {
   try {
-    await Role.sync(); // Sincronizar el modelo Role con la base de datos (asegurarse de que la tabla exista)
+    // Crear la tabla de roles utilizando migraciones de Sequelize (ejemplo)
+    // await queryInterface.createTable('Roles', { ... });
 
-    // Crear tres roles en la tabla de roles
-    await Role.create({ name: "Admin" });
-    await Role.create({ name: "Moderator" });
-    await Role.create({ name: "User" });
+    // Crear tres roles en la tabla de roles si no existen previamente
+    await Role.findOrCreate({ where: { name: "User" } });
+    await Role.findOrCreate({ where: { name: "Admin" } });
 
-    console.log("Roles creados exitosamente.");
+    console.log("Roles created successfully");
   } catch (error) {
-    if (error.errors[0].type === "unique violation") {
-      console.log("Error al crear los roles: Ya existen.");
-    } else {
-      console.error("Error al crear los roles:", error.errors[0].message);
-    }
-
-    // console.error("Error al crear los roles:", error.errors[0].message);
+    console.error("Error creating roles: ", error);
   } finally {
     process.exit(); // Salir del proceso una vez que se hayan creado los roles (opcional)
   }

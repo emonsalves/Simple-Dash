@@ -10,7 +10,7 @@ import { sequelize } from "./database/ProyectZero.js";
 async function force() {
   try {
     // const loadTables = true;
-    await createRoles();
+    // await createRoles();
     if (loadTables) {
       sequelize.sync({ force: true });
       console.log("Tables created successfully");
