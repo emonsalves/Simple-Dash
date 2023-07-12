@@ -13,7 +13,7 @@ function Login() {
 
   const handleResponse = (response) => {
     if (response.status === 200) {
-      console.log(response.data.body.user);
+      console.log(response.data.body);
       console.log("User logged in successfully");
       setErrorResponse("");
       setIsAuthenticated(!isAuthenticated);
