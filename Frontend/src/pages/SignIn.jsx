@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useAuthContext } from "../auth/AuthProvider";
+import { useAuthContext } from "../context/AuthContext";
 import DefaultLayout from "../layout/DefaultLayout";
 import { Navigate, useNavigate } from "react-router-dom";
-import AuthService from "../auth/AuthService";
+import AuthService from "../api/auth"
 
 function SignIn() {
   const [userName, setUserName] = useState("");

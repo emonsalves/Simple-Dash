@@ -3,7 +3,7 @@ import axios from "axios";
 const login = async ({ userName, password }) => {
   try {
     const response = await axios.post(
-      `${import.meta.env.VITE_BACKEND_URL}/login`,
+      `${import.meta.env.VITE_BACKEND_URL}/auth`,
       { userName, password },
       {
         headers: {
@@ -16,10 +16,8 @@ const login = async ({ userName, password }) => {
     throw new Error(error.response.data.body.message);
   }
 };
-
 const signIn = async ({ userName, password, passwordConfirmation }) => {
   try {
-    // console.log("signin", userName, password, passwordConfirmation);
     const response = await axios.post(
       `${import.meta.env.VITE_BACKEND_URL}/signin`,
       { userName, password, passwordConfirmation },

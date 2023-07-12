@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../auth/AuthProvider";
+import { useAuthContext } from "../context/AuthContext";
 
 function Dashboard() {
   const { isAuthenticated, setIsAuthenticated } = useAuthContext();
