@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import DefaultLayout from "../layout/DefaultLayout";
 import { Navigate, useNavigate } from "react-router-dom";
-import AuthService from "../api/auth"
+import UserService from "../api/user"
+
 
 function SignIn() {
   const [userName, setUserName] = useState("");
@@ -17,7 +18,7 @@ function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await AuthService.signIn({
+      const response = await UserService.createUser({
         userName,
         password,
         passwordConfirmation,
