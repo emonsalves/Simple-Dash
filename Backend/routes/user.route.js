@@ -1,45 +1,14 @@
 import { Router } from "express";
-import { jsonResponse } from "../lib/jsonResponse.js";
-import { User } from "../models/index.js";
+import { userController } from "../controllers/user.controller.js";
 
 const router = Router();
 
-router.get("/", async (req, res) => {
-  const users = await User.findAll();
-  res.json(jsonResponse(200, { users}));
-});
-
-router.get("/:username", async (req, res) => {
-  const { username } = req.params;
-  const user = await User.findOne({ where: { user_name: username } });
-  user
-    ? res.json(jsonResponse(200, { user, ok: true }))
-    : res.json(jsonResponse(404, { message: "User not found"}));
-});
-
-router.put("/:username", async (req, res) => {
-  const { username } = req.params;
-  const { name, last_name, phone, address } = req.body;
-  const updatedUser = await User.update(
-    {
-      name,
-      last_name,
-      phone,
-      address,
-    },
-    { where: { user_name: username } }
-  );
-  updatedUser
-    ? res.json(jsonResponse(200, { username}))
-    : res.json(jsonResponse(404, { message: "User not found"}));
-});
-
-router.delete("/:username", async (req, res) => {
-  const { username } = req.params;
-  const deletedUser = await User.destroy({ where: { user_name: username } });
-  deletedUser
-    ? res.json(jsonResponse(200, { username}))
-    : res.json(jsonResponse(404, { message: "User not found"}));
-});
+router.post("/login", userController.login);
+router.post("/logout", userController.logout);
+router.post("/register", userController.register);
+router.get("/all", userController.getAll);
+router.get("/:username", userController.getOne);
+router.put("/:username", userController.update);
+router.delete("/:username", userController.deleted);
 
 export default router;
