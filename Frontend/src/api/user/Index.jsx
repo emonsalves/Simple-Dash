@@ -3,7 +3,7 @@ import axios from "axios";
 const createUser = async ({ userName, password, passwordConfirmation }) => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/signin`,
+        `${import.meta.env.VITE_BACKEND_URL}/user/register`,
         { userName, password, passwordConfirmation },
         {
           headers: {
