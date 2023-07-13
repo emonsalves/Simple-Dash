@@ -45,7 +45,7 @@ function Login() {
         <h1>Log in</h1>
         {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
         <div>
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">User</label>
           <input
             type="text"
             id="username"

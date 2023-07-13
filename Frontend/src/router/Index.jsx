@@ -1,6 +1,6 @@
 import { createHashRouter } from "react-router-dom";
 import Login from "../pages/Login.jsx";
-import SignIn from "../pages/SignIn.jsx";
+import Register from "../pages/Register.jsx";
 import Dashboard from "../pages/Dashboard.jsx";
 import ProtectedRoute from "../auth/ProtectedRoute.jsx";
 
@@ -10,8 +10,8 @@ const router = createHashRouter([
     element: <Login />,
   },
   {
-    path: "/Signin",
-    element: <SignIn />,
+    path: "/register",
+    element: <Register />,
   },
   {
     path: "/",
