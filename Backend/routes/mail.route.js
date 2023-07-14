@@ -3,9 +3,9 @@ import { sendMail } from "../utils/mail.Util.js";
 
 const router = Router();
 
-router.post("/send", (req, res) => {
+router.post("/", (req, res) => {
   sendMail();
-  res.send("Mail sent!");
+  res.send("Mail sent successfully");
 });
 
 export default router;
