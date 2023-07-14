@@ -1,15 +1,18 @@
 import { User, Role } from "../models/index.js";
-import { bcryptUtil } from "../utils/bcypt.js";
+import { bcryptUtil } from "../utils/bcypt.Util.js";
+import { jsonWBT }  from "../utils/jwt.Util.js";
 
 const login = async (userName, password) => {
-  const user = await User.findOne({
+  const existingUser = await User.findOne({
     where: { user_name: userName },
     include: { model: Role, attributes: ["name"] },
   });
 
-  if (!user) {
+  if (!existingUser) {
     return { status: 404, data: { message: "User not found" } };
   }
+
+  const user = new User(existingUser.dataValues);
 
   const validPassword = await bcryptUtil.compare({
     text: password,
@@ -22,7 +25,7 @@ const login = async (userName, password) => {
 
   delete user.dataValues.password;
 
-  const accessToken = "access-token";
+  const accessToken = jsonWBT.generateToken({ userName });
   const refreshToken = "refresh-token";
 
   return { status: 200, data: { accessToken, refreshToken, user } };
@@ -34,7 +37,9 @@ const getAllUsers = async () => {
 };
 
 const getUserByUsername = async (username) => {
-  const user = await User.findOne({ where: { user_name: username } });
+  const existingUserName = await User.findOne({ where: { user_name: username } });
+  const user = new User(existingUserName.dataValues);
+
   return user
     ? { status: 200, data: { user, ok: true } }
     : { status: 404, data: { message: "User not found" } };
