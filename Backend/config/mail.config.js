@@ -11,7 +11,7 @@ const mailConfig = {
   },
   auth: {
     user: process.env.MAIL_USER, // Your email id
-    pass: process.env.MAIL_PASS, // Your password
+    pass: process.env.MAIL_PASSWORD, // Your password
   },
 };
 
