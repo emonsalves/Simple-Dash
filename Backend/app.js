@@ -1,5 +1,4 @@
-import "dotenv/config";
-
+import dotenv from "dotenv";
 import morganBody from "morgan-body";
 import express from "express";
 import cors from "cors";
@@ -7,6 +6,7 @@ import morgan from "morgan";
 import router from "./routes/index.js";
 
 const app = express();
+dotenv.config();
 
 // Middlewares
 app.use(cors({ origin: "*" }));
