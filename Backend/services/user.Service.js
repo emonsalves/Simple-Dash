@@ -1,6 +1,6 @@
 import { User, Role } from "../models/index.js";
 import { bcryptUtil } from "../utils/bcypt.Util.js";
-import { jsonWBT }  from "../utils/jwt.Util.js";
+import { jsonWBT } from "../utils/jwt.Util.js";
 
 const login = async (userName, password) => {
   const existingUser = await User.findOne({
@@ -37,7 +37,9 @@ const getAllUsers = async () => {
 };
 
 const getUserByUsername = async (username) => {
-  const existingUserName = await User.findOne({ where: { user_name: username } });
+  const existingUserName = await User.findOne({
+    where: { user_name: username },
+  });
   const user = new User(existingUserName.dataValues);
 
   return user
