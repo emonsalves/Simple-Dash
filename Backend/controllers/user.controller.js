@@ -1,5 +1,5 @@
 import { jsonResponse } from "../lib/jsonResponse.js";
-import { userService } from "../services/user.Service.js";
+import { userService } from "../services/user.service.js";
 
 const login = async (req, res) => {
   const { userName, password } = req.body;
