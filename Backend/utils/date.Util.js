@@ -1,14 +1,19 @@
 import dayjs from "dayjs";
 
-const DDMMYYYY = (date) => {
-  return dayjs(date).format("DD/MM/YYYY");
+const YYYYMMDD = (date) => {
+  return dayjs(date).format("YYYY-MM-DD");
 };
 
-const DDMMYYYYHHMMSS = (date) => {
-  return dayjs(date).format("DD/MM/YYYY HH:mm:ss");
+const YYYYMMDDHHMMSS = (date) => {
+  return dayjs(date).format("YYYY-MM-DD HH:mm:ss");
+};
+
+const YYYYMMDDTHHMMSSSSSZ = (date) => {
+  return dayjs(date).format("YYYY-MM-DDTHH:mm:ss.SSSZ");
 };
 
 export default dateFormat = {
-  DDMMYYYY,
-  DDMMYYYYHHMMSS,
+  YYYYMMDD,
+  YYYYMMDDHHMMSS,
+  YYYYMMDDTHHMMSSSSSZ,
 };
