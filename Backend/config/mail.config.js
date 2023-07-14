@@ -1,3 +1,7 @@
+import dotenv from "dotenv";
+
+dotenv.config();
+
 const mailConfig = {
   host: "smtp-mail.outlook.com", // hostname
   secureConnection: false, // TLS requires secureConnection to be false
@@ -6,8 +10,8 @@ const mailConfig = {
     ciphers: "SSLv3",
   },
   auth: {
-    user: "no-reply@kayser.cl",
-    pass: "Yav41378",
+    user: process.env.MAIL_USER, // Your email id
+    pass: process.env.MAIL_PASS, // Your password
   },
 };
 
