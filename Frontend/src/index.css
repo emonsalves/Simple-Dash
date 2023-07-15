@@ -2,6 +2,8 @@
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  background-color: green;
+
 }
 
 body {
@@ -38,7 +40,7 @@ button {
 }
 
 nav {
-  background-color: #eee;
+  background-color: gray
 }
 
 nav ul {
