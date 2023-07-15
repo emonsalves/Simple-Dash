@@ -30,7 +30,10 @@ const login = async (userName, password) => {
 };
 
 const getAllUsers = async () => {
-  const users = await User.findAll();
+  const users = await User.findAll({
+    attributes: { exclude: ["password"] },
+    include: { model: Role, attributes: ["name"] },
+  });
   return { status: 200, data: { users } };
 };
 

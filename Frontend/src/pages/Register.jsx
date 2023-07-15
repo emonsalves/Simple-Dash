@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import DefaultLayout from "../layout/DefaultLayout";
 import { Navigate, useNavigate } from "react-router-dom";
-import UserService from "../api/user"
-
+import UserService from "../api/user";
 
 function Register() {
   const [userName, setUserName] = useState("");
@@ -23,17 +22,22 @@ function Register() {
         password,
         passwordConfirmation,
       });
-      if (response.status === 201) {
+
+   
+      const { status } = response;
+      const { message } = response.data.body;
+
+      if (status === 201) {
         setErrorResponse("");
         goTo("/");
+        console.log(message);
+      } else {
+        console.log(message)
+        setErrorResponse(message);
+        setTimeout(() => setErrorResponse(""), 5000);
       }
-      console.log(response.data.body.message);
     } catch (error) {
-      console.log(error.message);
-      setErrorResponse(error.message);
-      setTimeout(() => {
-        setErrorResponse("");
-      }, 5000);
+      console.log(error);
     }
   };
 

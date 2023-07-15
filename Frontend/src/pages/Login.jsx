@@ -8,33 +8,34 @@ function Login() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [errorResponse, setErrorResponse] = useState("");
-  const { isAuthenticated, setIsAuthenticated } = useAuthContext();
+  const { isAuthenticated, setIsAuthenticated, setUser } = useAuthContext();
   const navigate = useNavigate();
 
   const handleResponse = (response) => {
-    if (response.status === 200) {
-      console.log(response.data.body);
+    const { status } = response;
+    const { body } = response.data;
+
+    if (status === 200) {
+      console.log(body);
       console.log("User logged in successfully");
       setErrorResponse("");
       setIsAuthenticated(!isAuthenticated);
+      setUser(body.user);
       navigate("/dashboard");
     } else {
-      console.log("User login failed");
+      console.log(body.message);
+      setErrorResponse(body.message);
+      setTimeout(() => setErrorResponse(""), 5000);
     }
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
       const response = await AuthService.login({ userName, password });
       handleResponse(response);
     } catch (error) {
-      console.log(error.message);
-      setErrorResponse(error.message);
-      setTimeout(() => {
-        setErrorResponse("");
-      }, 5000);
+      console.log(error);
     }
   };
 

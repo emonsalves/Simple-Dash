@@ -13,7 +13,7 @@ const login = async ({ userName, password }) => {
     );
     return response;
   } catch (error) {
-    throw new Error(error.response.data.body.message);
+    return error.response;
   }
 };
 
