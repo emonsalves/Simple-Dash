@@ -1,7 +1,6 @@
 import { createHashRouter } from "react-router-dom";
-import Login from "../pages/Login.jsx";
-import Register from "../pages/Register.jsx";
-import Dashboard from "../pages/Dashboard.jsx";
+import { Login, Register, Dashboard, Home } from "../pages";
+
 import ProtectedRoute from "../auth/ProtectedRoute.jsx";
 
 const router = createHashRouter([
@@ -20,6 +19,10 @@ const router = createHashRouter([
       {
         path: "/dashboard",
         element: <Dashboard />,
+      },
+      {
+        path: "/Home",
+        element: <Home />,
       },
     ],
   },
