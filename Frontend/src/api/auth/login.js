@@ -1,9 +1,10 @@
 import axios from "axios";
+import { backendUrl } from "../../config";
 
 const login = async ({ userName, password }) => {
   try {
     const response = await axios.post(
-      `${import.meta.env.VITE_BACKEND_URL}/user/login`,
+      `${backendUrl}/user/login`,
       { userName, password },
       {
         headers: {
@@ -17,5 +18,4 @@ const login = async ({ userName, password }) => {
   }
 };
 
-
-export default { login };
+export { login };

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import DefaultLayout from "../layout/DefaultLayout";
 import { Navigate, useNavigate } from "react-router-dom";
-import UserService from "../api/user";
+import { createUser } from "../api/user";
 
 function Register() {
   const [userName, setUserName] = useState("");
@@ -17,13 +17,12 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await UserService.createUser({
+      const response = await createUser({
         userName,
         password,
         passwordConfirmation,
       });
 
-   
       const { status } = response;
       const { message } = response.data.body;
 
@@ -32,7 +31,7 @@ function Register() {
         goTo("/");
         console.log(message);
       } else {
-        console.log(message)
+        console.log(message);
         setErrorResponse(message);
         setTimeout(() => setErrorResponse(""), 5000);
       }

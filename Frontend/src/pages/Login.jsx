@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import DefaultLayout from "../layout/DefaultLayout";
-import AuthService from "../api/auth";
+import { login } from "../api/auth";
 
 function Login() {
   const [userName, setUserName] = useState("");
@@ -20,7 +20,7 @@ function Login() {
       console.log("User logged in successfully");
       setErrorResponse("");
       setIsAuthenticated(!isAuthenticated);
-      setUser(body.user);
+      setUser(body);
       navigate("/dashboard");
     } else {
       console.log(body.message);
@@ -32,7 +32,7 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await AuthService.login({ userName, password });
+      const response = await login({ userName, password });
       handleResponse(response);
     } catch (error) {
       console.log(error);
