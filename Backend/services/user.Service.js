@@ -8,7 +8,6 @@ const login = async (userName, password) => {
     include: { model: Role, attributes: ["name"] },
   });
 
-
   if (!user) {
     return { status: 404, data: { message: "User not found" } };
   }
