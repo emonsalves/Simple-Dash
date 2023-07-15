@@ -3,16 +3,15 @@ import { bcryptUtil } from "../utils/bcypt.Util.js";
 import { jsonWBT } from "../utils/jwt.Util.js";
 
 const login = async (userName, password) => {
-  const existingUser = await User.findOne({
+  const user = await User.findOne({
     where: { user_name: userName },
     include: { model: Role, attributes: ["name"] },
   });
 
-  if (!existingUser) {
+
+  if (!user) {
     return { status: 404, data: { message: "User not found" } };
   }
-
-  const user = new User(existingUser.dataValues);
 
   const validPassword = await bcryptUtil.compare({
     text: password,
