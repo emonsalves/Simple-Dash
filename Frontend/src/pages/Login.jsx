@@ -32,6 +32,9 @@ function Login() {
     } catch (error) {
       console.log(error.message);
       setErrorResponse(error.message);
+      setTimeout(() => {
+        setErrorResponse("");
+      }, 5000);
     }
   };
 

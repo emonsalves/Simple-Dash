@@ -30,6 +30,10 @@ function Register() {
       console.log(response.data.body.message);
     } catch (error) {
       console.log(error.message);
+      setErrorResponse(error.message);
+      setTimeout(() => {
+        setErrorResponse("");
+      }, 5000);
     }
   };
 
@@ -43,7 +47,7 @@ function Register() {
         <form className="form" onSubmit={handleSubmit}>
           <h1>Registration</h1>
           {!!errorResponse && (
-            <div className="errorMessage">{errorResponse.body.message}</div>
+            <div className="errorMessage">{errorResponse}</div>
           )}
           <div className="form-control">
             <label htmlFor="username">User</label>
