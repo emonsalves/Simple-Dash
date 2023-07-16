@@ -12,7 +12,6 @@ const login = async ({ userName, password }) => {
         },
       }
     );
-    console.log("first response", response.data);
     return response.data;
   } catch (error) {
     return error.response.data;
