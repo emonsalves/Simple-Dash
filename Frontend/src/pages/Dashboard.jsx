@@ -3,30 +3,23 @@ import { useAuthContext } from "../context/AuthContext";
 import { searchUsers } from "../api/user";
 
 function Dashboard() {
-  const { setIsAuthenticated, user, setUser } = useAuthContext();
+  const { user, logOut } = useAuthContext();
   const goTo = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleLogout = async (e) => {
     e.preventDefault();
-    try {
-      console.log("User logged out successfully");
-      setIsAuthenticated(false);
-      setUser({});
-      goTo("/");
-    } catch (error) {
-      console.log(error);
-    }
+    logOut();
+    goTo("/");
   };
 
   const onClick = async (e) => {
     e.preventDefault();
     try {
-      console.log("test", user);
       const response = await searchUsers({
         userName: user.user.user_name,
         token: user.accessToken,
       });
-      console.log(response.body);
+     return console.log(response.body.message || response.body);
     } catch (error) {
       console.log(error);
     }
@@ -34,12 +27,12 @@ function Dashboard() {
 
   return (
     <>
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form">
         <h1>Dashboard</h1>
         <h2>Welcome {user.user.user_name}</h2>
         <h3>Role: {user.user.Role.name}</h3>
         <button onClick={onClick}>Search User</button>
-        <button type="submit">Log out</button>
+        <button onClick={handleLogout}>Logout</button>
       </form>
     </>
   );

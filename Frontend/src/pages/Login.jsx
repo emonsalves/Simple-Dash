@@ -11,10 +11,20 @@ function Login() {
   const { isAuthenticated, setIsAuthenticated, setUser } = useAuthContext();
   const navigate = useNavigate();
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await login({ userName, password });
+      handleResponse(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleResponse = (response) => {
     const { statusCode, body } = response;
     if (statusCode === 200) {
-      console.log("body ", body);
+      localStorage.setItem("tokens", JSON.stringify(body));
       console.log("User logged in successfully");
       setErrorResponse("");
       setIsAuthenticated(!isAuthenticated);
@@ -24,16 +34,6 @@ function Login() {
       console.log("message: ", body.message);
       setErrorResponse(body.message);
       setTimeout(() => setErrorResponse(""), 5000);
-    }
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await login({ userName, password });
-      handleResponse(response);
-    } catch (error) {
-      console.log(error);
     }
   };
 
