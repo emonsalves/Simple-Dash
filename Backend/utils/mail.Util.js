@@ -1,5 +1,5 @@
 import { createTransport, getTestMessageUrl } from "nodemailer";
-import { mailConfig } from "../config/mail.config.js";
+import { mailConfig } from "../config/gmail.config.js";
 
 const sendMail = async () => {
   let transporter = createTransport(mailConfig);
