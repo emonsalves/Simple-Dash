@@ -3,12 +3,12 @@ import { useAuthContext } from "../context/AuthContext";
 import { searchUsers } from "../api/user";
 
 function Dashboard() {
-  const { user, removeTokens } = useAuthContext();
+  const { user, logOut } = useAuthContext();
   const goTo = useNavigate();
 
   const handleLogout = async (e) => {
     e.preventDefault();
-    removeTokens();
+    logOut();
     goTo("/");
   };
 
