@@ -3,21 +3,17 @@ import { backendUrl } from "../../config";
 
 const searchUsers = async ({ userName, token }) => {
   try {
-    console.log("test Search", token);
-    console.log("test Search", userName);
+    const response = await axios({
+      method: "GET",
+      url: `${backendUrl}/user/all`,
+      headers: {
+        Authorization: token,
+      },
+    });
 
-    const response = await axios.get(
-      `${backendUrl}/user/all`,
-      { userName, token },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    return response;
+    return response.data;
   } catch (error) {
-    return error.response;
+    return error.response.data;
   }
 };
 
