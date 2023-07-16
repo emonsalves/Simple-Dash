@@ -14,7 +14,7 @@ const login = async (req, res) => {
     const result = await userService.login(userName, password);
     res.status(result.status).json(jsonResponse(result.status, result.data));
   } catch (error) {
-    res.status(500).json(jsonResponse(500, { message: error.message }));
+    res.json(jsonResponse(res.status, { message: error.message }));
   }
 };
 
@@ -23,7 +23,7 @@ const getAll = async (req, res) => {
     const result = await userService.getAllUsers();
     res.status(result.status).json(jsonResponse(result.status, result.data));
   } catch (error) {
-    res.status(500).json(jsonResponse(500, { message: error.message }));
+    res.json(jsonResponse(res.status, { message: error.message }));
   }
 };
 
@@ -34,7 +34,7 @@ const getOne = async (req, res) => {
     const result = await userService.getUserByUsername(username);
     res.status(result.status).json(jsonResponse(result.status, result.data));
   } catch (error) {
-    res.status(500).json(jsonResponse(500, { message: error.message }));
+    res.json(jsonResponse(res.status, { message: error.message }));
   }
 };
 
@@ -52,7 +52,7 @@ const update = async (req, res) => {
     );
     res.status(result.status).json(jsonResponse(result.status, result.data));
   } catch (error) {
-    res.status(500).json(jsonResponse(500, { message: error.message }));
+    res.json(jsonResponse(res.status, { message: error.message }));
   }
 };
 
@@ -63,7 +63,7 @@ const deleted = async (req, res) => {
     const result = await userService.deleteUserByUsername(username);
     res.status(result.status).json(jsonResponse(result.status, result.data));
   } catch (error) {
-    res.status(500).json(jsonResponse(500, { message: error.message }));
+    res.json(jsonResponse(res.status, { message: error.message }));
   }
 };
 
@@ -86,7 +86,7 @@ const register = async (req, res) => {
     const result = await userService.registerUser(userName, password);
     res.status(result.status).json(jsonResponse(result.status, result.data));
   } catch (error) {
-    res.status(500).json(jsonResponse(500, { message: error.message }));
+    res.json(jsonResponse(res.status, { message: error.message }));
   }
 };
 
