@@ -12,18 +12,16 @@ function Login() {
   const navigate = useNavigate();
 
   const handleResponse = (response) => {
-    const { status } = response;
-    const { body } = response.data;
-
-    if (status === 200) {
-      console.log(body);
+    const { statusCode, body } = response;
+    if (statusCode === 200) {
+      console.log("body ", body);
       console.log("User logged in successfully");
       setErrorResponse("");
       setIsAuthenticated(!isAuthenticated);
       setUser(body);
       navigate("/dashboard");
     } else {
-      console.log(body.message);
+      console.log("message: ", body.message);
       setErrorResponse(body.message);
       setTimeout(() => setErrorResponse(""), 5000);
     }
