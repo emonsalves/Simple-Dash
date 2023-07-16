@@ -11,23 +11,23 @@ function AuthProvider({ children }) {
     const tokensJson = localStorage.getItem("tokens");
     if (tokensJson) {
       const tokens = JSON.parse(tokensJson);
-      const { accessToken, refreshToken } = tokens;
-      setTokens({ accessToken, refreshToken });
-      setIsAuthenticated(true);
-      setUser(tokens);
+      saveTokens(tokens);
     }
   }, []);
 
-  const logOut = () => {
-    try {
-      console.log("User logged out successfully");
-      setIsAuthenticated(false);
-      setUser(null);
-      setTokens(null);
-      localStorage.removeItem("tokens");
-    } catch (error) {
-      console.log(error);
-    }
+  const saveTokens = (newTokens) => {
+    const { accessToken, refreshToken } = newTokens;
+    setTokens({ accessToken, refreshToken });
+    setIsAuthenticated(true);
+    setUser(newTokens);
+    localStorage.setItem("tokens", JSON.stringify(newTokens));
+  };
+
+  const removeTokens = () => {
+    setIsAuthenticated(false);
+    setUser({});
+    setTokens("");
+    localStorage.removeItem("tokens");
   };
 
   const value = {
@@ -35,7 +35,8 @@ function AuthProvider({ children }) {
     setIsAuthenticated,
     user,
     setUser,
-    logOut,
+    removeTokens,
+    saveTokens,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

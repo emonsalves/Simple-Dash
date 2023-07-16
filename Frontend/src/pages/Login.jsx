@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import DefaultLayout from "../layout/DefaultLayout";
 import { login } from "../api/auth";
@@ -8,7 +8,7 @@ function Login() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [errorResponse, setErrorResponse] = useState("");
-  const { isAuthenticated, setIsAuthenticated, setUser } = useAuthContext();
+  const { saveTokens } = useAuthContext();
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -24,11 +24,7 @@ function Login() {
   const handleResponse = (response) => {
     const { statusCode, body } = response;
     if (statusCode === 200) {
-      localStorage.setItem("tokens", JSON.stringify(body));
-      console.log("User logged in successfully");
-      setErrorResponse("");
-      setIsAuthenticated(!isAuthenticated);
-      setUser(body);
+      saveTokens(body);
       navigate("/dashboard");
     } else {
       console.log("message: ", body.message);
@@ -36,10 +32,6 @@ function Login() {
       setTimeout(() => setErrorResponse(""), 5000);
     }
   };
-
-  if (isAuthenticated) {
-    return <Navigate to="/dashboard" />;
-  }
 
   return (
     <DefaultLayout>
