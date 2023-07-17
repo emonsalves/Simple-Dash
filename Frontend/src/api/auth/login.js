@@ -3,15 +3,18 @@ import { backendUrl } from "../../config";
 
 const login = async ({ userName, password }) => {
   try {
-    const response = await axios.post(
-      `${backendUrl}/user/login`,
-      { userName, password },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await axios({
+      method: "POST",
+      url: `${backendUrl}/user/login`,
+      data: {
+        userName,
+        password,
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
     return response.data;
   } catch (error) {
     return error.response.data;

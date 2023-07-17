@@ -1,7 +1,7 @@
 import axios from "axios";
 import { backendUrl } from "../../config";
 
-const searchUsers = async ({ userName, token }) => {
+const searchUsers = async ({  token }) => {
   try {
     const response = await axios({
       method: "GET",
