@@ -1,6 +1,8 @@
+import { htmlRecoveryMail } from "../lib/mailHTML.js";
 import { User, Role } from "../models/index.js";
 import { bcryptUtil } from "../utils/bcypt.Util.js";
 import { jsonWBT } from "../utils/jwt.Util.js";
+import { sendMail } from "../utils/mail.Util.js";
 
 const login = async (userName, password) => {
   const user = await User.findOne({
@@ -91,7 +93,6 @@ const registerUser = async (userName, password) => {
       phone: "Test",
       address: "Test",
     });
-
     return { status: 201, data: { message: "User created" } };
   } catch (error) {
     return { status: 500, data: { message: error.message } };
@@ -100,13 +101,21 @@ const registerUser = async (userName, password) => {
 
 const recoveryPassword = async (userName) => {
   const passwordDefault = "1234567890";
-
+  const encryptedPassword = bcryptUtil.encrypt({ text: passwordDefault });
   const updatedUser = await User.update(
-    {
-      password: passwordDefault,
-    },
+    { password: encryptedPassword },
     { where: { user_name: userName } }
   );
+  sendMail({
+    to: "emonsalves@kayser.cl",
+    subject: "Recovery Password",
+    // text: `Hellou, ${userName}. Your new password is ${passwordDefault}, please change it.`,
+    textHtml: htmlRecoveryMail({
+      userName,
+      passwordDefault,
+      soporteMail: "informatica@kayser.cl",
+    }),
+  });
 
   return updatedUser;
 };
