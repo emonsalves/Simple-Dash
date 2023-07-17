@@ -11,5 +11,6 @@ router.get("/all", verifyToken, userController.getAll);
 router.get("/:username", userController.getOne);
 router.put("/:username", userController.update);
 router.delete("/:username", userController.deleted);
+router.post("/recovery", userController.recoveryAccount);
 
 export default router;

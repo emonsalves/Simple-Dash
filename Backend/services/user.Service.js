@@ -41,20 +41,20 @@ const getUserByUsername = async (username) => {
   const existingUserName = await User.findOne({
     where: { user_name: username },
   });
-  const user = new User(existingUserName.dataValues);
+  const user = existingUserName?.dataValues;
 
-  return user
+  return existingUserName
     ? { status: 200, data: { user, ok: true } }
     : { status: 404, data: { message: "User not found" } };
 };
 
-const updateUserByUsername = async (
+const updateUserByUsername = async ({
   username,
   name,
   last_name,
   phone,
-  address
-) => {
+  address,
+}) => {
   const updatedUser = await User.update(
     { name, last_name, phone, address },
     { where: { user_name: username } }
@@ -94,8 +94,21 @@ const registerUser = async (userName, password) => {
 
     return { status: 201, data: { message: "User created" } };
   } catch (error) {
-    throw new Error(error.message);
+    return { status: 500, data: { message: error.message } };
   }
+};
+
+const recoveryPassword = async (userName) => {
+  const passwordDefault = "1234567890";
+
+  const updatedUser = await User.update(
+    {
+      password: passwordDefault,
+    },
+    { where: { user_name: userName } }
+  );
+
+  return updatedUser;
 };
 
 export const userService = {
@@ -105,4 +118,5 @@ export const userService = {
   updateUserByUsername,
   deleteUserByUsername,
   registerUser,
+  recoveryPassword,
 };

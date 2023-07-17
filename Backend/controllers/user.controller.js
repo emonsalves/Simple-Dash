@@ -94,6 +94,23 @@ const logout = (req, res) => {
   res.json(jsonResponse(200, { message: "Logout" }));
 };
 
+const recoveryAccount = async (req, res) => {
+  const { userName } = req.body;
+  const userReset = await userService.getUserByUsername(userName);
+
+  if (userReset.status !== 200) {
+    return res
+      .status(userReset.status)
+      .json(jsonResponse(userReset.status, userReset.data));
+  }
+
+  const { user_name } = userReset.data.user;
+  await userService.recoveryPassword(user_name);
+  res
+    .status(userReset.status)
+    .json(jsonResponse(userReset.status, userReset.data));
+};
+
 export const userController = {
   login,
   getAll,
@@ -102,4 +119,5 @@ export const userController = {
   deleted,
   register,
   logout,
+  recoveryAccount,
 };
