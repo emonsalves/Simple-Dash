@@ -11,6 +11,7 @@ function ForgotPassword() {
       const response = await recoveryAccount({ userName });
       if (response.statusCode === 200) {
         alert("Email Sent");
+        console.log(`${response.body.message} to User : ${userName}`);
         return;
       }
     } catch (error) {

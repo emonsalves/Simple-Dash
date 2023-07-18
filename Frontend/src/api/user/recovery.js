@@ -11,8 +11,6 @@ const recoveryAccount = async ({ userName }) => {
       },
     });
 
-    console.log("Password Reset user : ", userName);
-
     return response.data;
   } catch (error) {
     console.log("Error to recovery : ", error.response.data.body.message);
