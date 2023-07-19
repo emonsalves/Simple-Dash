@@ -19,7 +19,7 @@ function Dashboard() {
         userName: user.user.user_name,
         token: user.accessToken,
       });
-     return console.log(response.body.message || response.body);
+      return console.log(response.body.message || response.body);
     } catch (error) {
       console.log(error);
     }
