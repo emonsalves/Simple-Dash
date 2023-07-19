@@ -13,8 +13,12 @@ const router = createHashRouter([
     element: <Register />,
   },
   {
-    path: "/recovery",
+    path: "/recovery-password",
     element: <ForgotPassword />,
+  },
+  {
+    path: "/reset-password",
+    element: <Home />,
   },
   {
     path: "/",
@@ -28,6 +32,7 @@ const router = createHashRouter([
         path: "/Home",
         element: <Home />,
       },
+
     ],
   },
 ]);

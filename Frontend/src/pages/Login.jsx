@@ -67,7 +67,7 @@ function Login() {
           />
         </div>
         <button type="submit">Log in</button>
-        <button type="button" onClick={() => navigate("/recovery")}>
+        <button type="button" onClick={() => navigate("/recovery-password")}>
           Forgot Password
         </button>
       </form>
