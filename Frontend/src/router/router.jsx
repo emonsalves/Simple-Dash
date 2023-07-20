@@ -1,52 +1,15 @@
 import { createHashRouter } from "react-router-dom";
-import { Dashboard, Home, Login, Register } from "../pages";
-// import ProtectedRoute from "../auth/ProtectedRoute.jsx";
+import { Dashboard, Login, Register } from "../pages";
 import { ForgotPassword } from "../pages/ForgotPassword";
-// import { Test } from "../pages/Test";
 import { PublicLayout } from "../layout/PublicLayout";
 import { AuthLayout } from "../layout/AuthLayout";
-
-// const router = createHashRouter([
-//   {
-//     path: "/",
-//     element: <Login />,
-//   },
-//   {
-//     path: "/register",
-//     element: <Register />,
-//   },
-//   {
-//     path: "/recovery-password",
-//     element: <ForgotPassword />,
-//   },
-//   {
-//     path: "/reset-password",
-//     element: <Home />,
-//   },
-//   {
-//     path: "/test",
-//     element: <Test />,
-//   },
-//   {
-//     path: "/",
-//     element: <ProtectedRoute />,
-//     children: [
-//       {
-//         path: "/dashboard",
-//         element: <Dashboard />,
-//       },
-//       {
-//         path: "/Home",
-//         element: <Home />,
-//       },
-//     ],
-//   },
-// ]);
+import { NotFound } from "../pages/NotFound";
 
 const router = createHashRouter([
   {
     path: "/auth",
     element: <PublicLayout />,
+    errorElement: <NotFound />,
     children: [
       {
         index: true,
@@ -65,12 +28,17 @@ const router = createHashRouter([
   {
     path: "/",
     element: <AuthLayout />,
+    errorElement: <NotFound />,
     children: [
       {
         path: "/",
         element: <Dashboard />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
 
