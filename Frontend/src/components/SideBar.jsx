@@ -38,7 +38,7 @@
 // export { SideBar };
 
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { BsArrowLeftCircle } from "react-icons/bs";
 import { AiFillPieChart } from "react-icons/ai";
@@ -52,11 +52,12 @@ const Sidebar = () => {
   const [open, setOpen] = useState(true);
   const [mobileMenu, setMobileMenu] = useState(false);
   const location = useLocation();
+  // const goTo = (path) => useNavigate(path);
 
   const Menus = [
-    { title: "Dashboard", path: "/dashboard", src: <AiFillPieChart /> },
-    { title: "Course", path: "/course", src: <SiFuturelearn /> },
-    { title: "Profile", path: "/profile", src: <CgProfile /> },
+    { title: "Dashboard", path: "/test", src: <AiFillPieChart /> },
+    { title: "Course", path: "/reset-password", src: <SiFuturelearn /> },
+    // { title: "Profile", path: "/", src: <CgProfile /> },
     { title: "Signin", path: "/login", src: <SiOpenaccess />, gap: "true" },
   ];
 
@@ -73,16 +74,16 @@ const Sidebar = () => {
           } absolute text-3xl bg-white fill-slate-800  rounded-full cursor-pointer top-9 -right-4 dark:fill-gray-400 dark:bg-gray-800`}
           onClick={() => setOpen(!open)}
         />
-        <Link to="/">
+        {/* <Link to="/">
           <div className={`flex ${open && "gap-x-4"} items-center`}>
             <img src={Logo} alt="" className="pl-2" />
             {open && (
               <span className="text-xl font-medium whitespace-nowrap dark:text-white">
-                Goal Quest
+                System
               </span>
             )}
           </div>
-        </Link>
+        </Link> */}
 
         <ul className="pt-6">
           {Menus.map((menu, index) => (

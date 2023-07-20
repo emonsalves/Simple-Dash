@@ -1,5 +1,4 @@
 import { useState } from "react";
-import DefaultLayout from "../layout/DefaultLayout";
 import { recoveryAccount } from "../api/user";
 
 function ForgotPassword() {
@@ -24,7 +23,6 @@ function ForgotPassword() {
   };
 
   return (
-    <DefaultLayout>
       <form className="form">
         <h1>Forgot Password</h1>
         <div>
@@ -40,7 +38,6 @@ function ForgotPassword() {
           Send Email
         </button>
       </form>
-    </DefaultLayout>
   );
 }
 

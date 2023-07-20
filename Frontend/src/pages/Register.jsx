@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
-import DefaultLayout from "../layout/DefaultLayout";
+import { PublicLayout } from "../layout/PublicLayout";
 import { Navigate, useNavigate } from "react-router-dom";
 import { createUser } from "../api/user";
 
@@ -10,7 +10,7 @@ function Register() {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [errorResponse, setErrorResponse] = useState("");
 
-  const auth = useAuthContext();
+  const { user } = useAuthContext();
 
   const goTo = useNavigate();
 
@@ -40,13 +40,12 @@ function Register() {
     }
   };
 
-  if (auth.isAuthenticated) {
-    return <Navigate to="/dashboard" />;
-  }
+  // if (auth.isAuthenticated) {
+  //   return <Navigate to="/dashboard" />;
+  // }
 
   return (
     <>
-      <DefaultLayout>
         <form className="form" onSubmit={handleSubmit}>
           <h1>Registration</h1>
           {!!errorResponse && (
@@ -84,7 +83,6 @@ function Register() {
           </div>
           <button type="submit">Register</button>
         </form>
-      </DefaultLayout>
     </>
   );
 }

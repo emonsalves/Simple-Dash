@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
+import { Navigate, useNavigate,  } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
-import DefaultLayout from "../layout/DefaultLayout";
+
 import { login } from "../api/auth";
 
 function Login() {
@@ -29,7 +29,7 @@ function Login() {
       setErrorResponse("");
       setIsAuthenticated(!isAuthenticated);
       setUser(body);
-      navigate("/dashboard");
+      navigate("/");
     } else {
       console.log("message: ", body.message);
       setErrorResponse(body.message);
@@ -38,11 +38,10 @@ function Login() {
   };
 
   if (isAuthenticated) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/" />;
   }
 
   return (
-    <DefaultLayout>
       <form className="form" onSubmit={handleSubmit}>
         <h1>Log in</h1>
         {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
@@ -67,11 +66,10 @@ function Login() {
           />
         </div>
         <button type="submit">Log in</button>
-        <button type="button" onClick={() => navigate("/recovery-password")}>
+        <button type="button" onClick={() => navigate("/auth/forgot-password")}>
           Forgot Password
         </button>
       </form>
-    </DefaultLayout>
   );
 }
 
