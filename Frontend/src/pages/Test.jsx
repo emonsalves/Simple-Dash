@@ -1,9 +1,9 @@
-import { SideBar } from "../components/SideBar";
+import { Sidebar } from "../components/Sidebar";
 
 const Test = () => {
   return (
     <div>
-      <SideBar />
+      <Sidebar />
     </div>
   );
 };

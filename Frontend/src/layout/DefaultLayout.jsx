@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function DefaultLayout({ children }) {
   return (
-    <>
+    <div className='flex flex-auto h-screen'> 
       <header>
         <nav>
           <ul>
@@ -16,7 +16,7 @@ function DefaultLayout({ children }) {
         </nav>
       </header>
       <main>{children}</main>
-    </>
+    </div>
   );
 }
 export default DefaultLayout;
