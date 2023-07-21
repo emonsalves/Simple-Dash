@@ -27,13 +27,15 @@ function Dashboard() {
 
   return (
     <>
-      <form className="form">
-        <h1>Dashboard</h1>
-        <h2>Welcome {user.name}</h2>
-        <h3>Role: {user.Role.name}</h3>
-        <button onClick={onClick}>Search User</button>
-        <button onClick={handleLogout}>Logout</button>
-      </form>
+      {user && ( // If user is logged in, show this
+        <form className="form">
+          <h1>Dashboard</h1>
+          <h2>Welcome {user.name}</h2>
+          <h2>Role {user.Role.name}</h2>
+          <button onClick={onClick}>Search User</button>
+          <button onClick={handleLogout}>Logout</button>
+        </form>
+      )}
     </>
   );
 }
