@@ -6,6 +6,15 @@ function Dashboard() {
   const { user, logOut } = useAuthContext();
   const goTo = useNavigate();
 
+  // const checkUserStorage = () => {
+  //   const newUser = JSON.parse(localStorage.getItem("user"));
+  //   return newUser;
+  // };
+
+  // if (!checkUserStorage()) {
+  //   goTo("/auth");
+  // }
+
   const handleLogout = async (e) => {
     e.preventDefault();
     logOut();
@@ -30,8 +39,9 @@ function Dashboard() {
       {user && ( // If user is logged in, show this
         <form className="form">
           <h1>Dashboard</h1>
-          <h2>Welcome {user.name}</h2>
-          <h2>Role {user.Role.name}</h2>
+          <h2>Welcome {user.user_name}</h2>
+          <h2>Role: {user.Role.name}</h2>
+
           <button onClick={onClick}>Search User</button>
           <button onClick={handleLogout}>Logout</button>
         </form>
