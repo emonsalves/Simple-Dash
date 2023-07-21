@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import { useEffect } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import { Sidebar } from "../components/SideBar";
@@ -9,8 +9,8 @@ function AuthLayout() {
   const goTo = useNavigate();
 
   useEffect(() => {
-    if (user) {
-      goTo("/");
+    if (!user) {
+      goTo("/auth");
     }
   }, [goTo, user]);
 
@@ -26,4 +26,5 @@ function AuthLayout() {
     </div>
   );
 }
+
 export { AuthLayout };
