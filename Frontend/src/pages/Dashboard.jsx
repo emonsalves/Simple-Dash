@@ -1,31 +1,19 @@
-import { useNavigate } from "react-router-dom";
 import { searchUsers } from "../api/user";
 import { useAuthContext } from "../context/AuthContext";
 
 function Dashboard() {
   const { user, logOut } = useAuthContext();
-  const goTo = useNavigate();
-
-  // const checkUserStorage = () => {
-  //   const newUser = JSON.parse(localStorage.getItem("user"));
-  //   return newUser;
-  // };
-
-  // if (!checkUserStorage()) {
-  //   goTo("/auth");
-  // }
 
   const handleLogout = async (e) => {
     e.preventDefault();
     logOut();
-    goTo("/auth");
   };
-
+  
   const onClick = async (e) => {
     e.preventDefault();
     try {
       const response = await searchUsers({
-        userName: user.user.user_name,
+        userName: user.user_name,
         token: user.accessToken,
       });
       return console.log(response.body.message || response.body);
@@ -36,12 +24,11 @@ function Dashboard() {
 
   return (
     <>
-      {user && ( // If user is logged in, show this
+      {user && (
         <form className="form">
           <h1>Dashboard</h1>
           <h2>Welcome {user.user_name}</h2>
           <h2>Role: {user.Role.name}</h2>
-
           <button onClick={onClick}>Search User</button>
           <button onClick={handleLogout}>Logout</button>
         </form>
