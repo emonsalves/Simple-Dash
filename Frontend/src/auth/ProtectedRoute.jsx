@@ -6,4 +6,4 @@ function ProtectedRoute() {
   return auth.isAuthenticated ? <Outlet /> : <Navigate to="/auth" />;
 }
 
-export default ProtectedRoute;
+export { ProtectedRoute };
