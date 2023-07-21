@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useAuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { createUser } from "../api/user";
 
@@ -39,43 +38,41 @@ function Register() {
 
   return (
     <>
-        <form className="form" onSubmit={handleSubmit}>
-          <h1>Registration</h1>
-          {!!errorResponse && (
-            <div className="errorMessage">{errorResponse}</div>
-          )}
-          <div className="form-control">
-            <label htmlFor="username">User</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
-            />
-          </div>
-          <div className="form-control">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <div className="form-control">
-            <label htmlFor="passwordConfirmation">Confirm Password</label>
-            <input
-              type="password"
-              id="passwordConfirmation"
-              name="passwordConfirmation"
-              value={passwordConfirmation}
-              onChange={(e) => setPasswordConfirmation(e.target.value)}
-            />
-          </div>
-          <button type="submit">Register</button>
-        </form>
+      <form className="form" onSubmit={handleSubmit}>
+        <h1>Registration</h1>
+        {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
+        <div className="form-control">
+          <label htmlFor="username">User</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </div>
+        <div className="form-control">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div className="form-control">
+          <label htmlFor="passwordConfirmation">Confirm Password</label>
+          <input
+            type="password"
+            id="passwordConfirmation"
+            name="passwordConfirmation"
+            value={passwordConfirmation}
+            onChange={(e) => setPasswordConfirmation(e.target.value)}
+          />
+        </div>
+        <button type="submit">Register</button>
+      </form>
     </>
   );
 }
