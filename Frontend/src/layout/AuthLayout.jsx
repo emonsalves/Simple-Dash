@@ -6,20 +6,20 @@ import { Header } from "../components/Header";
 
 function AuthLayout() {
   const { user } = useAuthContext();
-  const navigate = useNavigate();
+  const goTo = useNavigate();
 
   useEffect(() => {
-    if (!user) {
-      navigate("/auth");
+    if (user) {
+      goTo("/");
     }
-  }, [navigate, user]);
+  }, [goTo, user]);
 
   return (
-    <div className="min-h-screen grid grid-cols-1 xl:grid-cols-6">
+    <div className="flex">
       <Sidebar />
-      <div className="xl:col-span-5">
+      <div className="flex flex-col w-full h-screen overflow-y-auto bg-red-500">
         <Header />
-        <div className="h-[90vh] overflow-y-scroll p-2">
+        <div className="flex flex-col w-full h-screen overflow-y-auto bg-green-500">
           <Outlet />
         </div>
       </div>
