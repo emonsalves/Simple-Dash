@@ -8,9 +8,8 @@ function Login() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [errorResponse, setErrorResponse] = useState("");
-  const { isAuthenticated, setIsAuthenticated, setUser, setTokens } =
-    useAuthContext();
-  const navigate = useNavigate();
+  const { user, Login } = useAuthContext();
+  const goTo = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,23 +24,8 @@ function Login() {
   const handleResponse = (response) => {
     const { statusCode, body } = response;
     if (statusCode === 200) {
-      localStorage.setItem(
-        "tokens",
-        JSON.stringify({
-          accessToken: body.accessToken,
-          refreshToken: body.refreshToken,
-        })
-      );
-      localStorage.setItem("user", JSON.stringify(body.user));
-      console.log("User logged in successfully");
-      setErrorResponse("");
-      setIsAuthenticated(true);
-      setTokens({
-        accessToken: body.accessToken,
-        refreshToken: body.refreshToken,
-      });
-      setUser(body.user);
-      navigate("/");
+      Login({ body });
+      goTo("/");
     } else {
       console.log("message: ", body.message);
       setErrorResponse(body.message);
@@ -49,7 +33,7 @@ function Login() {
     }
   };
 
-  if (isAuthenticated) {
+  if (user) {
     return <Navigate to="/" />;
   }
 
@@ -78,7 +62,7 @@ function Login() {
         />
       </div>
       <button type="submit">Log in</button>
-      <button type="button" onClick={() => navigate("/auth/forgot-password")}>
+      <button type="button" onClick={() => goTo("/auth/forgot-password")}>
         Forgot Password
       </button>
     </form>
