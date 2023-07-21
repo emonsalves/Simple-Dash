@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
-import { PublicLayout } from "../layout/PublicLayout";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { createUser } from "../api/user";
 
 function Register() {
@@ -9,8 +8,6 @@ function Register() {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [errorResponse, setErrorResponse] = useState("");
-
-  const { user } = useAuthContext();
 
   const goTo = useNavigate();
 
@@ -39,10 +36,6 @@ function Register() {
       console.log(error);
     }
   };
-
-  // if (auth.isAuthenticated) {
-  //   return <Navigate to="/dashboard" />;
-  // }
 
   return (
     <>
