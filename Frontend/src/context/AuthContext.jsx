@@ -11,7 +11,6 @@ function AuthProvider({ children }) {
     const newUser = JSON.parse(localStorage.getItem("user"));
 
     if (newTokens && newUser) {
-      console.log("test",newUser)
       setTokens(newTokens);
       setUser(newUser);
       setIsAuthenticated(true);
@@ -33,13 +32,24 @@ function AuthProvider({ children }) {
     setTokens(false);
   };
 
+  const Login = async ({ body }) => {
+    const { accessToken, refreshToken, user } = body;
+
+    localStorage.setItem(
+      "tokens",
+      JSON.stringify({ accessToken, refreshToken })
+    );
+    localStorage.setItem("user", JSON.stringify(user));
+    setIsAuthenticated(true);
+    setTokens({ accessToken, refreshToken });
+    setUser(user);
+  };
+
   const value = {
     isAuthenticated,
-    setIsAuthenticated,
     user,
-    setUser,
     logOut,
-    setTokens,
+    Login,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
