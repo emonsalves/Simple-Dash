@@ -10,9 +10,9 @@ function AuthProvider({ children }) {
     const newTokens = JSON.parse(localStorage.getItem("tokens"));
     const newUser = JSON.parse(localStorage.getItem("user"));
 
-    console.log(newTokens, newUser)
     if (newTokens && newUser) {
-      setTokens(tokens);
+      console.log("test",newUser)
+      setTokens(newTokens);
       setUser(newUser);
       setIsAuthenticated(true);
     }
