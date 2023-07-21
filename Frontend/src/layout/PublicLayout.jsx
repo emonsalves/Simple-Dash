@@ -1,19 +1,23 @@
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
+import { Header } from "../components/Header";
 
 function PublicLayout() {
   const { user } = useAuthContext();
-  const navigate = useNavigate();
+  const goTo = useNavigate();
 
   useEffect(() => {
-    if (!user) {
-      navigate("/auth");
+    if (user) {
+      goTo("/auth");
     }
-  }, [navigate, user]);
+  }, [goTo, user]);
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <Outlet />
+    <div className="flex flex-col w-full bg-red-500">
+      <Header />
+      <div className="flex flex-col w-full h-screen overflow-y-auto bg-green-500">
+        <Outlet />
+      </div>
     </div>
   );
 }
