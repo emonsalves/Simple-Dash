@@ -1,33 +1,36 @@
 import { createContext, useContext, useEffect, useState } from "react";
-
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(false);
-  const [tokens, setTokens] = useState("");
+  const [tokens, setTokens] = useState(false);
 
   useEffect(() => {
-    const tokensJson = localStorage.getItem("tokens");
-    if (tokensJson) {
-      const tokens = JSON.parse(tokensJson);
-      const { accessToken, refreshToken } = tokens;
-      setTokens({ accessToken, refreshToken });
+    const newTokens = JSON.parse(localStorage.getItem("tokens"));
+    const newUser = JSON.parse(localStorage.getItem("user"));
+
+    console.log(newTokens, newUser)
+    if (newTokens && newUser) {
+      setTokens(tokens);
+      setUser(newUser);
       setIsAuthenticated(true);
-      setUser(tokens);
     }
   }, []);
 
-  const logOut = () => {
-    try {
-      console.log("User logged out successfully");
-      setIsAuthenticated(false);
-      setUser(null);
-      setTokens(null);
-      localStorage.removeItem("tokens");
-    } catch (error) {
-      console.log(error);
+  useEffect(() => {
+    if (tokens && user) {
+      localStorage.setItem("tokens", JSON.stringify(tokens));
+      localStorage.setItem("user", JSON.stringify(user));
     }
+  }, [tokens, user]);
+
+  const logOut = () => {
+    localStorage.removeItem("tokens");
+    localStorage.removeItem("user");
+    setIsAuthenticated(false);
+    setUser(false);
+    setTokens(false);
   };
 
   const value = {
@@ -36,6 +39,7 @@ function AuthProvider({ children }) {
     user,
     setUser,
     logOut,
+    setTokens,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
