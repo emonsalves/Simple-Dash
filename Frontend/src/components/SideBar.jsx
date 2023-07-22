@@ -1,29 +1,26 @@
 import { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 
 import { BsArrowLeftCircle } from "react-icons/bs";
 import { AiFillPieChart } from "react-icons/ai";
 import { SiFuturelearn } from "react-icons/si";
-import { SiOpenaccess } from "react-icons/si";
+import { SlLogout } from "react-icons/sl";
 import { CgProfile } from "react-icons/cg";
 import Logo from "../assets/vite.svg";
 import HamburgerButton from "./HamburgerMenuButton/HamburgerButton";
+import { useAuthContext } from "../context/AuthContext";
 
 const Sidebar = () => {
+  const { logOut } = useAuthContext();
   const [open, setOpen] = useState(true);
   const [mobileMenu, setMobileMenu] = useState(false);
   const location = useLocation();
+  const goTo = useNavigate();
 
   const Menus = [
-    { title: "Dashboard", path: "/", src: <AiFillPieChart /> },
+    { title: "Dashboard", path: "dashboard", src: <AiFillPieChart /> },
     { title: "Course", path: "/auth/reset-password", src: <SiFuturelearn /> },
     { title: "Profile", path: "/auth/test", src: <CgProfile /> },
-    {
-      title: "Signin",
-      path: "/auth/register",
-      src: <SiOpenaccess />,
-      gap: "true",
-    },
   ];
 
   return (
@@ -55,10 +52,10 @@ const Sidebar = () => {
             <NavLink to={menu.path} key={index}>
               <li
                 className={`flex items-center gap-x-6 p-3 text-base font-normal rounded-lg cursor-pointer dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700
-                        ${menu.gap ? "mt-9" : "mt-2"} ${
-                  location.pathname === menu.path &&
-                  "bg-gray-200 dark:bg-gray-700"
-                }`}
+                        mt-2 ${
+                          location.pathname === menu.path &&
+                          "bg-gray-200 dark:bg-gray-700"
+                        }`}
               >
                 <span className="text-2xl">{menu.src}</span>
                 <span
@@ -72,7 +69,26 @@ const Sidebar = () => {
             </NavLink>
           ))}
         </ul>
+
+        {/* Logout Menu */}
+        <div>
+          <button
+            className={`${
+              open ? "block" : "hidden"
+            } flex items-center gap-x-6 p-3 text-base font-normal rounded-lg cursor-pointer dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 mt-2`}
+            onClick={() => {
+              logOut();
+              goTo("/auth/");
+            }}
+          >
+            <span className="text-2xl">
+              <SlLogout />
+            </span>
+            <span>Logout</span>
+          </button>
+        </div>
       </div>
+
       {/* Mobile Menu */}
       <div className="pt-0">
         <HamburgerButton
