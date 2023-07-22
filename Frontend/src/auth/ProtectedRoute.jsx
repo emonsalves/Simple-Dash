@@ -1,9 +1,8 @@
-import { Outlet, Navigate } from "react-router-dom";
-import { useAuthContext } from "../context/AuthContext";
+import { Navigate } from "react-router-dom";
 
-function ProtectedRoute() {
-  const auth = useAuthContext();
-  return auth.isAuthenticated ? <Outlet /> : <Navigate to="/auth" />;
-}
+const RequireAuth = ({ children }) => {
+  const userLocalStorage = localStorage.getItem("user");
+  return userLocalStorage ? children : <Navigate to="/auth" />;
+};
 
-export { ProtectedRoute };
+export { RequireAuth };
