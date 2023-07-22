@@ -40,12 +40,17 @@ const router = createHashRouter([
   },
   {
     path: "/in/",
-    element: <AuthLayout />,
+    element: (
+      <RequireAuth>
+        <AuthLayout />
+      </RequireAuth>
+    ),
     errorElement: <NotFound />,
     children: [
       {
         path: "dashboard",
-        element: <RequireAuth><Dashboard /></RequireAuth>,
+        // element: <RequireAuth><Dashboard /></RequireAuth>,
+        element: <Dashboard />,
       },
     ],
   },
