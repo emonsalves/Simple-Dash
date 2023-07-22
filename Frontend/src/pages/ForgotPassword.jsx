@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { recoveryAccount } from "../api/user";
+import { Button } from "../components/Button/ButtonMagic";
 
 function ForgotPassword() {
   const [userName, setUserName] = useState("");
@@ -11,7 +12,6 @@ function ForgotPassword() {
       if (response.statusCode === 200) {
         alert("Email Sent");
         console.log(`${response.body.message} to User : ${userName}`);
-        return;
       }
     } catch (error) {
       console.log(error);
@@ -23,21 +23,29 @@ function ForgotPassword() {
   };
 
   return (
-      <form className="form">
-        <h1>Forgot Password</h1>
-        <div>
-          <label htmlFor="username">UserName</label>
+    <div className="forgot-password-container flex flex-col items-center w-[300px]">
+      <form className="form flex flex-col  p-2" onSubmit={handleSubmit}>
+        <h1 className="text-2xl font-bold mb-4">Forgot Password</h1>
+        <div className="form-control mb-4">
+          <label htmlFor="username" className="font-medium">
+            UserName
+          </label>
           <input
             onChange={handleChange}
             type="text"
             id="username"
             name="username"
+            value={userName}
+            className="border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
           />
         </div>
-        <button type="submit" onClick={handleSubmit}>
-          Send Email
-        </button>
+        <Button
+          text="Send Email"
+          type="submit"
+          tailwind="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        />
       </form>
+    </div>
   );
 }
 

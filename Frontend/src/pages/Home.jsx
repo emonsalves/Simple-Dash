@@ -1,10 +1,7 @@
-import { Link } from "react-router-dom";
-
 function Home() {
   return (
-    <div>
-      <h1>Home</h1>
-      <Link to="/auth">Go to Login</Link>
+    <div className="flex flex-col items-center justify-center h-screen">
+      <h1>Wellcome to Home Page</h1>
     </div>
   );
 }
