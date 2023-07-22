@@ -8,8 +8,13 @@ function Login() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [errorResponse, setErrorResponse] = useState("");
-  const { user, Login } = useAuthContext();
+  const { Login } = useAuthContext();
   const goTo = useNavigate();
+
+  if (localStorage.getItem("user")) {
+    return <Navigate to="/in/dashboard" />;
+  }
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,7 +30,7 @@ function Login() {
     const { statusCode, body } = response;
     if (statusCode === 200) {
       Login({ body });
-      goTo("/");
+      goTo("/in/dashboard");
     } else {
       console.log("message: ", body.message);
       setErrorResponse(body.message);
@@ -33,9 +38,7 @@ function Login() {
     }
   };
 
-  if (user) {
-    return <Navigate to="/" />;
-  }
+
 
   return (
     <form className="form" onSubmit={handleSubmit}>
@@ -62,7 +65,7 @@ function Login() {
         />
       </div>
       <button type="submit">Log in</button>
-      <button type="button" onClick={() => goTo("/auth/forgot-password")}>
+      <button type="button" onClick={() => goTo("auth/forgot-password")}>
         Forgot Password
       </button>
     </form>
