@@ -3,7 +3,7 @@ import { useAuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
-  const { user, logOut } = useAuthContext();
+  const { user, tokens, logOut } = useAuthContext();
   const goTo = useNavigate();
 
 
@@ -18,7 +18,7 @@ function Dashboard() {
     try {
       const response = await searchUsers({
         userName: user.user_name,
-        token: user.accessToken,
+        token: tokens.accessToken,
       });
       return console.log(response.body.message || response.body);
     } catch (error) {
