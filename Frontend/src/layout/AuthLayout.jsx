@@ -1,18 +1,9 @@
 import { useNavigate, Outlet } from "react-router-dom";
-import { useEffect } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import { Sidebar } from "../components/SideBar";
 import { Header } from "../components/Header";
 
 function AuthLayout() {
-  const { user } = useAuthContext();
-  const goTo = useNavigate();
-
-  useEffect(() => {
-    if (!user) {
-      goTo("/auth");
-    }
-  }, [goTo, user]);
 
   return (
     <div className="flex">
