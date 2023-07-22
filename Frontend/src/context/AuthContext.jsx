@@ -55,6 +55,7 @@ function AuthProvider({ children }) {
     user,
     logOut,
     Login,
+    tokens,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
