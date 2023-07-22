@@ -1,16 +1,19 @@
 .hamburger {
     cursor: pointer;
-    width: 24px;
-    height: 24px;
-    margin: 24px;
+    width: 30px;
+    height: 30px;
+    margin: 5px 0px 0px 5px;
     transition: all 0.25s;
     position: absolute;
+    background-color: rgb(39, 131, 212);
+    border-radius: 5px;
 }
 
 .hamburger-top,
 .hamburger-middle,
 .hamburger-bottom {
     position: absolute;
+    margin: 7px 0px 0px 3px;
     top: 0;
     left: 0;
     width: 24px;
