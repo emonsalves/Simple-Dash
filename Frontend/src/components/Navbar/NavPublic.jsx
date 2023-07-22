@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const NavPublic = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const goTo = useNavigate();
+  const location = useLocation();
 
   const menuItems = [
-    { text: "Login", onClick: () => goTo("/auth") },
-    { text: "Register", onClick: () => goTo("/auth/register") },
+    { text: "Login", path: "/auth" },
+    { text: "Register", path: "/auth/register" },
   ];
 
   const handleMobileMenuToggle = () => {
@@ -26,8 +27,12 @@ const NavPublic = () => {
           {menuItems.map((item, index) => (
             <a
               key={index}
-              onClick={item.onClick}
-              className="text-gray-300 hover:text-white cursor-pointer"
+              onClick={() => goTo(item.path)}
+              className={`${
+                location.pathname === item.path
+                  ? "text-white"
+                  : "text-gray-300 hover:text-white"
+              } cursor-pointer`}
             >
               {item.text}
             </a>
@@ -47,8 +52,12 @@ const NavPublic = () => {
           {menuItems.map((item, index) => (
             <a
               key={index}
-              onClick={item.onClick}
-              className="text-gray-300 hover:text-white"
+              onClick={() => goTo(item.path)}
+              className={`${
+                location.pathname === item.path
+                  ? "text-white"
+                  : "text-gray-300 hover:text-white"
+              }`}
             >
               {item.text}
             </a>
