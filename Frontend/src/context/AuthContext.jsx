@@ -6,22 +6,27 @@ function AuthProvider({ children }) {
   const [user, setUser] = useState(false);
   const [tokens, setTokens] = useState(false);
 
-  useEffect(() => {
-    const newTokens = JSON.parse(localStorage.getItem("tokens"));
-    const newUser = JSON.parse(localStorage.getItem("user"));
 
-    if (newTokens && newUser) {
-      setTokens(newTokens);
-      setUser(newUser);
-      setIsAuthenticated(true);
-    }
+  useEffect(() => {
+    (function () {
+      const newTokens = JSON.parse(localStorage.getItem("tokens"));
+      const newUser = JSON.parse(localStorage.getItem("user"));
+
+      if (newTokens && newUser) {
+        setTokens(newTokens);
+        setUser(newUser);
+        setIsAuthenticated(true);
+      }
+    })();
   }, []);
 
   useEffect(() => {
-    if (tokens && user) {
-      localStorage.setItem("tokens", JSON.stringify(tokens));
-      localStorage.setItem("user", JSON.stringify(user));
-    }
+    (function () {
+      if (tokens && user) {
+        localStorage.setItem("tokens", JSON.stringify(tokens));
+        localStorage.setItem("user", JSON.stringify(user));
+      }
+    })();
   }, [tokens, user]);
 
   const logOut = () => {
