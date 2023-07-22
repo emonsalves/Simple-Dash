@@ -1,14 +1,18 @@
 import { searchUsers } from "../api/user";
 import { useAuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
   const { user, logOut } = useAuthContext();
+  const goTo = useNavigate();
+
 
   const handleLogout = async (e) => {
     e.preventDefault();
     logOut();
+    goTo("/auth");
   };
-  
+
   const onClick = async (e) => {
     e.preventDefault();
     try {
@@ -21,6 +25,7 @@ function Dashboard() {
       console.log(error);
     }
   };
+
 
   return (
     <>
