@@ -1,44 +1,53 @@
 import { createHashRouter } from "react-router-dom";
-import { Dashboard, Login, Register } from "../pages";
+import { Dashboard, Home, Login, Register } from "../pages";
 import { ForgotPassword } from "../pages/ForgotPassword";
 import { PublicLayout } from "../layout/PublicLayout";
 import { AuthLayout } from "../layout/AuthLayout";
 import { NotFound } from "../pages/NotFound";
+import { RequireAuth } from "../auth/ProtectedRoute";
 
 const router = createHashRouter([
   {
-    path: "/auth",
+    path: "/",
+    element: <PublicLayout />,
+    errorElement: <NotFound />,
+    children: [
+      {
+        path: "",
+        element: <Home />,
+      },
+    ],
+  },
+  {
+    path: "/auth/",
     element: <PublicLayout />,
     errorElement: <NotFound />,
     children: [
       {
         index: true,
+        path: "",
         element: <Login />,
       },
       {
-        path: "/auth/register",
+        path: "register",
         element: <Register />,
       },
       {
-        path: "/auth/forgot-password",
+        path: "forgot-password",
         element: <ForgotPassword />,
       },
     ],
   },
   {
-    path: "/",
+    path: "/in/",
     element: <AuthLayout />,
     errorElement: <NotFound />,
     children: [
       {
-        path: "/",
-        element: <Dashboard />,
+        path: "dashboard",
+        element: <RequireAuth><Dashboard /></RequireAuth>,
       },
     ],
-  },
-  {
-    path: "*",
-    element: <NotFound />,
   },
 ]);
 
