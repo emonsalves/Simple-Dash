@@ -15,7 +15,7 @@ const NavPublic = () => {
   };
 
   return (
-    <nav className="bg-gray-800 p-4">
+    <nav className="bg-gray-800 p-4 fixed w-full z-10 top-0 shadow">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <span className="text-white text-xl hover:text-white cursor-pointer">
