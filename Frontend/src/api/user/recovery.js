@@ -13,7 +13,6 @@ const recoveryAccount = async ({ userName }) => {
 
     return response.data;
   } catch (error) {
-    console.log("Error to recovery : ", error.response.data.body.message);
     return error.response.data;
   }
 };
