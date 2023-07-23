@@ -5,9 +5,9 @@ import { NavPublic } from "../components/Navbar/NavPublic";
 function PublicLayout() {
 
   return (
-    <div className="flex flex-col w-full bg-red-500">
+    <div className="flex flex-col w-full ">
       <NavPublic />
-      <div className="flex flex-col w-full h-screen justify-center items-center overflow-y-auto bg-green-500">
+      <div className="flex flex-col w-full h-screen justify-center items-center overflow-y-auto ">
         <Outlet />
       </div>
     </div>
