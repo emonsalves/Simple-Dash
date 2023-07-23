@@ -8,9 +8,9 @@ function AuthLayout() {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="flex flex-col w-full h-screen overflow-y-auto bg-red-500">
+      <div className="flex flex-col w-full h-14 bg-red-500">
         <Header />
-        <div className="flex flex-col w-full h-screen overflow-y-auto bg-green-500">
+        <div className="flex flex-col w-full">
           <Outlet />
         </div>
       </div>
