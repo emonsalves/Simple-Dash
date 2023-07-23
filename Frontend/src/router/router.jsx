@@ -5,6 +5,7 @@ import { PublicLayout } from "../layout/PublicLayout";
 import { AuthLayout } from "../layout/AuthLayout";
 import { NotFound } from "../pages/NotFound";
 import { RequireAuth } from "../auth/ProtectedRoute";
+import { ResetPassword } from "../pages/ResetPassword";
 
 const router = createHashRouter([
   {
@@ -13,7 +14,7 @@ const router = createHashRouter([
     errorElement: <NotFound />,
     children: [
       {
-        path: "",
+        index: true,
         element: <Home />,
       },
     ],
@@ -25,7 +26,6 @@ const router = createHashRouter([
     children: [
       {
         index: true,
-        path: "",
         element: <Login />,
       },
       {
@@ -35,6 +35,10 @@ const router = createHashRouter([
       {
         path: "forgot-password",
         element: <ForgotPassword />,
+      },
+      {
+        path: "reset-password",
+        element: <ResetPassword />,
       },
     ],
   },
@@ -48,8 +52,8 @@ const router = createHashRouter([
     errorElement: <NotFound />,
     children: [
       {
+        index: true,
         path: "dashboard",
-        // element: <RequireAuth><Dashboard /></RequireAuth>,
         element: <Dashboard />,
       },
     ],
