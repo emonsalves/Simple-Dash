@@ -3,13 +3,14 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import { login } from "../api/auth";
 import { Button } from "../components/Button/ButtonMagic";
+import useSweetAlert from "../hooks/useSweetAlert";
 
 function Login() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [errorResponse, setErrorResponse] = useState("");
   const { Login } = useAuthContext();
   const goTo = useNavigate();
+  const sweetAlert = useSweetAlert();
 
   if (localStorage.getItem("user")) {
     return <Navigate to="/in/dashboard" />;
@@ -21,7 +22,12 @@ function Login() {
       const response = await login({ userName, password });
       handleResponse(response);
     } catch (error) {
-      console.error(error);
+      sweetAlert.showAlert({
+        title: "Error",
+        text: error.message,
+        icon: "error",
+        timer: 2000,
+      });
     }
   };
 
@@ -31,8 +37,12 @@ function Login() {
       Login({ body });
       goTo("/in/dashboard");
     } else {
-      setErrorResponse(body.message);
-      setTimeout(() => setErrorResponse(""), 5000);
+      sweetAlert.showAlert({
+        title: "Error",
+        text: body.message,
+        icon: "error",
+        timer: 2000,
+      });
     }
   };
 
@@ -43,11 +53,7 @@ function Login() {
     >
       <div className="form-header">
         <h1 className="text-2xl font-bold mb-4">Log in</h1>
-        {!!errorResponse && (
-          <div className="errorMessage text-red-500">{errorResponse}</div>
-        )}
       </div>
-
       <div className="form-body flex flex-col mb-4">
         <label htmlFor="username" className="mb-1 font-medium">
           UserName

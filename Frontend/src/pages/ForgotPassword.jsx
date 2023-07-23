@@ -1,20 +1,38 @@
 import { useState } from "react";
 import { recoveryAccount } from "../api/user";
 import { Button } from "../components/Button/ButtonMagic";
+import useSweetAlert from "../hooks/useSweetAlert";
 
 function ForgotPassword() {
   const [userName, setUserName] = useState("");
+  const sweetAlert = useSweetAlert();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const response = await recoveryAccount({ userName });
       if (response.statusCode === 200) {
-        alert("Email Sent");
-        console.log(`${response.body.message} to User : ${userName}`);
+        sweetAlert.showAlert({
+          title: "Email Sent Successfully",
+          text: response.body.message,
+          icon: "success",
+          timer: 2000,
+        });
+      } else {
+        sweetAlert.showAlert({
+          title: "Error",
+          text: response.body.message,
+          icon: "error",
+          timer: 2000,
+        });
       }
     } catch (error) {
-      console.log(error);
+      sweetAlert.showAlert({
+        title: "Error",
+        text: error.message,
+        icon: "error",
+        timer: 2000,
+      });
     }
   };
 

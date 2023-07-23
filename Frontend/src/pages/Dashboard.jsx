@@ -38,7 +38,6 @@ function Dashboard() {
                 {user.user_name}
               </h2>
             ))}
-
         </form>
       )}
     </>
