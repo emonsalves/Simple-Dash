@@ -75,7 +75,7 @@ const Sidebar = () => {
           <button
             className={`${
               open ? "block" : "hidden"
-            } flex items-center gap-x-6 p-3 text-base font-normal rounded-lg cursor-pointer dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 mt-2`}
+            } flex items-center gap-x-6 p-3 text-base font-normal rounded-lg cursor-pointer dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 mt-2 w-full`}
             onClick={() => {
               logOut();
               goTo("/auth/");
@@ -117,7 +117,20 @@ const Sidebar = () => {
                 {menu.title}
               </span>
             </NavLink>
-          ))}
+          ))
+          }
+           <button
+            className={`${
+              open ? "block" : "hidden"
+            } flex justify-center items-center gap-x-6 p-3 text-base font-bold rounded-lg cursor-pointer dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 mt-2 w-full`}
+            onClick={() => {
+              logOut();
+              goTo("/auth/");
+            }}
+          >
+            Logout
+          </button>
+
         </div>
       </div>
     </>
