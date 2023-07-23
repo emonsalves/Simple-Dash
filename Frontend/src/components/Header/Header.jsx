@@ -1,7 +1,12 @@
 import { useState } from "react";
+import { SlLogout } from "react-icons/sl";
 import { FaUserCircle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../context/AuthContext";
 
 const Header = () => {
+  const { logOut, user } = useAuthContext();
+  const goTo = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -12,27 +17,36 @@ const Header = () => {
     <nav className="bg-gray-800 shadow">
       <div className="px-8 mx-auto">
         <div className="flex items-center justify-end h-16">
-          <div className="relative">
+          <div className="relative ">
             <button
               type="button"
-              className="flex items-center justify-center w-10 h-10 rounded-full text-gray-50 hover:bg-gray-500 focus:outline-none"
+              className="flex items-center justify-center rounded-md text-gray-50 hover:bg-gray-500 focus:outline-none transition ease-in-out duration-300"
               onClick={toggleDropdown}
               id="options-menu"
             >
               <FaUserCircle className="w-6 h-6" />
+              {user && ( // if user is not null then show the user name
+                <span className="ml-2 text-sm font-medium text-gray-50">
+                  {user.name}
+                </span>
+              )}
             </button>
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-56 bg-gray-800 rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
+              <div className="absolute right-0 mt-2 w-56 bg-gray-800 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 transition ease-in-out duration-300 border border-gray-700">
                 <div
                   className="py-1"
                   role="menu"
                   aria-labelledby="options-menu"
                 >
                   <a
-                    href="#"
-                    className="block px-4 py-2 text-md text-gray-100 hover:bg-gray-600"
+                    onClick={() => {
+                      logOut();
+                      goTo("/auth/");
+                    }}
+                    className="px-4 py-2 text-md text-gray-100 hover:bg-gray-600 cursor-pointer flex items-center justify-center gap-x-5"
                     role="menuitem"
                   >
+                    <SlLogout />
                     Logout
                   </a>
                 </div>
