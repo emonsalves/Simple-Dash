@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 
 const Header = () => {
