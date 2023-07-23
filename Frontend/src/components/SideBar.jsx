@@ -3,7 +3,7 @@ import { NavLink, useNavigate, useLocation } from "react-router-dom";
 
 import { BsArrowLeftCircle } from "react-icons/bs";
 import { AiFillPieChart } from "react-icons/ai";
-import { SiFuturelearn } from "react-icons/si";
+import { SiFuturelearn, SiGooglefit } from "react-icons/si";
 import { SlLogout } from "react-icons/sl";
 import { CgProfile } from "react-icons/cg";
 import Logo from "../assets/vite.svg";
@@ -21,6 +21,11 @@ const Sidebar = () => {
     { title: "Dashboard", path: "dashboard", src: <AiFillPieChart /> },
     { title: "Course", path: "/auth/reset-password", src: <SiFuturelearn /> },
     { title: "Profile", path: "/auth/test", src: <CgProfile /> },
+    {
+      title: "Reset Password",
+      path: "/auth/reset-password",
+      src: <SiGooglefit />,
+    },
   ];
 
   return (
@@ -117,9 +122,8 @@ const Sidebar = () => {
                 {menu.title}
               </span>
             </NavLink>
-          ))
-          }
-           <button
+          ))}
+          <button
             className={`${
               open ? "block" : "hidden"
             } flex justify-center items-center gap-x-6 p-3 text-base font-bold rounded-lg cursor-pointer dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 mt-2 w-full`}
@@ -130,7 +134,6 @@ const Sidebar = () => {
           >
             Logout
           </button>
-
         </div>
       </div>
     </>
