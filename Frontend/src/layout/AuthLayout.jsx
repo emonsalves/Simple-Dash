@@ -4,7 +4,7 @@ import { Header } from "../components/Header";
 
 function AuthLayout() {
   return (
-    <div className="flex">
+    <div className="flex transition-all duration-300">
       <Sidebar />
       <div className="flex flex-col w-full h-14 bg-red-500">
         <Header />

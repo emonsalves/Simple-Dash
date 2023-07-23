@@ -33,7 +33,7 @@ const Sidebar = () => {
       <div
         className={`${
           open ? "w-60" : "w-fit"
-        } hidden sm:block relative h-screen duration-300 bg-gray-100 border-r border-gray-200 dark:border-gray-600 p-5 dark:bg-slate-800`}
+        } hidden sm:block relative h-screen bg-gray-100 border-r border-gray-200 dark:border-gray-600 p-5 dark:bg-slate-800`}
       >
         <BsArrowLeftCircle
           className={`${
@@ -78,9 +78,7 @@ const Sidebar = () => {
         {/* Logout Menu */}
         <div>
           <button
-            className={`${
-              open ? "block" : "hidden"
-            } flex items-center gap-x-6 p-3 text-base font-normal rounded-lg cursor-pointer dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 mt-2 w-full`}
+            className={`flex items-center gap-x-6 p-3 text-base font-normal rounded-lg cursor-pointer dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 mt-2 w-full`}
             onClick={() => {
               logOut();
               goTo("/auth/");
@@ -89,7 +87,7 @@ const Sidebar = () => {
             <span className="text-2xl">
               <SlLogout />
             </span>
-            <span>Logout</span>
+            <span className={`${!open && "hidden"}`}>Logout</span>
           </button>
         </div>
       </div>
