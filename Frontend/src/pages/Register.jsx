@@ -37,12 +37,14 @@ function Register() {
   };
 
   return (
-    <form className="form md:w-2/3 lg:w-1/2 xl:w-1/3 p-2 mx-auto" onSubmit={handleSubmit}>
+    <form className="form md:w-2/3 lg:w-1/2 xl:w-1/3 p-2 mx-auto drop-shadow-2xl rounded-lg  dark:bg-slate-800 mt-16 mb-16 text-gray-50">
       <h1 className="text-2xl font-bold mb-4">Registration</h1>
-      {!!errorResponse && <div className="errorMessage text-red-500 mb-4">{errorResponse}</div>}
+      {!!errorResponse && (
+        <div className="errorMessage text-red-500 mb-4">{errorResponse}</div>
+      )}
       <div className="form-control mb-4">
         <label htmlFor="username" className="font-medium">
-          User
+          UserName
         </label>
         <input
           type="text"
