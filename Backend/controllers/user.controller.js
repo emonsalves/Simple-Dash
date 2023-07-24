@@ -40,12 +40,12 @@ const getOne = async (req, res) => {
 
 const update = async (req, res) => {
   const { username } = req.params;
-  const { name, last_name, phone, address } = req.body;
+  const { first_name, last_name, phone, address } = req.body;
 
   try {
     const result = await userService.updateUserByUsername(
       username,
-      name,
+      first_name,
       last_name,
       phone,
       address

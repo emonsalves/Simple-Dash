@@ -27,7 +27,7 @@ const Header = () => {
               <FaUserCircle className="w-6 h-6" />
               {user && (
                 <span className="ml-2 text-sm font-medium text-gray-50">
-                  {user.name} {user.last_name}
+                  {user.first_name} {user.last_name}
                 </span>
               )}
             </button>

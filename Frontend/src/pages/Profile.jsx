@@ -4,7 +4,7 @@ import useFormatDate from "../hooks/useFormatDate";
 function Profile() {
   const { user } = useAuthContext();
   const formatDate = useFormatDate();
-  const { name, last_name, email, address, phone, created_at, updated_at } =
+  const { first_name, last_name, email, address, phone, created_at, updated_at } =
     user;
 
   return (
@@ -14,12 +14,12 @@ function Profile() {
       {user ? (
         <>
           <div className="profile-item mb-2">
-            <label className="font-medium">Name:</label>
+            <label className="font-medium">First Name:</label>
             <input
               type="text"
               id="name"
               name="name"
-              defaultValue={name}
+              defaultValue={first_name}
               className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
             />
           </div>

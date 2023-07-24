@@ -55,14 +55,14 @@ const getUserByUsername = async (username) => {
 };
 
 const updateUserByUsername = async ({
-  name,
+  first_name,
   last_name,
   username,
   phone,
   address,
 }) => {
   const updatedUser = await User.update(
-    { name, last_name, phone, address },
+    { first_name, last_name, phone, address },
     { where: { user_name: username } }
   );
   return updatedUser
@@ -92,7 +92,7 @@ const registerUser = async (userName, password) => {
     await User.create({
       user_name: userName,
       password: encryptedPassword,
-      name: "",
+      first_name: "",
       last_name: "",
       address: "",
       phone: "",
