@@ -104,9 +104,8 @@ const recoveryAccount = async (req, res) => {
       .json(jsonResponse(userReset.status, userReset.data));
   }
 
-  const { user_name } = userReset.data.user;
-  await userService.recoveryPassword(user_name);
-
+  const { user_name, email } = userReset.data.user;
+  await userService.recoveryPassword({ userName: user_name, email });
   res.json(jsonResponse(200, { message: "Recovery Password" }));
 };
 

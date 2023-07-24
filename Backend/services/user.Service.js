@@ -1,8 +1,12 @@
+import dotenv from "dotenv";
+
 import { htmlRecoveryMail } from "../lib/mailHTML.js";
 import { User, Role } from "../models/index.js";
 import { bcryptUtil } from "../utils/bcypt.Util.js";
 import { jsonWBT } from "../utils/jwt.Util.js";
 import { sendMail } from "../utils/mail.Util.js";
+
+dotenv.config();
 
 const login = async (userName, password) => {
   const user = await User.findOne({
@@ -100,20 +104,23 @@ const registerUser = async (userName, password) => {
   }
 };
 
-const recoveryPassword = async (userName) => {
+const recoveryPassword = async ({ userName, email }) => {
   const secureCode = "123456";
   const encryptedPassword = bcryptUtil.encrypt({ text: secureCode });
   const updatedUser = await User.update(
     { password: encryptedPassword },
     { where: { user_name: userName } }
   );
+
+  console.log("email: ", email);
+
   sendMail({
-    to: "emonsalves@kayser.cl",
+    to: process.env.MAIL_TO,
     subject: "Recovery Password",
     textHtml: htmlRecoveryMail({
       userName,
       secureCode,
-      soporteMail: "informatica@kayser.cl",
+      soporteMail: process.env.MAIL_SUPPORT,
     }),
   });
 

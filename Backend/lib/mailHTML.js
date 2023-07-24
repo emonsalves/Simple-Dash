@@ -1,4 +1,4 @@
-const htmlRecoveryMail = ({ userName, passwordDefault, soporteMail }) => {
+const htmlRecoveryMail = ({ userName, secureCode, soporteMail }) => {
   return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml">
       <head>
@@ -467,7 +467,7 @@ const htmlRecoveryMail = ({ userName, passwordDefault, soporteMail }) => {
                       href="https://example.com"
                       class="f-fallback email-masthead_name"
                     >
-                      COMERCIAL KAYSER LTDA
+                      SYSTEM DASHBOARD
                     </a>
                   </td>
                 </tr>
@@ -497,8 +497,8 @@ const htmlRecoveryMail = ({ userName, passwordDefault, soporteMail }) => {
                               Intranet account. Use the button below to reset
                               it.
                               <div border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnImageBlock" style="min-width:100%;">
-                              <h1 class="middle">Your new password is</h1>
-                              <strong> <h1 class="middle">${passwordDefault}</h1> </strong>
+                              <h1 class="middle">Your Secure Code is</h1>
+                              <strong> <h1 class="middle">${secureCode}</h1> </strong>
                                 </div>
                               <strong
                                 >This password reset is only valid for the next 24
@@ -579,8 +579,8 @@ const htmlRecoveryMail = ({ userName, passwordDefault, soporteMail }) => {
                       <tr>
                         <td class="content-cell" align="center">
                           <p class="f-fallback sub align-center">
-                            Comercial Kayser Ltda.
-                            <br />General Gana 1101, Santiago, Chile <br />
+                            SYSTEM DASHBOARD
+                            <br /> Santiago, Chile <br />
                           </p>
                         </td>
                       </tr>
