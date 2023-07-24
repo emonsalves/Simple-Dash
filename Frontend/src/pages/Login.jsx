@@ -4,6 +4,7 @@ import { useAuthContext } from "../context/AuthContext";
 import { login } from "../api/auth";
 import { Button } from "../components/Button/ButtonMagic";
 import useSweetAlert from "../hooks/useSweetAlert";
+import useSweetToast from "../hooks/useSweetToast";
 
 function Login() {
   const [userName, setUserName] = useState("");
@@ -11,6 +12,7 @@ function Login() {
   const { Login } = useAuthContext();
   const goTo = useNavigate();
   const sweetAlert = useSweetAlert();
+  const sweetToast = useSweetToast();
 
   if (localStorage.getItem("user")) {
     return <Navigate to="/in/dashboard" />;
@@ -36,6 +38,7 @@ function Login() {
     if (statusCode === 200) {
       Login({ body });
       goTo("/in/dashboard");
+      sweetToast.showToast();
     } else {
       sweetAlert.showAlert({
         title: "Error",
