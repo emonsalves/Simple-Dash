@@ -6,26 +6,15 @@ function ResetPassword() {
   const [resetCode, setResetCode] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [errorResponse, setErrorResponse] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
- 
   };
 
   return (
     <div className="form md:w-2/3 lg:w-1/2 xl:w-1/3 p-2 mx-auto drop-shadow-2xl rounded-lg bg-gray-100 border-r border-gray-200 dark:border-gray-600 dark:bg-slate-800 text-gray-50">
       <form className="form flex flex-col p-2" onSubmit={handleSubmit}>
         <h1 className="text-2xl font-bold mb-4">Reset Password</h1>
-        {!!errorResponse && (
-          <div className="errorMessage text-red-500 mb-4">{errorResponse}</div>
-        )}
-        {!!successMessage && (
-          <div className="successMessage text-green-500 mb-4">
-            {successMessage}
-          </div>
-        )}
         <div className="form-control mb-4 flex flex-col">
           <label htmlFor="userName" className="font-medium">
             User Name

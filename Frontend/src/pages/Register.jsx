@@ -8,7 +8,6 @@ function Register() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [errorResponse, setErrorResponse] = useState("");
   const goTo = useNavigate();
   const sweetAlert = useSweetAlert();
 
@@ -25,7 +24,6 @@ function Register() {
       const { message } = response.data.body;
 
       if (status === 201) {
-        setErrorResponse("");
         goTo("/auth");
         sweetAlert.showAlert({
           title: "Success",
@@ -40,8 +38,6 @@ function Register() {
           icon: "error",
           timer: 2000,
         });
-        setErrorResponse(message);
-        setTimeout(() => setErrorResponse(""), 5000);
       }
     } catch (error) {
       console.log(error);
