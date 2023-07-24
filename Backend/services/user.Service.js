@@ -112,10 +112,8 @@ const recoveryPassword = async ({ userName, email }) => {
     { where: { user_name: userName } }
   );
 
-  console.log("email: ", email);
-
   sendMail({
-    to: process.env.MAIL_TO,
+    to: email,
     subject: "Recovery Password",
     textHtml: htmlRecoveryMail({
       userName,
