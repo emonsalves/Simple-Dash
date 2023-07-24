@@ -6,6 +6,7 @@ import { AuthLayout } from "../layout/AuthLayout";
 import { NotFound } from "../pages/NotFound";
 import { RequireAuth } from "../auth/ProtectedRoute";
 import { ResetPassword } from "../pages/ResetPassword";
+import { Profile } from "../pages/Profile";
 
 const router = createHashRouter([
   {
@@ -55,6 +56,10 @@ const router = createHashRouter([
         index: true,
         path: "dashboard",
         element: <Dashboard />,
+      },
+       {
+        path: "profile",
+        element: <Profile />,
       },
     ],
   },
