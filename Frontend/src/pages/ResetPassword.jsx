@@ -12,7 +12,7 @@ function ResetPassword() {
   };
 
   return (
-    <div className="form md:w-2/3 lg:w-1/2 xl:w-1/3 p-2 mx-auto drop-shadow-2xl rounded-lg bg-gray-100 border-r border-gray-200 dark:border-gray-600 dark:bg-slate-800 text-gray-50">
+    <div className="form md:w-2/3 lg:w-1/2 xl:w-1/3 p-2 mx-auto drop-shadow-2xl rounded-lg border-r border-gray-600 bg-slate-800 text-gray-50">
       <form className="form flex flex-col p-2" onSubmit={handleSubmit}>
         <h1 className="text-2xl font-bold mb-4">Reset Password</h1>
         <div className="form-control mb-4 flex flex-col">

@@ -51,7 +51,7 @@ function Login() {
 
   return (
     <form
-      className="form md:w-2/3 lg:w-1/2 xl:w-1/3 p-2 mx-auto drop-shadow-2xl rounded-lg bg-white dark:bg-slate-800 mt-16 mb-16 text-gray-50"
+      className="form md:w-2/3 lg:w-1/2 xl:w-1/3 p-2 mx-auto drop-shadow-2xl rounded-lg  bg-slate-800 mt-16 mb-16 text-gray-50"
       onSubmit={handleSubmit}
     >
       <div className="form-header">
