@@ -51,9 +51,9 @@ const getUserByUsername = async (username) => {
 };
 
 const updateUserByUsername = async ({
-  username,
   name,
   last_name,
+  username,
   phone,
   address,
 }) => {
@@ -66,7 +66,7 @@ const updateUserByUsername = async ({
     : { status: 404, data: { message: "User not found" } };
 };
 
-const deleteUserByUsername = async (username) => {
+const deleteUserByUsername = async ({ username }) => {
   const deletedUser = await User.destroy({ where: { user_name: username } });
   return deletedUser
     ? { status: 200, data: { username } }
@@ -88,10 +88,11 @@ const registerUser = async (userName, password) => {
     await User.create({
       user_name: userName,
       password: encryptedPassword,
-      name: "Test",
-      last_name: "Test",
-      phone: "Test",
-      address: "Test",
+      name: "",
+      last_name: "",
+      address: "",
+      phone: "",
+      email: "",
     });
     return { status: 201, data: { message: "User created" } };
   } catch (error) {
@@ -100,8 +101,8 @@ const registerUser = async (userName, password) => {
 };
 
 const recoveryPassword = async (userName) => {
-  const passwordDefault = "1234567890";
-  const encryptedPassword = bcryptUtil.encrypt({ text: passwordDefault });
+  const secureCode = "123456";
+  const encryptedPassword = bcryptUtil.encrypt({ text: secureCode });
   const updatedUser = await User.update(
     { password: encryptedPassword },
     { where: { user_name: userName } }
@@ -109,10 +110,9 @@ const recoveryPassword = async (userName) => {
   sendMail({
     to: "emonsalves@kayser.cl",
     subject: "Recovery Password",
-    // text: `Hellou, ${userName}. Your new password is ${passwordDefault}, please change it.`,
     textHtml: htmlRecoveryMail({
       userName,
-      passwordDefault,
+      secureCode,
       soporteMail: "informatica@kayser.cl",
     }),
   });
