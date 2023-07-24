@@ -1,4 +1,22 @@
 # Simple-Dash
 
-Basic Proyect of Routes
-React - Express - Sequalize - Mysql - Yarn - Vite - JsonWebToken - Bcrypt - Nodemailer
+## Basic Proyect in progress...
+
+## Created with :
+
+- Vite 
+- React 
+- Express 
+- Sequalize 
+- Mysql 
+- Yarn 
+- JsonWebToken 
+- Bcrypt 
+- Nodemailer 
+- SweetAlert2 
+- TailwindCss
+- Axios
+- React Router Dom
+- React Icons
+- ...
+
