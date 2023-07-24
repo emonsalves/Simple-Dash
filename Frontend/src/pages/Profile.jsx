@@ -21,16 +21,6 @@ function Profile() {
 
       {user ? (
         <>
-          {/* <div className="profile-item mb-4">
-            <label className="font-medium">User Name:</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              defaultValue={user_name}
-              className="border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
-            />
-          </div> */}
           <div className="profile-item mb-4">
             <label className="font-medium">Name:</label>
             <input

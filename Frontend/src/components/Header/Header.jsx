@@ -32,7 +32,7 @@ const Header = () => {
               )}
             </button>
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-56 bg-gray-800 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 transition ease-in-out duration-300 border border-gray-700">
+              <div className="absolute right-0 mt-2 w-56 bg-gray-800 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 transition ease-in-out duration-300 border border-gray-700 z-10">
                 <div
                   className="py-1"
                   role="menu"
