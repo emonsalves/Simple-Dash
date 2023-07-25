@@ -33,7 +33,9 @@ const Sidebar = () => {
       {/* Desktop Menu */}
       <div
         className={`${
-          open ? "w-60" : "w-fit"
+          open
+            ? "w-60 transition-width duration-500"
+            : "w-20 transition-width duration-500"
         } hidden sm:block fixed top-0 left-0 h-screen overflow-visible border-r border-gray-600 p-5 bg-slate-800 z-10`}
       >
         <BsArrowLeftCircle
@@ -66,7 +68,7 @@ const Sidebar = () => {
                 <span
                   className={`${
                     !open && "hidden"
-                  } origin-left duration-300 hover:block`}
+                  } origin-left duration-1000 hover:block`}
                 >
                   {menu.title}
                 </span>
