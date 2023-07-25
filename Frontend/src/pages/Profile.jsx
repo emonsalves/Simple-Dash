@@ -4,40 +4,33 @@ import { Button } from "../components/Button/ButtonMagic";
 import { useAuthContext } from "../context/AuthContext";
 import useFormatDate from "../hooks/useFormatDate";
 import useSweetAlert from "../hooks/useSweetAlert";
+import { ProfileItem } from "../components/Input/Input";
 
 function Profile() {
   const { user } = useAuthContext();
   const sweetAlert = useSweetAlert();
-
   const formatDate = useFormatDate();
-  const {
-    user_name,
-    first_name,
-    last_name,
-    email,
-    address,
-    phone,
-    created_at,
-    updated_at,
-  } = user;
 
   const [userUpdate, setUserUpdate] = useState({
-    user_name,
-    first_name,
-    last_name,
-    email,
-    address,
-    phone,
+    first_name: user.first_name,
+    last_name: user.last_name,
+    email: user.email,
+    address: user.address,
+    phone: user.phone,
   });
 
-  const handleChange = (event) => {
-    setUserUpdate({ ...userUpdate, [event.target.name]: event.target.value });
+  const handleChange = (name, value) => {
+    setUserUpdate((prevUserUpdate) => ({
+      ...prevUserUpdate,
+      [name]: value,
+    }));
   };
 
   const handleUpdate = async (event) => {
     event.preventDefault();
     const { first_name, last_name, email, address, phone } = userUpdate;
     const { user_name } = user;
+
     await updateUserInfo({
       user_name,
       first_name,
@@ -46,6 +39,7 @@ function Profile() {
       address,
       phone,
     });
+
     sweetAlert.showAlert({
       title: "Update Profile Success",
       text: "Your profile has been updated successfully",
@@ -55,85 +49,53 @@ function Profile() {
   };
 
   return (
-    <div className="profile-container bg-opacity-20 backdrop-blur-lg p-4 rounded-lg md:w-2/3 lg:w-1/2 xl:w-1/3 mx-auto drop-shadow-2xl  text-black shadow-lg border">
+    <div className="profile-container bg-opacity-20 backdrop-blur-lg p-4 rounded-lg md:w-2/3 lg:w-1/2 xl:w-1/3 mx-auto drop-shadow-2xl text-black shadow-lg border">
       <h1 className="text-2xl font-bold mb-4 text-center">Profile Editor</h1>
 
       {user ? (
         <>
-          <div className="profile-item mb-2">
-            <label className="font-medium">First Name:</label>
-            <input
-              type="text"
-              id="first_name"
-              name="first_name"
-              onChange={handleChange}
-              defaultValue={first_name}
-              className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
-            />
-          </div>
-          <div className="profile-item mb-2">
-            <label className="font-medium">Last Name:</label>
-            <input
-              type="text"
-              id="last_name"
-              name="last_name"
-              onChange={handleChange}
-              defaultValue={last_name}
-              className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
-            />
-          </div>
-          <div className="profile-item mb-2">
-            <label className="font-medium">Email:</label>
-            <input
-              type="text"
-              id="email"
-              name="email"
-              onChange={handleChange}
-              defaultValue={email}
-              className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
-            />
-          </div>
-          <div className="profile-item mb-2">
-            <label className="font-medium">Address:</label>
-            <input
-              type="text"
-              id="address"
-              name="address"
-              onChange={handleChange}
-              defaultValue={address}
-              className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
-            />
-          </div>
-          <div className="profile-item mb-2">
-            <label className="font-medium">Phone:</label>
-            <input
-              type="text"
-              id="phone"
-              name="phone"
-              onChange={handleChange}
-              defaultValue={phone}
-              className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
-            />
-          </div>
+          <ProfileItem
+            label="First Name"
+            value={userUpdate.first_name}
+            onChange={handleChange}
+          />
+          <ProfileItem
+            label="Last Name"
+            value={userUpdate.last_name}
+            onChange={handleChange}
+          />
+          <ProfileItem
+            label="Email"
+            value={userUpdate.email}
+            onChange={handleChange}
+          />
+          <ProfileItem
+            label="Address"
+            value={userUpdate.address}
+            onChange={handleChange}
+          />
+          <ProfileItem
+            label="Phone"
+            value={userUpdate.phone}
+            onChange={handleChange}
+          />
+
+          {/* Static fields */}
           <div className="profile-item mb-2">
             <label className="font-medium">Created At:</label>
             <input
               type="text"
-              id="created_at"
-              name="created_at"
-              defaultValue={formatDate.YYYYMMDDHHMMSS(created_at)}
+              value={formatDate.YYYYMMDDHHMMSS(user.created_at)}
               className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full inactive"
               readOnly
             />
           </div>
-          <div className="profile-item mb-2">
+          <div className="profile-item mb-4">
             <label className="font-medium">Updated At:</label>
             <input
               type="text"
-              id="updated_at"
-              name="updated_at"
-              defaultValue={formatDate.YYYYMMDDHHMMSS(updated_at)}
-              className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
+              value={formatDate.YYYYMMDDHHMMSS(user.updated_at)}
+              className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full inactive"
               readOnly
             />
           </div>
@@ -141,13 +103,13 @@ function Profile() {
             <label className="font-medium">Rol Asignado :</label>
             <input
               type="text"
-              id="rol"
-              name="rol"
-              defaultValue={user.Role.name}
-              className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
+              value={user.Role.name}
+              className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full inactive"
               readOnly
             />
           </div>
+
+          {/* Action buttons */}
           <div className="profile-item flex justify-between gap-2">
             <Button
               text="Actualizar"
