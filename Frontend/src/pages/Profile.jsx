@@ -7,7 +7,7 @@ import useSweetAlert from "../hooks/useSweetAlert";
 import { refreshToken } from "../api/token/refreshToken";
 
 function Profile() {
-  const { user } = useAuthContext();
+  const { user, Login } = useAuthContext();
   const sweetAlert = useSweetAlert();
 
   const formatDate = useFormatDate();
@@ -48,8 +48,9 @@ function Profile() {
       phone,
     });
 
-    refreshToken({ user_name });
-
+    const newTokens = await refreshToken({ user_name });
+    const { body } = newTokens;
+    Login({ body });
     sweetAlert.showAlert({
       title: "Update Profile Success",
       text: "Your profile has been updated successfully",
