@@ -3,9 +3,12 @@ import { updateUserInfo } from "../api/user/update";
 import { Button } from "../components/Button/ButtonMagic";
 import { useAuthContext } from "../context/AuthContext";
 import useFormatDate from "../hooks/useFormatDate";
+import useSweetAlert from "../hooks/useSweetAlert";
 
 function Profile() {
   const { user } = useAuthContext();
+  const sweetAlert = useSweetAlert();
+
   const formatDate = useFormatDate();
   const {
     user_name,
@@ -32,10 +35,9 @@ function Profile() {
   };
 
   const handleUpdate = async (event) => {
+    event.preventDefault();
     const { first_name, last_name, email, address, phone } = userUpdate;
     const { user_name } = user;
-    event.preventDefault();
-
     await updateUserInfo({
       user_name,
       first_name,
@@ -43,6 +45,12 @@ function Profile() {
       email,
       address,
       phone,
+    });
+    sweetAlert.showAlert({
+      title: "Update Profile Success",
+      text: "Your profile has been updated successfully",
+      icon: "success",
+      timer: 2000,
     });
   };
 

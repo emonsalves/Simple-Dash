@@ -76,7 +76,7 @@ const Sidebar = () => {
         </ul>
 
         {/* Logout Menu */}
-        <div className="absolute bottom-5 w-44">
+        <div className="absolute bottom-5 w-48">
           <button
             className={`flex items-center gap-x-6 p-3 text-base font-normal rounded-lg cursor-pointer text-white hover:bg-gray-700 mt-2 w-full`}
             onClick={() => {

@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
@@ -6,27 +7,22 @@ function AuthProvider({ children }) {
   const [user, setUser] = useState(false);
   const [tokens, setTokens] = useState(false);
 
-
   useEffect(() => {
-    (function () {
-      const newTokens = JSON.parse(localStorage.getItem("tokens"));
-      const newUser = JSON.parse(localStorage.getItem("user"));
+    const newTokens = JSON.parse(localStorage.getItem("tokens"));
+    const newUser = JSON.parse(localStorage.getItem("user"));
 
-      if (newTokens && newUser) {
-        setTokens(newTokens);
-        setUser(newUser);
-        setIsAuthenticated(true);
-      }
-    })();
+    if (newTokens && newUser) {
+      setTokens(newTokens);
+      setUser(newUser);
+      setIsAuthenticated(true);
+    }
   }, []);
 
   useEffect(() => {
-    (function () {
-      if (tokens && user) {
-        localStorage.setItem("tokens", JSON.stringify(tokens));
-        localStorage.setItem("user", JSON.stringify(user));
-      }
-    })();
+    if (tokens && user) {
+      localStorage.setItem("tokens", JSON.stringify(tokens));
+      localStorage.setItem("user", JSON.stringify(user));
+    }
   }, [tokens, user]);
 
   const logOut = () => {
@@ -50,16 +46,23 @@ function AuthProvider({ children }) {
     setUser(user);
   };
 
+  const updateToken = ({ accessToken, refreshToken }) => {
+    setTokens({ accessToken, refreshToken });
+    localStorage.setItem("tokens", JSON.stringify({ accessToken, refreshToken }));
+  };
+
   const value = {
     isAuthenticated,
     user,
     logOut,
     Login,
+    updateToken,
     tokens,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
+
 export default AuthProvider;
 
 export const useAuthContext = () => useContext(AuthContext);
