@@ -15,7 +15,7 @@ const Header = () => {
 
   return (
     <nav className="bg-gray-800 shadow">
-      <div className="px-8 mx-auto">
+      <div className="px-4 mx-auto">
         <div className="flex items-center justify-end h-16">
           <div className="relative ">
             <button
@@ -24,12 +24,12 @@ const Header = () => {
               onClick={toggleDropdown}
               id="options-menu"
             >
-              <FaUserCircle className="w-6 h-6" />
               {user && (
                 <span className="ml-2 text-sm font-medium text-gray-50">
                   {user.first_name} {user.last_name}
                 </span>
               )}
+              <FaUserCircle className="w-6 h-6 ml-2" />
             </button>
             {isDropdownOpen && (
               <div className="absolute right-0 mt-2 w-56 bg-gray-800 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 transition ease-in-out duration-300 border border-gray-700 z-10">
