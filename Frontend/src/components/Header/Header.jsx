@@ -20,7 +20,7 @@ const Header = () => {
           <div className="relative ">
             <button
               type="button"
-              className="flex items-center justify-center rounded-md text-gray-50 hover:py-3 hover:bg-gray-500  focus:outline-none transition ease-in-out duration-300"
+              className="flex items-center justify-center rounded-md text-gray-50 py-3 hover:bg-gray-500  focus:outline-none transition ease-in-out duration-300"
               onClick={toggleDropdown}
               id="options-menu"
             >
@@ -32,7 +32,7 @@ const Header = () => {
               <FaUserCircle className="w-6 h-6 ml-2" />
             </button>
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-56 bg-gray-800 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 transition ease-in-out duration-300 border border-gray-700 z-10">
+              <div className="absolute right-0 mt-2 w-22 bg-gray-800 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 transition ease-in-out duration-300 border border-gray-700 z-10">
                 <div
                   className="py-1"
                   role="menu"
