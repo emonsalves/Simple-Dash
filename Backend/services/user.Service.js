@@ -60,11 +60,13 @@ const updateUserByUsername = async ({
   username,
   phone,
   address,
+  email,
 }) => {
   const updatedUser = await User.update(
-    { first_name, last_name, phone, address },
+    { first_name, last_name, phone, address, email },
     { where: { user_name: username } }
   );
+
   return updatedUser
     ? { status: 200, data: { username } }
     : { status: 404, data: { message: "User not found" } };

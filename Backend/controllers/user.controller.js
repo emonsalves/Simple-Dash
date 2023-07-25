@@ -40,16 +40,17 @@ const getOne = async (req, res) => {
 
 const update = async (req, res) => {
   const { username } = req.params;
-  const { first_name, last_name, phone, address } = req.body;
+  const { first_name, last_name, phone, address, email } = req.body;
 
   try {
-    const result = await userService.updateUserByUsername(
+    const result = await userService.updateUserByUsername({
       username,
       first_name,
       last_name,
       phone,
-      address
-    );
+      address,
+      email,
+    });
     res.status(result.status).json(jsonResponse(result.status, result.data));
   } catch (error) {
     res.json(jsonResponse(res.status, { message: error.message }));

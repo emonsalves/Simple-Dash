@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { updateUserInfo } from "../api/user/update";
 import { Button } from "../components/Button/ButtonMagic";
 import { useAuthContext } from "../context/AuthContext";
 import useFormatDate from "../hooks/useFormatDate";
@@ -6,6 +8,7 @@ function Profile() {
   const { user } = useAuthContext();
   const formatDate = useFormatDate();
   const {
+    user_name,
     first_name,
     last_name,
     email,
@@ -15,9 +18,32 @@ function Profile() {
     updated_at,
   } = user;
 
+  const [userUpdate, setUserUpdate] = useState({
+    user_name,
+    first_name,
+    last_name,
+    email,
+    address,
+    phone,
+  });
+
+  const handleChange = (event) => {
+    setUserUpdate({ ...userUpdate, [event.target.name]: event.target.value });
+  };
+
   const handleUpdate = async (event) => {
+    const { first_name, last_name, email, address, phone } = userUpdate;
+    const { user_name } = user;
     event.preventDefault();
-    console.log("update");
+
+    await updateUserInfo({
+      user_name,
+      first_name,
+      last_name,
+      email,
+      address,
+      phone,
+    });
   };
 
   return (
@@ -30,8 +56,9 @@ function Profile() {
             <label className="font-medium">First Name:</label>
             <input
               type="text"
-              id="name"
-              name="name"
+              id="first_name"
+              name="first_name"
+              onChange={handleChange}
               defaultValue={first_name}
               className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
             />
@@ -42,6 +69,7 @@ function Profile() {
               type="text"
               id="last_name"
               name="last_name"
+              onChange={handleChange}
               defaultValue={last_name}
               className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
             />
@@ -52,6 +80,7 @@ function Profile() {
               type="text"
               id="email"
               name="email"
+              onChange={handleChange}
               defaultValue={email}
               className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
             />
@@ -62,6 +91,7 @@ function Profile() {
               type="text"
               id="address"
               name="address"
+              onChange={handleChange}
               defaultValue={address}
               className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
             />
@@ -72,6 +102,7 @@ function Profile() {
               type="text"
               id="phone"
               name="phone"
+              onChange={handleChange}
               defaultValue={phone}
               className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
             />
