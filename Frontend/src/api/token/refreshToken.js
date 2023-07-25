@@ -1,13 +1,13 @@
 import axios from "axios";
 import { backendUrl } from "../../config";
 
-const refreshToken = async (refresh_token) => {
+const refreshToken = async ({ user_name }) => {
   try {
     const response = await axios({
       method: "POST",
       url: `${backendUrl}/token/refresh`,
       data: {
-        refresh_token,
+        user_name,
       },
       headers: {
         "Content-Type": "application/json",

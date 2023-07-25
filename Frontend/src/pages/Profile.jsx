@@ -4,6 +4,7 @@ import { Button } from "../components/Button/ButtonMagic";
 import { useAuthContext } from "../context/AuthContext";
 import useFormatDate from "../hooks/useFormatDate";
 import useSweetAlert from "../hooks/useSweetAlert";
+import { refreshToken } from "../api/token/refreshToken";
 
 function Profile() {
   const { user } = useAuthContext();
@@ -46,6 +47,9 @@ function Profile() {
       address,
       phone,
     });
+
+    refreshToken({ user_name });
+
     sweetAlert.showAlert({
       title: "Update Profile Success",
       text: "Your profile has been updated successfully",
