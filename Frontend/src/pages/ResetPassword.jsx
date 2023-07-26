@@ -15,20 +15,35 @@ function ResetPassword() {
   const handleClick = async (event) => {
     event.preventDefault();
 
-    updatePassword({
+    const response = await updatePassword({
       user_name: userName,
       resetCode,
       password,
       passwordConfirmation,
     });
 
-    sweetAlert.showAlert(
-      "Password Reset",
-      "Your password has been reset successfully",
-      "success"
-    );
+    console.log("STATUS", response);
 
-    goTo("/auth");
+    const { statusCode } = response;
+    const { message } = response.body;
+
+    if (statusCode === 200) {
+      goTo("/auth");
+      sweetAlert.showAlert({
+        title: "Success",
+        text: message,
+        icon: "success",
+        timer: 2000,
+      });
+      goTo("/auth");
+    } else {
+      sweetAlert.showAlert({
+        title: "Error",
+        text: message,
+        icon: "error",
+        timer: 2000,
+      });
+    }
   };
 
   return (
