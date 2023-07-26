@@ -22,8 +22,6 @@ function ResetPassword() {
       passwordConfirmation,
     });
 
-    console.log("STATUS", response);
-
     const { statusCode } = response;
     const { message } = response.body;
 
