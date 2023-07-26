@@ -22,14 +22,13 @@ function ResetPassword() {
       passwordConfirmation,
     });
 
-    const { statusCode } = response;
-    const { message } = response.body;
+    const { statusCode, body } = response;
 
     if (statusCode === 200) {
       goTo("/auth");
       sweetAlert.showAlert({
         title: "Success",
-        text: message,
+        text: body.message,
         icon: "success",
         timer: 2000,
       });
@@ -37,7 +36,7 @@ function ResetPassword() {
     } else {
       sweetAlert.showAlert({
         title: "Error",
-        text: message,
+        text: body.message,
         icon: "error",
         timer: 2000,
       });
