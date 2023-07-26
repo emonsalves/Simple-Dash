@@ -121,6 +121,7 @@ const recoveryPassword = async ({ userName, email }) => {
       userName,
       secureCode,
       soporteMail: process.env.MAIL_SUPPORT,
+      linkResetPassword: process.env.MAIL_LINK_RESET_PASSWORD,
     }),
   });
 
@@ -144,14 +145,14 @@ const updatePassword = async ({
       return { status: 400, data: { message: "Passwords do not match" } };
     }
 
-    // const validResetCode = await bcryptUtil.compare({
-    //   text: resetCode,
-    //   hash: user.password,
-    // });
+    const validResetCode = await bcryptUtil.compare({
+      text: resetCode,
+      hash: user.password,
+    });
 
-    // if (!validResetCode) {
-    //   return { status: 400, data: { message: "Invalid reset code" } };
-    // }
+    if (!validResetCode) {
+      return { status: 400, data: { message: "Invalid reset code" } };
+    }
 
     const encryptedPassword = bcryptUtil.encrypt({ text: password });
 
