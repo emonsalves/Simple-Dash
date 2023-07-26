@@ -7,10 +7,11 @@ const router = Router();
 router.post("/login", userController.login);
 router.post("/logout", userController.logout);
 router.post("/register", userController.register);
+router.post("/recovery", userController.recoveryAccount);
 router.get("/all", verifyToken, userController.getAll);
 router.get("/:username", userController.getOne);
 router.put("/update/:username", userController.update);
+router.put("/reset-password/:username", userController.updatePassword);
 router.delete("/delete/:username", userController.deleted);
-router.post("/recovery", userController.recoveryAccount);
 
 export default router;

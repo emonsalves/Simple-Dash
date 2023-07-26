@@ -57,6 +57,23 @@ const update = async (req, res) => {
   }
 };
 
+const updatePassword = async (req, res) => {
+  const { username } = req.params;
+  const { resetCode, password, passwordConfirmation } = req.body;
+
+  try {
+    const result = await userService.updatePassword({
+      username,
+      resetCode,
+      password,
+      passwordConfirmation,
+    });
+    res.status(result.status).json(jsonResponse(result.status, result.data));
+  } catch (error) {
+    res.json(jsonResponse(res.status, { message: error.message }));
+  }
+};
+
 const deleted = async (req, res) => {
   const { username } = req.params;
 
@@ -115,6 +132,7 @@ export const userController = {
   getAll,
   getOne,
   update,
+  updatePassword,
   deleted,
   register,
   logout,

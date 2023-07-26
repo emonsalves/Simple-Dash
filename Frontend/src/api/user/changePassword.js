@@ -1,15 +1,22 @@
 import axios from "axios";
 import { backendUrl } from "../../config";
 
-const updatePassword = async ({ userName, password, password2 }) => {
+const updatePassword = async ({
+  user_name,
+  resetCode,
+  password,
+  passwordConfirmation,
+}) => {
+  //  console.log("changePassword.js: ", user_name, resetCode, password, passwordConfirmation);
+
   try {
     const response = await axios({
       method: "PUT",
-      url: `${backendUrl}/user/resetPassword`,
+      url: `${backendUrl}/user/reset-password/${user_name}`,
       data: {
-        userName,
+        resetCode,
         password,
-        password2,
+        passwordConfirmation,
       },
     });
 

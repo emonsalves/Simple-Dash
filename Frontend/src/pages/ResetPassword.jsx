@@ -1,19 +1,39 @@
 import { useState } from "react";
 import { Button } from "../components/Button/ButtonMagic";
+import useSweetAlert from "../hooks/useSweetAlert";
+import { updatePassword } from "../api/user";
+import { useNavigate } from "react-router-dom";
 
 function ResetPassword() {
   const [userName, setUserName] = useState("");
   const [resetCode, setResetCode] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const sweetAlert = useSweetAlert();
+  const goTo = useNavigate();
 
-  const handleSubmit = async (event) => {
+  const handleClick = async (event) => {
     event.preventDefault();
+
+    updatePassword({
+      user_name: userName,
+      resetCode,
+      password,
+      passwordConfirmation,
+    });
+
+    sweetAlert.showAlert(
+      "Password Reset",
+      "Your password has been reset successfully",
+      "success"
+    );
+
+    goTo("/auth");
   };
 
   return (
     <div className="form md:w-2/3 lg:w-1/2 xl:w-1/3 p-2 mx-auto drop-shadow-2xl rounded-lg border-r border-gray-600 bg-slate-800 text-gray-50">
-      <form className="form flex flex-col p-2" onSubmit={handleSubmit}>
+      <form className="form flex flex-col p-2">
         <h1 className="text-2xl font-bold mb-4">Reset Password</h1>
         <div className="form-control mb-4 flex flex-col">
           <label htmlFor="userName" className="font-medium">
@@ -70,6 +90,7 @@ function ResetPassword() {
         <Button
           text="Reset Password"
           type="submit"
+          action={handleClick}
           tailwind="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         />
       </form>

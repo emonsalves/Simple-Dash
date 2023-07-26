@@ -127,6 +127,41 @@ const recoveryPassword = async ({ userName, email }) => {
   return updatedUser;
 };
 
+const updatePassword = async ({
+  username,
+  resetCode,
+  password,
+  passwordConfirmation,
+}) => {
+  const user = await User.findOne({ where: { user_name: username } });
+
+  if (!user) {
+    return { status: 404, data: { message: "User not found" } };
+  }
+
+  if (password !== passwordConfirmation) {
+    return { status: 400, data: { message: "Passwords do not match" } };
+  }
+
+  const validResetCode = await bcryptUtil.compare({
+    text: resetCode,
+    hash: user.password,
+  });
+
+  if (!validResetCode) {
+    return { status: 400, data: { message: "Invalid reset code" } };
+  }
+
+  const encryptedPassword = bcryptUtil.encrypt({ text: password });
+
+  await User.update(
+    { password: encryptedPassword },
+    { where: { user_name: username } }
+  );
+
+  return { status: 200, data: { message: "Password updated" } };
+};
+
 export const userService = {
   login,
   getAllUsers,
@@ -135,4 +170,5 @@ export const userService = {
   deleteUserByUsername,
   registerUser,
   recoveryPassword,
+  updatePassword,
 };
