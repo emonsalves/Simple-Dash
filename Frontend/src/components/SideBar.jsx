@@ -3,11 +3,11 @@ import { NavLink, useNavigate, useLocation } from "react-router-dom";
 
 import { BsArrowLeftCircle } from "react-icons/bs";
 import { AiFillPieChart } from "react-icons/ai";
-import { SiFuturelearn, SiGooglefit } from "react-icons/si";
-import { SlLogout } from "react-icons/sl";
+import { FaHome } from "react-icons/fa";
+import { ImExit } from "react-icons/im";
 import { CgProfile } from "react-icons/cg";
 import Logo from "../assets/vite.svg";
-import HamburgerButton from "./HamburgerMenuButton/HamburgerButton";
+import { HamburgerButton } from "./HamburgerMenuButton/HamburgerButton";
 import { useAuthContext } from "../context/AuthContext";
 
 const Sidebar = () => {
@@ -18,14 +18,9 @@ const Sidebar = () => {
   const goTo = useNavigate();
 
   const Menus = [
-    { title: "Dashboard", path: "dashboard", src: <AiFillPieChart /> },
-    { title: "Course", path: "/", src: <SiFuturelearn /> },
+    { title: "Dashboard", path: "/in/dashboard", src: <AiFillPieChart /> },
+    { title: "Home", path: "/", src: <FaHome /> },
     { title: "Profile", path: "/in/profile", src: <CgProfile /> },
-    {
-      title: "Reset Password",
-      path: "/auth/reset-password",
-      src: <SiGooglefit />,
-    },
   ];
 
   return (
@@ -87,7 +82,7 @@ const Sidebar = () => {
             }}
           >
             <span className="text-2xl">
-              <SlLogout />
+              <ImExit />
             </span>
             <span className={`${!open && "hidden"}`}>Logout</span>
           </button>

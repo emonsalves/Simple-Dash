@@ -54,44 +54,69 @@ function Login() {
       className="form md:w-2/3 lg:w-1/2 xl:w-1/3 p-2 mx-auto drop-shadow-2xl rounded-lg  bg-slate-800 mt-16 mb-16 text-gray-50"
       onSubmit={handleSubmit}
     >
-      <div className="form-header">
-        <h1 className="text-2xl font-bold mb-4">Log in</h1>
+      <div className="form-header font-bold m-2 text-center">
+        <h1 className="text-2xl m-1 ">Wellcome</h1>
+        <p>Sign in to your account</p>
       </div>
       <div className="form-body flex flex-col mb-4">
-        <label htmlFor="username" className="mb-1 font-medium">
-          UserName
-        </label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          value={userName}
-          onChange={(event) => setUserName(event.target.value)}
-          className="border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring focus:ring-blue-400"
-        />
-        <label htmlFor="password" className="mt-4 mb-1 font-medium">
-          Password
-        </label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-          className="border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring focus:ring-blue-400"
-        />
+        <div className="relative flex justify-center m-2">
+          <span className=" inline-flex  items-center px-3 border-t bg-white  border-gray-300 text-gray-500 shadow-sm text-sm rounded-l-md">
+            <svg
+              width="15"
+              height="15"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M12 12c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6 2.69 6 6 6zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
+            </svg>
+          </span>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Username"
+            value={userName}
+            onChange={(event) => setUserName(event.target.value)}
+            className="border border-gray-300 px-4 py-2 rounded-r-md focus:outline-none focus:ring focus:ring-blue-400 placeholder-gray-400 placeholder:text-xl "
+          />
+        </div>
+
+        <div className="relative flex justify-center m-2">
+          <span className=" inline-flex  items-center px-3 border-t bg-white  border-gray-300 text-gray-500 shadow-sm text-sm rounded-l-md">
+            <svg
+              width="15"
+              height="15"
+              fill="currentColor"
+              viewBox="0 0 1792 1792"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M1376 768q40 0 68 28t28 68v576q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-576q0-40 28-68t68-28h32v-320q0-185 131.5-316.5t316.5-131.5 316.5 131.5 131.5 316.5q0 26-19 45t-45 19h-64q-26 0-45-19t-19-45q0-106-75-181t-181-75-181 75-75 181v320h736z"></path>
+            </svg>
+          </span>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            className="border border-gray-300 px-4 py-2 rounded-r-md focus:outline-none focus:ring focus:ring-blue-400 placeholder-gray-400 placeholder:text-xl "
+          />
+        </div>
       </div>
+
       <div className="form-footer flex justify-between gap-2">
         <Button
           text="Log in"
           type="submit"
-          tailwind="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          tailwind="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 w-40 rounded"
         />
         <Button
           text="Forgot Password"
           type="button"
           action={() => goTo("/auth/forgot-password")}
-          tailwind="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          tailwind="bg-red-500 hover:bg-red-700 text-white font-bold py-2 w-40 rounded"
         />
       </div>
     </form>

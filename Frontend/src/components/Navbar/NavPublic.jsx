@@ -20,7 +20,7 @@ const NavPublic = () => {
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <span className="text-white text-xl hover:text-white cursor-pointer">
-            Mi Sitio
+            My Site
           </span>
         </div>
         <div className="hidden md:flex space-x-4">

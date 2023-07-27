@@ -15,4 +15,4 @@ const HamburgerButton = ({ mobileMenu, setMobileMenu }) => {
   );
 };
 
-export default HamburgerButton;
+export { HamburgerButton };
