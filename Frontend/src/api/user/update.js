@@ -2,22 +2,20 @@ import axios from "axios";
 import { backendUrl } from "../../config";
 
 const updateUserInfo = async ({
-  user_name,
-  first_name,
-  last_name,
+  userName,
+  firstName,
+  lastName,
   email,
   address,
   phone,
 }) => {
   try {
-
-    console.log("USER", user_name)
     const response = await axios({
       method: "PUT",
-      url: `${backendUrl}/user/update/${user_name}`,
+      url: `${backendUrl}/user/update/${userName}`,
       data: {
-        first_name,
-        last_name,
+        firstName,
+        lastName,
         email,
         address,
         phone,
@@ -26,6 +24,7 @@ const updateUserInfo = async ({
         "Content-Type": "application/json",
       },
     });
+
     return response.data;
   } catch (error) {
     return error.response.data;
