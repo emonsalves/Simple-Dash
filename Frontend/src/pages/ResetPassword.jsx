@@ -16,7 +16,7 @@ function ResetPassword() {
     event.preventDefault();
 
     const response = await updatePassword({
-      user_name: userName,
+      userName,
       resetCode,
       password,
       passwordConfirmation,
