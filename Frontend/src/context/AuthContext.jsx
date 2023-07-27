@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { objectResponse } from "../lib/objectResponse";
 
 const AuthContext = createContext();
 
@@ -36,19 +37,24 @@ function AuthProvider({ children }) {
   const Login = async ({ body }) => {
     const { accessToken, refreshToken, user } = body;
 
+    const userFormatted = objectResponse(user);
+
     localStorage.setItem(
       "tokens",
       JSON.stringify({ accessToken, refreshToken })
     );
-    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("user", JSON.stringify(userFormatted));
     setIsAuthenticated(true);
     setTokens({ accessToken, refreshToken });
-    setUser(user);
+    setUser(userFormatted);
   };
 
   const updateToken = ({ accessToken, refreshToken }) => {
     setTokens({ accessToken, refreshToken });
-    localStorage.setItem("tokens", JSON.stringify({ accessToken, refreshToken }));
+    localStorage.setItem(
+      "tokens",
+      JSON.stringify({ accessToken, refreshToken })
+    );
   };
 
   const value = {
