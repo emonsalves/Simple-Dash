@@ -1,5 +1,6 @@
 import axios from "axios";
 import { backendUrl } from "../../config";
+import { objectResponse } from "../../lib/objectResponse.js";
 
 const login = async ({ userName, password }) => {
   try {
@@ -14,6 +15,14 @@ const login = async ({ userName, password }) => {
         "Content-Type": "application/json",
       },
     });
+
+    if (response.status === 200) {
+      const { statusCode, body } = response.data;
+      const { accessToken, refreshToken, user } = body;
+      const userFormatted = objectResponse(user);
+      const newBody = { accessToken, refreshToken, user: userFormatted };
+      return { statusCode, body: newBody };
+    }
 
     return response.data;
   } catch (error) {
