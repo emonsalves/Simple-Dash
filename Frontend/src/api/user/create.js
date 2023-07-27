@@ -16,9 +16,9 @@ const createUser = async ({ userName, password, passwordConfirmation }) => {
       },
     });
 
-    return response;
+    return response.data
   } catch (error) {
-    return error.response;
+    return error.response.data;
   }
 };
 
