@@ -26,7 +26,7 @@ const Header = () => {
             >
               {user && (
                 <span className="ml-2 text-sm font-medium text-gray-50">
-                  {user.first_name} {user.last_name}
+                  {user.firstName} {user.lastName}
                 </span>
               )}
               <FaUserCircle className="w-6 h-6 ml-2" />
