@@ -8,7 +8,7 @@ import { sendMail } from "../utils/mail.Util.js";
 
 dotenv.config();
 
-const login = async (userName, password) => {
+const login = async ({ userName, password }) => {
   const user = await User.findOne({
     where: { user_name: userName },
     include: { model: Role, attributes: ["name"] },
@@ -32,7 +32,7 @@ const login = async (userName, password) => {
   const accessToken = jsonWBT.generateToken({ userName });
   const refreshToken = "refresh-token";
 
-  return { status: 200, data: { accessToken, refreshToken, user } };
+  return { status: 200, data: { accessToken, refreshToken, user }, ok: true };
 };
 
 const getAllUsers = async () => {
@@ -40,46 +40,50 @@ const getAllUsers = async () => {
     attributes: { exclude: ["password"] },
     include: { model: Role, attributes: ["name"] },
   });
-  return { status: 200, data: { users } };
+  return users
+    ? { status: 200, data: { users }, ok: true }
+    : { status: 404, data: { message: "Users not found" } };
 };
 
-const getUserByUsername = async (username) => {
+const getUserByUsername = async ({ userName }) => {
   const existingUserName = await User.findOne({
-    where: { user_name: username },
+    where: { user_name: userName },
   });
+
   const user = existingUserName?.dataValues;
 
   return existingUserName
-    ? { status: 200, data: { user, ok: true } }
+    ? { status: 200, data: { user }, ok: true }
     : { status: 404, data: { message: "User not found" } };
 };
 
 const updateUserByUsername = async ({
-  first_name,
-  last_name,
-  username,
+  firstName,
+  lastName,
+  userName,
   phone,
   address,
   email,
 }) => {
+
   const updatedUser = await User.update(
-    { first_name, last_name, phone, address, email },
-    { where: { user_name: username } }
+    { first_name: firstName, last_name: lastName, phone, address, email },
+    { where: { user_name: userName } }
   );
 
   return updatedUser
-    ? { status: 200, data: { username } }
+    ? { status: 200, data: { userName }, ok: true }
     : { status: 404, data: { message: "User not found" } };
 };
 
-const deleteUserByUsername = async ({ username }) => {
-  const deletedUser = await User.destroy({ where: { user_name: username } });
+const deleteUserByUsername = async ({ userName }) => {
+  const deletedUser = await User.destroy({ where: { user_name: userName } });
   return deletedUser
-    ? { status: 200, data: { username } }
+    ? { status: 200, data: { userName }, ok: true }
     : { status: 404, data: { message: "User not found" } };
 };
 
-const registerUser = async (userName, password) => {
+const registerUser = async ({ userName, password }) => {
   const existingUserName = await User.findOne({
     where: { user_name: userName },
   });
@@ -88,22 +92,21 @@ const registerUser = async (userName, password) => {
     return { status: 400, data: { message: "Username already exists" } };
   }
 
-  try {
-    const encryptedPassword = bcryptUtil.encrypt({ text: password });
+  const encryptedPassword = bcryptUtil.encrypt({ text: password });
 
-    await User.create({
-      user_name: userName,
-      password: encryptedPassword,
-      first_name: "",
-      last_name: "",
-      address: "",
-      phone: "",
-      email: "",
-    });
-    return { status: 201, data: { message: "User created" } };
-  } catch (error) {
-    return { status: 500, data: { message: error.message } };
-  }
+  const newUserCreated = await User.create({
+    user_name: userName,
+    password: encryptedPassword,
+    first_name: "",
+    last_name: "",
+    address: "",
+    phone: "",
+    email: "",
+  });
+
+  return newUserCreated
+    ? { status: 201, data: { userName }, ok: true }
+    : { status: 404, data: { message: "User not found" } };
 };
 
 const recoveryPassword = async ({ userName, email }) => {
@@ -113,6 +116,10 @@ const recoveryPassword = async ({ userName, email }) => {
     { password: encryptedPassword },
     { where: { user_name: userName } }
   );
+
+  if (!updatedUser) {
+    return { status: 404, data: { message: "User not found" } };
+  }
 
   sendMail({
     to: email,
@@ -125,46 +132,44 @@ const recoveryPassword = async ({ userName, email }) => {
     }),
   });
 
-  return updatedUser;
+  return { status: 200, data: { userName }, ok: true };
 };
 
 const updatePassword = async ({
-  username,
+  userName,
   resetCode,
   password,
   passwordConfirmation,
 }) => {
-  try {
-    const user = await User.findOne({ where: { user_name: username } });
+  const user = await User.findOne({ where: { user_name: userName } });
 
-    if (!user) {
-      return { status: 404, data: { message: "User not found" } };
-    }
-
-    if (password !== passwordConfirmation) {
-      return { status: 400, data: { message: "Passwords do not match" } };
-    }
-
-    const validResetCode = await bcryptUtil.compare({
-      text: resetCode,
-      hash: user.password,
-    });
-
-    if (!validResetCode) {
-      return { status: 400, data: { message: "Invalid reset code" } };
-    }
-
-    const encryptedPassword = bcryptUtil.encrypt({ text: password });
-
-    await User.update(
-      { password: encryptedPassword },
-      { where: { user_name: username } }
-    );
-
-    return { status: 200, data: { message: "Password updated" } };
-  } catch (error) {
-    return { status: 500, data: { message: error.message } };
+  if (!user) {
+    return { status: 404, data: { message: "User not found" } };
   }
+
+  if (password !== passwordConfirmation) {
+    return { status: 400, data: { message: "Passwords do not match" } };
+  }
+
+  const validResetCode = await bcryptUtil.compare({
+    text: resetCode,
+    hash: user.password,
+  });
+
+  if (!validResetCode) {
+    return { status: 400, data: { message: "Invalid reset code" } };
+  }
+
+  const encryptedPassword = bcryptUtil.encrypt({ text: password });
+
+  const newUpdateUser = await User.update(
+    { password: encryptedPassword },
+    { where: { user_name: userName } }
+  );
+
+  return newUpdateUser
+    ? { status: 200, data: { message: "Password updated" }, ok: true }
+    : { status: 500, data: { message: error.message } };
 };
 
 export const userService = {
