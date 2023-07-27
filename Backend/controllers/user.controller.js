@@ -11,7 +11,7 @@ const login = async (req, res) => {
   }
 
   try {
-    const result = await userService.login(userName, password);
+    const result = await userService.login({ userName, password });
     res.status(result.status).json(jsonResponse(result.status, result.data));
   } catch (error) {
     res.json(jsonResponse(res.status, { message: error.message }));
@@ -28,10 +28,10 @@ const getAll = async (req, res) => {
 };
 
 const getOne = async (req, res) => {
-  const { username } = req.params;
+  const { userName } = req.params;
 
   try {
-    const result = await userService.getUserByUsername(username);
+    const result = await userService.getUserByUsername({ userName });
     res.status(result.status).json(jsonResponse(result.status, result.data));
   } catch (error) {
     res.json(jsonResponse(res.status, { message: error.message }));
@@ -39,14 +39,14 @@ const getOne = async (req, res) => {
 };
 
 const update = async (req, res) => {
-  const { username } = req.params;
-  const { first_name, last_name, phone, address, email } = req.body;
+  const { userName } = req.params;
+  const { firstName, lastName, phone, address, email } = req.body;
 
   try {
     const result = await userService.updateUserByUsername({
-      username,
-      first_name,
-      last_name,
+      userName,
+      firstName,
+      lastName,
       phone,
       address,
       email,
@@ -58,12 +58,12 @@ const update = async (req, res) => {
 };
 
 const updatePassword = async (req, res) => {
-  const { username } = req.params;
+  const { userName } = req.params;
   const { resetCode, password, passwordConfirmation } = req.body;
 
   try {
     const result = await userService.updatePassword({
-      username,
+      userName,
       resetCode,
       password,
       passwordConfirmation,
@@ -75,10 +75,10 @@ const updatePassword = async (req, res) => {
 };
 
 const deleted = async (req, res) => {
-  const { username } = req.params;
+  const { userName } = req.params;
 
   try {
-    const result = await userService.deleteUserByUsername(username);
+    const result = await userService.deleteUserByUsername({ userName });
     res.status(result.status).json(jsonResponse(result.status, result.data));
   } catch (error) {
     res.json(jsonResponse(res.status, { message: error.message }));
@@ -101,7 +101,7 @@ const register = async (req, res) => {
   }
 
   try {
-    const result = await userService.registerUser(userName, password);
+    const result = await userService.registerUser({ userName, password });
     res.status(result.status).json(jsonResponse(result.status, result.data));
   } catch (error) {
     res.json(jsonResponse(res.status, { message: error.message }));
@@ -114,7 +114,7 @@ const logout = (req, res) => {
 
 const recoveryAccount = async (req, res) => {
   const { userName } = req.body;
-  const userReset = await userService.getUserByUsername(userName);
+  const userReset = await userService.getUserByUsername({ userName });
 
   if (userReset.status !== 200) {
     return res
@@ -122,8 +122,8 @@ const recoveryAccount = async (req, res) => {
       .json(jsonResponse(userReset.status, userReset.data));
   }
 
-  const { user_name, email } = userReset.data.user;
-  await userService.recoveryPassword({ userName: user_name, email });
+  const { email } = userReset.data.user;
+  await userService.recoveryPassword({ userName, email });
   res.json(jsonResponse(200, { message: "Recovery Password" }));
 };
 
