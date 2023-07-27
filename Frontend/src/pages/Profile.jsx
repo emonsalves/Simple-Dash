@@ -12,20 +12,20 @@ function Profile() {
 
   const formatDate = useFormatDate();
   const {
-    user_name,
-    first_name,
-    last_name,
+    userName,
+    firstName,
+    lastName,
     email,
     address,
     phone,
-    created_at,
-    updated_at,
+    createdAt,
+    updatedAt,
   } = user;
 
   const [userUpdate, setUserUpdate] = useState({
-    user_name,
-    first_name,
-    last_name,
+    userName,
+    firstName,
+    lastName,
     email,
     address,
     phone,
@@ -37,18 +37,19 @@ function Profile() {
 
   const handleUpdate = async (event) => {
     event.preventDefault();
-    const { first_name, last_name, email, address, phone } = userUpdate;
-    const { user_name } = user;
+    const { firstName, lastName, email, address, phone } = userUpdate;
+    const { userName } = user;
     await updateUserInfo({
-      user_name,
-      first_name,
-      last_name,
+      userName,
+      firstName,
+      lastName,
       email,
       address,
       phone,
     });
 
-    const newTokens = await refreshToken({ user_name });
+    const newTokens = await refreshToken({ userName });
+
     const { body } = newTokens;
     Login({ body });
     sweetAlert.showAlert({
@@ -69,10 +70,10 @@ function Profile() {
             <label className="font-medium">First Name:</label>
             <input
               type="text"
-              id="first_name"
-              name="first_name"
+              id="firstName"
+              name="firstName"
               onChange={handleChange}
-              defaultValue={first_name}
+              defaultValue={firstName}
               className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
             />
           </div>
@@ -80,10 +81,10 @@ function Profile() {
             <label className="font-medium">Last Name:</label>
             <input
               type="text"
-              id="last_name"
-              name="last_name"
+              id="lastName"
+              name="lastName"
               onChange={handleChange}
-              defaultValue={last_name}
+              defaultValue={lastName}
               className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
             />
           </div>
@@ -124,9 +125,9 @@ function Profile() {
             <label className="font-medium">Created At:</label>
             <input
               type="text"
-              id="created_at"
-              name="created_at"
-              defaultValue={formatDate.YYYYMMDDHHMMSS(created_at)}
+              id="createdAt"
+              name="createdAt"
+              defaultValue={formatDate.YYYYMMDDHHMMSS(createdAt)}
               className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full inactive"
               readOnly
             />
@@ -135,9 +136,9 @@ function Profile() {
             <label className="font-medium">Updated At:</label>
             <input
               type="text"
-              id="updated_at"
-              name="updated_at"
-              defaultValue={formatDate.YYYYMMDDHHMMSS(updated_at)}
+              id="updatedAt"
+              name="createdAt"
+              defaultValue={formatDate.YYYYMMDDHHMMSS(updatedAt)}
               className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
               readOnly
             />
