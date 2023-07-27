@@ -51,8 +51,8 @@ function ForgotPassword() {
           <input
             onChange={handleChange}
             type="text"
-            id="username"
-            name="username"
+            id="userName"
+            name="userName"
             value={userName}
             className="border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
           />
