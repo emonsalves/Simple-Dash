@@ -5,9 +5,9 @@ import { jsonWBT } from "../utils/jwt.Util.js";
 
 dotenv.config();
 
-const getNewToken = async ({ user_name }) => {
+const getNewToken = async ({ userName }) => {
   const user = await User.findOne({
-    where: { user_name },
+    where: { user_name: userName },
     include: { model: Role, attributes: ["name"] },
   });
 
@@ -17,10 +17,10 @@ const getNewToken = async ({ user_name }) => {
 
   delete user.dataValues.password;
 
-  const accessToken = jsonWBT.generateToken({ user_name });
+  const accessToken = jsonWBT.generateToken({ userName });
   const refreshToken = "refresh-token";
 
-  return { status: 200, data: { accessToken, refreshToken, user } };
+  return { status: 200, data: { accessToken, refreshToken, user }, ok: true };
 };
 
 export const tokenService = {
