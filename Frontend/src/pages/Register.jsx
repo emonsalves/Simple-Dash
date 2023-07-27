@@ -20,14 +20,14 @@ function Register() {
         passwordConfirmation,
       });
 
-      const { status } = response;
-      const { message } = response.data.body;
+      const { statusCode } = response;
+      const { message, userName: userNameResponse } = response.body;
 
-      if (status === 201) {
+      if (statusCode === 201) {
         goTo("/auth");
         sweetAlert.showAlert({
           title: "Success",
-          text: message,
+          text: `User ${userNameResponse} created successfully`,
           icon: "success",
           timer: 2000,
         });
