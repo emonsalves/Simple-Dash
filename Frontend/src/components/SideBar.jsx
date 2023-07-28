@@ -37,16 +37,18 @@ const Sidebar = () => {
           } absolute text-3xl rounded-full cursor-pointer top-9 -right-4 fill-gray-400 bg-gray-800`}
           onClick={() => setOpen(!open)}
         />
-        <NavLink to="/">
-          <div className={`flex ${open && "gap-x-4"} items-center`}>
-            <img src={Logo} alt="" className="pl-2" />
-            {open && (
-              <span className="text-xl font-medium whitespace-nowrap text-white">
-                System
-              </span>
-            )}
-          </div>
-        </NavLink>
+        <div
+          className={`flex gap-x-6 items-center p-3 text-base font-normal rounded-lg cursor-default text-white`}
+        >
+          <img src={Logo} alt="" className="" />
+          <span
+            className={`${
+              !open && "opacity-0 invisible"
+            } text-xl font-medium text-white origin-left transition-all duration-1000 hover:block`}
+          >
+            System
+          </span>
+        </div>
 
         <ul className="pt-6">
           {Menus.map((menu, index) => (
@@ -72,24 +74,28 @@ const Sidebar = () => {
             open ? "w-[200px] transition-width duration-500" : ""
           }`}
         >
-<button
-  // className={`flex items-center gap-x-4 p-3 text-base font-normal rounded-lg cursor-pointer text-white hover:bg-gray-700 mt-2 w-full`}
-  className={`${ !open && 'w-14'} flex items-center gap-x-4 p-3 text-base font-normal rounded-lg cursor-pointer text-white hover:bg-gray-700 mt-2 w-full`}
-  onClick={() => {
-    logOut();
-    goTo("/auth/");
-  }}
->
-  <span className="text-2xl ml-[6px]">
-    <ImExit />
-  </span>
-  <span
-    // className={`ml-1 transition-opacity duration-500  ${!open ? 'opacity-0 invisible' : 'opacity-100 visible'}`}
-    className={`${ !open && 'opacity-0 invisible'} origin-left transition-all duration-1000   hover:block`}
-  >
-    Logout
-  </span>
-</button>
+          <button
+            // className={`flex items-center gap-x-4 p-3 text-base font-normal rounded-lg cursor-pointer text-white hover:bg-gray-700 mt-2 w-full`}
+            className={`${
+              !open && "w-14"
+            } flex items-center gap-x-4 p-3 text-base font-normal rounded-lg cursor-pointer text-white hover:bg-gray-700 mt-2 w-full`}
+            onClick={() => {
+              logOut();
+              goTo("/auth/");
+            }}
+          >
+            <span className="text-2xl ml-[6px]">
+              <ImExit />
+            </span>
+            <span
+              // className={`ml-1 transition-opacity duration-500  ${!open ? 'opacity-0 invisible' : 'opacity-100 visible'}`}
+              className={`${
+                !open && "opacity-0 invisible"
+              } origin-left transition-all duration-1000   hover:block`}
+            >
+              Logout
+            </span>
+          </button>
         </div>
       </div>
 

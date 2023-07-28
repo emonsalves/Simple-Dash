@@ -18,12 +18,10 @@ const NavPublic = () => {
   return (
     <nav className="bg-gray-800 p-4 fixed w-full z-10 top-0 shadow">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="flex items-center" onClick={() => goTo("/")}>
-          <span className="text-white text-xl hover:text-white cursor-pointer">
-            My Site
-          </span>
+        <div className="flex items-center hover:text-white cursor-pointer">
+          <span className="text-white text-xl ">My Site</span>
         </div>
-        <div className="hidden md:flex space-x-4">
+        <div className="hidden md:flex space-x-4  ">
           {menuItems.map((item, index) => (
             <a
               key={index}
@@ -31,7 +29,7 @@ const NavPublic = () => {
               className={`${
                 location.pathname === item.path
                   ? "text-white"
-                  : "text-gray-300 hover:text-white"
+                  : "text-gray-300 hover:text-white hover:bg-gray-700 flex items-center px-3 py-2 rounded-md text-sm font-medium"
               } cursor-pointer`}
             >
               {item.text}
