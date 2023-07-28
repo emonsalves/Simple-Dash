@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-
 import { NavPublic } from "../components/Navbar/NavPublic";
 
 function PublicLayout() {
