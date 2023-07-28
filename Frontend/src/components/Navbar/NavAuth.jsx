@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { SlLogout } from "react-icons/sl";
 import { FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -8,16 +8,21 @@ const NavAuth = () => {
   const { logOut, user } = useAuthContext();
   const goTo = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prevState) => !prevState);
+  };
+
+  const closeDropdown = () => {
+    setIsDropdownOpen(false);
   };
 
   return (
     <nav className="bg-gray-800 shadow">
       <div className="px-2 mx-auto">
         <div className="flex items-center justify-end h-16">
-          <div className="relative ">
+          <div className="relative" onBlur={closeDropdown} ref={dropdownRef}>
             <button
               type="button"
               className="flex items-center px-5 justify-center rounded-md text-gray-50 py-3 hover:bg-gray-700  focus:outline-none transition ease-in-out duration-300"

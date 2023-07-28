@@ -26,10 +26,8 @@ const NavPublic = () => {
             <a
               key={index}
               onClick={() => goTo(item.path)}
-              className={`${
-                location.pathname === item.path
-                  ? "text-white"
-                  : "text-gray-300 hover:text-white hover:bg-gray-700 flex items-center px-3 py-2 rounded-md text-sm font-medium"
+              className={`hover:text-white hover:bg-gray-700 flex items-center px-3 py-2 rounded-md text-sm font-medium ${
+                location.pathname === item.path ? "text-white" : "text-gray-300"
               } cursor-pointer`}
             >
               {item.text}
