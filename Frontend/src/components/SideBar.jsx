@@ -27,10 +27,8 @@ const Sidebar = () => {
     <>
       {/* Desktop Menu */}
       <div
-        className={`${
-          open
-            ? "w-60 transition-width duration-500"
-            : "w-20 transition-width duration-500"
+        className={` transition-width duration-500 ${
+          open ? "w-60" : "w-24"
         } hidden sm:block fixed top-0 left-0 h-screen overflow-visible border-r border-gray-600 p-5 bg-slate-800 z-10`}
       >
         <BsArrowLeftCircle
@@ -55,15 +53,13 @@ const Sidebar = () => {
             <NavLink to={menu.path} key={index}>
               <li
                 className={`flex items-center gap-x-6 p-3 text-base font-normal rounded-lg cursor-pointer text-white hover:bg-gray-700
-                        mt-2 ${
-                          location.pathname === menu.path && "bg-gray-700"
-                        }`}
+                 mt-2 ${location.pathname === menu.path && "bg-gray-700"}`}
               >
-                <span className="text-2xl">{menu.src}</span>
+                <span className="text-2xl ml-1">{menu.src}</span>
                 <span
                   className={`${
-                    !open && "hidden"
-                  } origin-left duration-1000 hover:block`}
+                    !open && "opacity-0 invisible"
+                  } origin-left transition-all duration-1000 hover:block`}
                 >
                   {menu.title}
                 </span>
@@ -71,21 +67,29 @@ const Sidebar = () => {
             </NavLink>
           ))}
         </ul>
-
-        {/* Logout Menu */}
-        <div className="absolute bottom-5 w-48">
-          <button
-            className={`flex items-center gap-x-6 p-3 text-base font-normal rounded-lg cursor-pointer text-white hover:bg-gray-700 mt-2 w-full`}
-            onClick={() => {
-              logOut();
-              goTo("/auth/");
-            }}
-          >
-            <span className="text-2xl">
-              <ImExit />
-            </span>
-            <span className={`${!open && "hidden"}`}>Logout</span>
-          </button>
+        <div
+          className={`absolute bottom-5 ${
+            open ? "w-[200px] transition-width duration-500" : ""
+          }`}
+        >
+<button
+  // className={`flex items-center gap-x-4 p-3 text-base font-normal rounded-lg cursor-pointer text-white hover:bg-gray-700 mt-2 w-full`}
+  className={`${ !open && 'w-14'} flex items-center gap-x-4 p-3 text-base font-normal rounded-lg cursor-pointer text-white hover:bg-gray-700 mt-2 w-full`}
+  onClick={() => {
+    logOut();
+    goTo("/auth/");
+  }}
+>
+  <span className="text-2xl ml-[6px]">
+    <ImExit />
+  </span>
+  <span
+    // className={`ml-1 transition-opacity duration-500  ${!open ? 'opacity-0 invisible' : 'opacity-100 visible'}`}
+    className={`${ !open && 'opacity-0 invisible'} origin-left transition-all duration-1000   hover:block`}
+  >
+    Logout
+  </span>
+</button>
         </div>
       </div>
 
