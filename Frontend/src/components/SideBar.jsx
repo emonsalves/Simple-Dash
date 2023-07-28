@@ -27,7 +27,7 @@ const Sidebar = () => {
     <>
       {/* Desktop Menu */}
       <div
-        className={` transition-width duration-500 ${
+        className={` transition-width duration-1000 ${
           open ? "w-60" : "w-24"
         } hidden sm:block fixed top-0 left-0 h-screen overflow-visible border-r border-gray-600 p-5 bg-slate-800 z-10`}
       >
@@ -71,7 +71,7 @@ const Sidebar = () => {
         </ul>
         <div
           className={`absolute bottom-5 ${
-            open ? "w-[200px] transition-width duration-500" : ""
+            open ? "w-[200px] transition-width duration-1000" : ""
           }`}
         >
           <button
@@ -88,7 +88,6 @@ const Sidebar = () => {
               <ImExit />
             </span>
             <span
-              // className={`ml-1 transition-opacity duration-500  ${!open ? 'opacity-0 invisible' : 'opacity-100 visible'}`}
               className={`${
                 !open && "opacity-0 invisible"
               } origin-left transition-all duration-1000   hover:block`}
