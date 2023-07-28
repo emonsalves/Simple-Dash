@@ -20,8 +20,8 @@ const NavAuth = () => {
 
   return (
     <nav className="bg-gray-800 shadow">
-      <div className="px-2 mx-auto">
-        <div className="flex items-center justify-end h-16">
+      <div className="px-1 mx-auto">
+        <div className="flex items-center justify-end h-14">
           <div className="relative" onBlur={closeDropdown} ref={dropdownRef}>
             <button
               type="button"

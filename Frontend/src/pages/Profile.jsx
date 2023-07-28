@@ -31,11 +31,11 @@ function Profile() {
     phone,
   });
 
-  const handleChange = (event) => {
+  const handleChangeInput = (event) => {
     setUserUpdate({ ...userUpdate, [event.target.name]: event.target.value });
   };
 
-  const handleUpdate = async (event) => {
+  const handleUpdateProfile = async (event) => {
     event.preventDefault();
     const { firstName, lastName, email, address, phone } = userUpdate;
     const { userName } = user;
@@ -60,6 +60,8 @@ function Profile() {
     });
   };
 
+  const handleChangePassword = () => {};
+
   return (
     <div className="profile-container bg-opacity-20 backdrop-blur-lg p-4 rounded-lg md:w-2/3 lg:w-1/2 xl:w-1/3 mx-auto drop-shadow-2xl  text-black shadow-lg border">
       <h1 className="text-2xl font-bold mb-4 text-center">Profile Editor</h1>
@@ -72,7 +74,7 @@ function Profile() {
               type="text"
               id="firstName"
               name="firstName"
-              onChange={handleChange}
+              onChange={handleChangeInput}
               defaultValue={firstName}
               className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
             />
@@ -83,7 +85,7 @@ function Profile() {
               type="text"
               id="lastName"
               name="lastName"
-              onChange={handleChange}
+              onChange={handleChangeInput}
               defaultValue={lastName}
               className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
             />
@@ -94,7 +96,7 @@ function Profile() {
               type="text"
               id="email"
               name="email"
-              onChange={handleChange}
+              onChange={handleChangeInput}
               defaultValue={email}
               className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
             />
@@ -105,7 +107,7 @@ function Profile() {
               type="text"
               id="address"
               name="address"
-              onChange={handleChange}
+              onChange={handleChangeInput}
               defaultValue={address}
               className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
             />
@@ -116,7 +118,7 @@ function Profile() {
               type="text"
               id="phone"
               name="phone"
-              onChange={handleChange}
+              onChange={handleChangeInput}
               defaultValue={phone}
               className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
             />
@@ -157,11 +159,12 @@ function Profile() {
           <div className="profile-item flex justify-between gap-2">
             <Button
               text="Actualizar"
-              action={handleUpdate}
+              action={handleUpdateProfile}
               tailwind="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow-lg"
             />
             <Button
               text="Cambiar Contraseña"
+              action={handleChangePassword}
               tailwind="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded shadow-lg"
             />
           </div>
