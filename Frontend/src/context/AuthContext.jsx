@@ -34,11 +34,9 @@ function AuthProvider({ children }) {
     setTokens(false);
   };
 
-  const Login = async ({ body }) => {
+  const createToken = async ({ body }) => {
     const { accessToken, refreshToken, user } = body;
-
     const userFormatted = objectResponse(user);
-
     localStorage.setItem(
       "tokens",
       JSON.stringify({ accessToken, refreshToken })
@@ -61,7 +59,7 @@ function AuthProvider({ children }) {
     isAuthenticated,
     user,
     logOut,
-    Login,
+    createToken,
     updateToken,
     tokens,
   };

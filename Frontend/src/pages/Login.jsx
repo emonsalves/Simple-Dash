@@ -9,7 +9,7 @@ import useSweetToast from "../hooks/useSweetToast";
 function Login() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const { Login } = useAuthContext();
+  const { createToken } = useAuthContext();
   const goTo = useNavigate();
   const sweetAlert = useSweetAlert();
   const sweetToast = useSweetToast();
@@ -36,7 +36,7 @@ function Login() {
   const handleResponse = (response) => {
     const { statusCode, body } = response;
     if (statusCode === 200) {
-      Login({ body });
+      createToken({ body });
       goTo("/in/dashboard");
       sweetToast.showToast();
     } else {
