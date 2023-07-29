@@ -75,9 +75,8 @@ const Sidebar = () => {
           }`}
         >
           <button
-            // className={`flex items-center gap-x-4 p-3 text-base font-normal rounded-lg cursor-pointer text-white hover:bg-gray-700 mt-2 w-full`}
             className={`${
-              !open && "w-14"
+              !open && "w-[55px]"
             } flex items-center gap-x-4 p-3 text-base font-normal rounded-lg cursor-pointer text-white hover:bg-gray-700 mt-2 w-full`}
             onClick={() => {
               logOut();
@@ -89,8 +88,8 @@ const Sidebar = () => {
             </span>
             <span
               className={`${
-                !open && "opacity-0 invisible"
-              } origin-left transition-all duration-1000   hover:block`}
+                !open && " opacity-0 invisible"
+              } origin-left transition-all duration-1000`}
             >
               Logout
             </span>
@@ -118,7 +117,7 @@ const Sidebar = () => {
               onClick={() => setMobileMenu(false)}
             >
               <span
-                className={` ${
+                className={`${
                   location.pathname === menu.path && "bg-gray-700"
                 } p-2 rounded-xl hover:bg-gray-700`}
               >
