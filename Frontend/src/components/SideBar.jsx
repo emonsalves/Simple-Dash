@@ -75,9 +75,9 @@ const Sidebar = () => {
           }`}
         >
           <button
-            className={`${
-              !open && "w-[55px]"
-            } flex items-center gap-x-4 p-3 text-base font-normal rounded-lg cursor-pointer text-white hover:bg-gray-700 mt-2 w-full`}
+            className={`flex items-center gap-x-4 p-3 text-base font-normal rounded-lg cursor-pointer text-white hover:bg-gray-700 mt-5 w-full ${
+              open ? "w-60" : "w-[55px]"
+            }`}
             onClick={() => {
               logOut();
               goTo("/auth/");
