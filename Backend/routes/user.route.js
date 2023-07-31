@@ -12,6 +12,7 @@ router.get("/all", verifyToken, userController.getAll);
 router.get("/:userName", userController.getOne);
 router.put("/update/:userName", userController.update);
 router.put("/reset-password/:userName", userController.updatePassword);
+router.put("/update-password/:userName", userController.updatePassword)
 router.delete("/delete/:userName", userController.deleted);
 
 export default router;

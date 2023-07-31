@@ -18,7 +18,7 @@ const NavPublic = () => {
   return (
     <nav className="bg-gray-800 p-3 fixed w-full z-10 top-0 shadow">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="flex items-center hover:text-white cursor-pointer">
+        <div className="flex items-center hover:text-white cursor-pointer hover:bg-gray-700  p-1 rounded-lg">
           <span className="text-white text-xl ">My Site</span>
         </div>
         <div className="hidden md:flex">
@@ -26,7 +26,7 @@ const NavPublic = () => {
             <a
               key={index}
               onClick={() => goTo(item.path)}
-              className={`hover:text-white hover:bg-gray-700 flex items-center px-4 py-2 rounded-md text-sm font-medium ${
+              className={`hover:text-white hover:bg-gray-700 flex items-center px-4 py-2 rounded-md text-mb font-medium ${
                 location.pathname === item.path ? "text-white" : "text-gray-300"
               } cursor-pointer`}
             >

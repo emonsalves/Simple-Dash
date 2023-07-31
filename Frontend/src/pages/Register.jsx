@@ -46,7 +46,7 @@ function Register() {
 
   return (
     <form className="form md:w-2/3 lg:w-1/2 xl:w-1/3 p-2 mx-auto drop-shadow-2xl rounded-lg bg-slate-800 mt-16 mb-16 text-gray-50">
-      <h1 className="text-2xl font-bold mb-4">Registration</h1>
+      <h1 className="text-2xl font-bold mb-4 text-center">Register User</h1>
       <div className="form-control mb-4">
         <label htmlFor="username" className="font-medium">
           UserName
@@ -55,6 +55,7 @@ function Register() {
           type="text"
           id="username"
           name="username"
+          placeholder="User Name"
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
           className="border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
@@ -68,6 +69,7 @@ function Register() {
           type="password"
           id="password"
           name="password"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
@@ -81,6 +83,7 @@ function Register() {
           type="password"
           id="passwordConfirmation"
           name="passwordConfirmation"
+          placeholder="Confirm Password"
           value={passwordConfirmation}
           onChange={(e) => setPasswordConfirmation(e.target.value)}
           className="border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
@@ -90,7 +93,7 @@ function Register() {
         <Button
           text="Register"
           action={handleSubmit}
-          tailwind="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          tailwind="bg-blue-700 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded"
         />
       </div>
     </form>

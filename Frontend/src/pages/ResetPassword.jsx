@@ -15,6 +15,8 @@ function ResetPassword() {
   const handleClick = async (event) => {
     event.preventDefault();
 
+    console.log("userName", userName ,"resetCode", resetCode, "password", password, "passwordConfirmation", passwordConfirmation);
+
     const response = await updatePassword({
       userName,
       resetCode,
@@ -55,6 +57,7 @@ function ResetPassword() {
             type="text"
             id="userName"
             name="userName"
+            placeholder="User Name"
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
             className="border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring focus:ring-blue-400"
@@ -68,6 +71,7 @@ function ResetPassword() {
             type="text"
             id="resetCode"
             name="resetCode"
+            placeholder="Reset Code"
             value={resetCode}
             onChange={(e) => setResetCode(e.target.value)}
             className="border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring focus:ring-blue-400"
@@ -81,6 +85,7 @@ function ResetPassword() {
             type="password"
             id="password"
             name="password"
+            placeholder="New Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring focus:ring-blue-400"
@@ -94,6 +99,7 @@ function ResetPassword() {
             type="password"
             id="passwordConfirmation"
             name="passwordConfirmation"
+            placeholder="Confirm New Password"
             value={passwordConfirmation}
             onChange={(e) => setPasswordConfirmation(e.target.value)}
             className="border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring focus:ring-blue-400"

@@ -110,13 +110,13 @@ function Login() {
         <Button
           text="Log in"
           type="submit"
-          tailwind="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 w-40 rounded"
+          tailwind="bg-blue-700 hover:bg-blue-500 text-white font-bold py-2 w-40 rounded"
         />
         <Button
           text="Forgot Password"
           type="button"
           action={() => goTo("/auth/forgot-password")}
-          tailwind="bg-red-500 hover:bg-red-700 text-white font-bold py-2 w-40 rounded"
+          tailwind="bg-red-700 hover:bg-red-500 text-white font-bold py-2 w-40 rounded"
         />
       </div>
     </form>

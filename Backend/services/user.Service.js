@@ -162,6 +162,10 @@ const updatePassword = async ({ userName, resetCode, newPassword }) => {
     : { status: 500, data: { message: error.message } };
 };
 
+const resetPassword = async ({ userName, password }) => {
+}
+
+
 export const userService = {
   login,
   getAllUsers,

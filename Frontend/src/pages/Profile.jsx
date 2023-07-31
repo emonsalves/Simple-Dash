@@ -121,7 +121,7 @@ function Profile() {
   };
 
   return (
-    <div className="profile-container bg-opacity-20 backdrop-blur-lg p-4 rounded-lg md:w-2/3 lg:w-1/2 xl:w-1/3 mx-auto drop-shadow-2xl  text-black shadow-lg border">
+    <div className="profile-container bg-blue-200 bg-opacity-10 backdrop-blur-xl p-4 rounded-lg md:w-2/3 lg:w-1/2 xl:w-1/3 mx-auto text-black shadow-lg">
       <h1 className="text-2xl font-bold mb-4 text-center">Profile Editor</h1>
 
       {user ? (
@@ -223,12 +223,12 @@ function Profile() {
             <Button
               text="Update Profile"
               action={handleUpdateProfile}
-              tailwind="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow-lg"
+              tailwind="bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded ring-2 ring-green-600"
             />
             <Button
               text="Change Password"
               action={handleChangePassword}
-              tailwind="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded shadow-lg"
+              tailwind="bg-orange-600 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded ring-2 ring-orange-600"
             />
           </div>
         </>

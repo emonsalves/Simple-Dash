@@ -77,6 +77,10 @@ const updatePassword = async (req, res) => {
   }
 };
 
+const resetPassword = async (req, res) => {
+
+};
+
 const deleted = async (req, res) => {
   const { userName } = req.params;
 
@@ -136,6 +140,7 @@ export const userController = {
   getOne,
   update,
   updatePassword,
+  resetPassword,
   deleted,
   register,
   logout,
