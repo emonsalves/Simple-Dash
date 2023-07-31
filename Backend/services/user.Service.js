@@ -65,7 +65,6 @@ const updateUserByUsername = async ({
   address,
   email,
 }) => {
-
   const updatedUser = await User.update(
     { first_name: firstName, last_name: lastName, phone, address, email },
     { where: { user_name: userName } }
@@ -135,32 +134,23 @@ const recoveryPassword = async ({ userName, email }) => {
   return { status: 200, data: { userName }, ok: true };
 };
 
-const updatePassword = async ({
-  userName,
-  resetCode,
-  password,
-  passwordConfirmation,
-}) => {
+const updatePassword = async ({ userName, resetCode, newPassword }) => {
   const user = await User.findOne({ where: { user_name: userName } });
 
   if (!user) {
     return { status: 404, data: { message: "User not found" } };
   }
-
-  if (password !== passwordConfirmation) {
-    return { status: 400, data: { message: "Passwords do not match" } };
-  }
-
+  
   const validResetCode = await bcryptUtil.compare({
     text: resetCode,
     hash: user.password,
   });
 
   if (!validResetCode) {
-    return { status: 400, data: { message: "Invalid reset code" } };
+    return { status: 400, data: { message: "Invalid reset code or user" } };
   }
 
-  const encryptedPassword = bcryptUtil.encrypt({ text: password });
+  const encryptedPassword = bcryptUtil.encrypt({ text: newPassword });
 
   const newUpdateUser = await User.update(
     { password: encryptedPassword },
@@ -168,7 +158,7 @@ const updatePassword = async ({
   );
 
   return newUpdateUser
-    ? { status: 200, data: { message: "Password updated" }, ok: true }
+    ? { status: 200, data: { message: "Password has been updated" }, ok: true }
     : { status: 500, data: { message: error.message } };
 };
 

@@ -4,8 +4,8 @@ import { backendUrl } from "../../config";
 const updatePassword = async ({
   userName,
   resetCode,
-  password,
-  passwordConfirmation,
+  newPassword,
+  confirmNewPassword,
 }) => {
   try {
     const response = await axios({
@@ -13,8 +13,8 @@ const updatePassword = async ({
       url: `${backendUrl}/user/reset-password/${userName}`,
       data: {
         resetCode,
-        password,
-        passwordConfirmation,
+        newPassword,
+        confirmNewPassword,
       },
     });
 

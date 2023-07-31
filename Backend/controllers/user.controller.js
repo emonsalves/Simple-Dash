@@ -59,14 +59,17 @@ const update = async (req, res) => {
 
 const updatePassword = async (req, res) => {
   const { userName } = req.params;
-  const { resetCode, password, passwordConfirmation } = req.body;
+  const { resetCode, newPassword, confirmNewPassword } = req.body;
+
+  if (newPassword !== confirmNewPassword) {
+    return res.json(jsonResponse(400, { message: "Passwords do not match" }));
+  }
 
   try {
     const result = await userService.updatePassword({
       userName,
       resetCode,
-      password,
-      passwordConfirmation,
+      newPassword,
     });
     res.status(result.status).json(jsonResponse(result.status, result.data));
   } catch (error) {
