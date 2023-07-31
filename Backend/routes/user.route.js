@@ -11,8 +11,8 @@ router.post("/recovery", userController.recoveryAccount);
 router.get("/all", verifyToken, userController.getAll);
 router.get("/:userName", userController.getOne);
 router.put("/update/:userName", userController.update);
-router.put("/reset-password/:userName", userController.updatePassword);
-router.put("/update-password/:userName", userController.updatePassword)
+router.put("/reset-password/:userName", userController.updatePassword); // revisar 
+router.put("/update-password/:userName", userController.updatePassword) // revisar
 router.delete("/delete/:userName", userController.deleted);
 
 export default router;
