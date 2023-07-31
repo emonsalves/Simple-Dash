@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 
-import { htmlRecoveryMail } from "../lib/mailHTML.js";
+import { htmlRecoveryMail } from "../lib/htmlRecoveryMail.js";
 import { User, Role } from "../models/index.js";
 import { bcryptUtil } from "../utils/bcypt.Util.js";
 import { jsonWBT } from "../utils/jwt.Util.js";
