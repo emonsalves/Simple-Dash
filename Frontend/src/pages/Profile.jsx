@@ -132,6 +132,7 @@ function Profile() {
               type="text"
               id="firstName"
               name="firstName"
+              placeholder="First Name"
               onChange={handleChangeInput}
               defaultValue={firstName}
               className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
@@ -143,6 +144,7 @@ function Profile() {
               type="text"
               id="lastName"
               name="lastName"
+              placeholder="Last Name"
               onChange={handleChangeInput}
               defaultValue={lastName}
               className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
@@ -154,6 +156,7 @@ function Profile() {
               type="text"
               id="email"
               name="email"
+              placeholder="Email"
               onChange={handleChangeInput}
               defaultValue={email}
               className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
@@ -165,6 +168,7 @@ function Profile() {
               type="text"
               id="address"
               name="address"
+              placeholder="Address"
               onChange={handleChangeInput}
               defaultValue={address}
               className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
@@ -176,6 +180,7 @@ function Profile() {
               type="text"
               id="phone"
               name="phone"
+              placeholder="Phone"
               onChange={handleChangeInput}
               defaultValue={phone}
               className="border border-gray-300 px-4 py-1 rounded focus:outline-none focus:ring focus:ring-blue-400 w-full"
