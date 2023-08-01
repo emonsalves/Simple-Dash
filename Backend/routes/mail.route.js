@@ -5,7 +5,7 @@ const router = Router();
 
 router.post("/", (req, res) => {
   const { to, subject, text, textHtml } = req.body;
-  sendMail({ to, subject, text, textHtml});
+  sendMail({ to, subject, text, textHtml });
   res.send("Mail sent successfully");
 });
 

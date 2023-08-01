@@ -91,7 +91,7 @@ const resetPassword = async (req, res) => {
   try {
     const result = await userService.updatePassword({
       userName,
-     oldPassword : resetCode,
+      oldPassword: resetCode,
       newPassword,
     });
     res.status(result.status).json(jsonResponse(result.status, result.data));

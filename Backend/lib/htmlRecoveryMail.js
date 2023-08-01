@@ -1,4 +1,9 @@
-const htmlRecoveryMail = ({ userName, secureCode, supportMail, linkResetPassword }) => {
+const htmlRecoveryMail = ({
+  userName,
+  secureCode,
+  supportMail,
+  linkResetPassword,
+}) => {
   return `
 <!DOCTYPE html>
 <html>
