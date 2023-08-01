@@ -57,9 +57,9 @@ const update = async (req, res) => {
   }
 };
 
-const updatePassword = async (req, res) => {
+const changePassword = async (req, res) => {
   const { userName } = req.params;
-  const { resetCode, newPassword, confirmNewPassword } = req.body;
+  const { oldPassword, newPassword, confirmNewPassword } = req.body;
 
   if (newPassword !== confirmNewPassword) {
     return res.json(jsonResponse(400, { message: "Passwords do not match" }));
@@ -68,7 +68,7 @@ const updatePassword = async (req, res) => {
   try {
     const result = await userService.updatePassword({
       userName,
-      resetCode,
+      oldPassword,
       newPassword,
     });
     res.status(result.status).json(jsonResponse(result.status, result.data));
@@ -78,7 +78,26 @@ const updatePassword = async (req, res) => {
 };
 
 const resetPassword = async (req, res) => {
+  const { userName } = req.params;
+  console.log("first", req.body);
+  const { resetCode, newPassword, confirmNewPassword } = req.body;
 
+  if (newPassword !== confirmNewPassword) {
+    return res.json(
+      jsonResponse(400, { message: "New Passwords do not match" })
+    );
+  }
+
+  try {
+    const result = await userService.updatePassword({
+      userName,
+     oldPassword : resetCode,
+      newPassword,
+    });
+    res.status(result.status).json(jsonResponse(result.status, result.data));
+  } catch (error) {
+    res.json(jsonResponse(res.status, { message: error.message }));
+  }
 };
 
 const deleted = async (req, res) => {
@@ -139,7 +158,7 @@ export const userController = {
   getAll,
   getOne,
   update,
-  updatePassword,
+  changePassword,
   resetPassword,
   deleted,
   register,

@@ -1,18 +1,18 @@
 import axios from "axios";
 import { backendUrl } from "../../config";
 
-const updatePassword = async ({
+const changePassword = async ({
   userName,
-  resetCode,
+  oldPassword,
   newPassword,
   confirmNewPassword,
 }) => {
   try {
     const response = await axios({
       method: "PUT",
-      url: `${backendUrl}/user/reset-password/${userName}`,
+      url: `${backendUrl}/user/change-password/${userName}`,
       data: {
-        resetCode,
+        oldPassword,
         newPassword,
         confirmNewPassword,
       },
@@ -24,4 +24,4 @@ const updatePassword = async ({
   }
 };
 
-export { updatePassword };
+export { changePassword };

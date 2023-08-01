@@ -1,27 +1,25 @@
 import { useState } from "react";
 import { Button } from "../components/Button/ButtonMagic";
 import useSweetAlert from "../hooks/useSweetAlert";
-import { updatePassword } from "../api/user";
+import { resetPassword } from "../api/user";
 import { useNavigate } from "react-router-dom";
 
 function ResetPassword() {
   const [userName, setUserName] = useState("");
   const [resetCode, setResetCode] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [newPassword, setNeWPassword] = useState("");
+  const [confirmNewPassword, setconfirmNewPassword] = useState("");
   const sweetAlert = useSweetAlert();
   const goTo = useNavigate();
 
   const handleClick = async (event) => {
     event.preventDefault();
 
-    console.log("userName", userName ,"resetCode", resetCode, "password", password, "passwordConfirmation", passwordConfirmation);
-
-    const response = await updatePassword({
+    const response = await resetPassword({
       userName,
       resetCode,
-      password,
-      passwordConfirmation,
+      newPassword,
+      confirmNewPassword,
     });
 
     const { statusCode, body } = response;
@@ -86,8 +84,8 @@ function ResetPassword() {
             id="password"
             name="password"
             placeholder="New Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={newPassword}
+            onChange={(e) => setNeWPassword(e.target.value)}
             className="border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring focus:ring-blue-400"
           />
         </div>
@@ -100,8 +98,8 @@ function ResetPassword() {
             id="passwordConfirmation"
             name="passwordConfirmation"
             placeholder="Confirm New Password"
-            value={passwordConfirmation}
-            onChange={(e) => setPasswordConfirmation(e.target.value)}
+            value={confirmNewPassword}
+            onChange={(e) => setconfirmNewPassword(e.target.value)}
             className="border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring focus:ring-blue-400"
           />
         </div>

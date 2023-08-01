@@ -24,4 +24,4 @@ const resetPassword = async ({
   }
 };
 
-export { updatePassword };
+export { resetPassword };

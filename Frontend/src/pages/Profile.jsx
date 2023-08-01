@@ -5,7 +5,7 @@ import { useAuthContext } from "../context/AuthContext";
 import useFormatDate from "../hooks/useFormatDate";
 import useSweetAlert from "../hooks/useSweetAlert";
 import { refreshToken } from "../api/token/refreshToken";
-import { updatePassword } from "../api/user/changePassword";
+import { changePassword } from "../api/user/changePassword";
 
 function Profile() {
   const { user, createToken } = useAuthContext();
@@ -67,7 +67,7 @@ function Profile() {
       html: `
       <div class="flex flex-col gap-2">
       <label class="font-medium">Old Password:</label>
-        <input type="text" id="resetCode" name="resetCode" class="border border-gray-300 px-4 py-1 m-1 rounded focus:outline-none focus:ring focus:ring-red-400" />
+        <input type="text" id="oldPassword" name="oldPassword" class="border border-gray-300 px-4 py-1 m-1 rounded focus:outline-none focus:ring focus:ring-red-400" />
         <label class="font-medium">New Password:</label>
         <input type="password" id="newPassword" name="newPassword" class="border border-gray-300 px-4 py-1 m-1 rounded focus:outline-none focus:ring focus:ring-red-400" />
         <label class="font-medium">Confirm New Password:</label>
@@ -81,7 +81,7 @@ function Profile() {
       showLoaderOnConfirm: true,
 
       preConfirm: async () => {
-        const resetCode = document.getElementById("resetCode").value;
+        const oldPassword = document.getElementById("oldPassword").value;
         const newPassword = document.getElementById("newPassword").value;
         const confirmNewPassword =
           document.getElementById("confirmNewPassword").value;
@@ -96,9 +96,9 @@ function Profile() {
         }
 
         const { userName } = user;
-        const response = await updatePassword({
+        const response = await changePassword({
           userName,
-          resetCode,
+          oldPassword,
           newPassword,
           confirmNewPassword,
         });
