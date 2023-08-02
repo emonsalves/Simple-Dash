@@ -5,7 +5,8 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "test": "node app/server.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
@@ -19,10 +20,12 @@
     "mssql": "^9.1.1",
     "mysql2": "^3.4.3",
     "nodemailer": "^6.9.3",
+    "path": "^0.12.7",
     "sequelize": "^6.32.1",
     "sequelize-auto": "^0.8.8"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "sequelize-cli": "^6.6.1"
   }
 }
